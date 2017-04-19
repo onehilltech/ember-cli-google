@@ -11,10 +11,6 @@ export default CaptchaComponent.extend({
   /// The type of CAPTCHA to serve.
   type: 'image',
 
-  /// The attribute bindings for the component.
-  attributeBindings: ['tabIndex:data-tabindex'],
-  tabIndex: 0,
-
   didInsertElement () {
     this._super (...arguments);
 
@@ -43,7 +39,8 @@ export default CaptchaComponent.extend({
      * Reset the widget.
      */
     reset () {
-      this._super (...arguments);
+      // Reset the base class.
+      this._reset ();
 
       let grecaptcha = this.get ('grecaptcha');
       const widgetId = this.get ('widgetId');
