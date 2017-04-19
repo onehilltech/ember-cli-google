@@ -5,8 +5,10 @@ import CaptchaComponent from './g-recaptcha-base';
 export default CaptchaComponent.extend({
   layout,
 
+  /// Reposition the reCAPTCHA badge. 'inline' allows you to control the CSS.
   badge: 'bottomright',
 
+  /// The type of CAPTCHA to serve.
   type: 'image',
 
   /// The attribute bindings for the component.
