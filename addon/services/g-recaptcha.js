@@ -27,8 +27,8 @@ export default Ember.Service.extend({
   init () {
     this._super (...arguments);
 
-    const config = Ember.getOwner (this).resolveRegistration ('config:environment');
-    this.set ('_siteKey', config.google.recaptcha.siteKey);
+    const ENV = Ember.getOwner(this).resolveRegistration('config:environment');
+    this.set ('_siteKey', ENV.GoogleENV.reCAPTCHA.siteKey);
   },
 
   /// Site key for the application.
