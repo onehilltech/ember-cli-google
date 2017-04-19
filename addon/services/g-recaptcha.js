@@ -3,7 +3,7 @@ import Ember from 'ember';
 // Promise that is responsible for loading the recaptcha script on-demand
 // for the service below. This promise can be executed multiple times, and
 // it will return the original result.
-let getScript = new Ember.RSVP.Promise ((resolve, reject) => {
+let getInstance = new Ember.RSVP.Promise ((resolve, reject) => {
   window.grecaptcha_onload = () => {
     Ember.run (null, resolve, window.grecaptcha);
   };
@@ -46,7 +46,7 @@ export default Ember.Service.extend({
     params = Ember.merge (params, {sitekey: this.get ('_siteKey')});
 
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      getScript.then ((grecaptcha) => {
+      getInstance.then ((grecaptcha) => {
         const widgetId = grecaptcha.render (container, params);
 
         Ember.run (null, resolve, widgetId);
@@ -63,7 +63,7 @@ export default Ember.Service.extend({
    */
   execute (widgetId) {
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      getScript.then ((grecaptcha) => {
+      getInstance.then ((grecaptcha) => {
         grecaptcha.execute (widgetId);
 
         Ember.run (null, resolve);
@@ -79,7 +79,7 @@ export default Ember.Service.extend({
    */
   reset (widgetId) {
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      getScript.then ((grecaptcha) => {
+      getInstance.then ((grecaptcha) => {
         grecaptcha.reset (widgetId);
 
         Ember.run (null, resolve);
@@ -95,7 +95,7 @@ export default Ember.Service.extend({
    */
   getResponse (widgetId) {
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      getScript.then ((grecaptcha) => {
+      getInstance.then ((grecaptcha) => {
         const res = grecaptcha.getResponse (widgetId);
 
         Ember.run (null, resolve, res);
