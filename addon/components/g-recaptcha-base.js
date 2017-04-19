@@ -50,11 +50,7 @@ export default Ember.Component.extend({
         // Let the client (or parent) know that we have received a response. We,
         // however, are not going to tell them the response value since that is not
         // really important to them.
-        let onResponse = this.get ('onResponse');
-
-        if (onResponse) {
-          onResponse ();
-        }
+        this.get ('onResponse') (response);
       }.bind (this));
   },
 
