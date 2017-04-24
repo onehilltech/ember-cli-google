@@ -1,5 +1,7 @@
 # ember-cli-google
 
+Ember add-on that integrates Google services and components into EmberJS.
+
 ## Features
 
 * Google reCAPTCHA
