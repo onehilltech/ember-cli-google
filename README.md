@@ -4,7 +4,7 @@ Ember add-on that integrates Google services and components into an EmberJS appl
 
 ## Features
 
-* Google reCAPTCHA
+* [Google reCAPTCHA](https://www.google.com/recaptcha/intro/)
 
 ## Installation
 
