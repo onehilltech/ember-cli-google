@@ -21,11 +21,37 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * Callback for handling updates to the components attributes.
+   * 
+   * @param attrs
+   */
+  didUpdateAttrs (attrs) {
+    this._super (...arguments);
+
+    const reset = this.get ('reset');
+
+    if (reset) {
+      const widgetId = this.get ('widgetId');
+
+      this.get ('grecaptcha').reset (widgetId).then (function () {
+        this.didReset ();
+      }.bind (this));
+    }
+  },
+
+  /**
+   * Callback that the widget has been reset.
+   */
+  didReset () {
+    this._reset ();
+  },
+
+  /**
    * Reset the widget. After the widget has been reset, it will not have
    * a response.
    */
   _reset () {
-    // Clear the current response.
+    this.set ('reset', false);
     this.set ('response');
   },
 
