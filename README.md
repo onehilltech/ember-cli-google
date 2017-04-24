@@ -1,6 +1,6 @@
 # ember-cli-google
 
-Ember add-on that integrates Google services and components into EmberJS.
+Ember add-on that integrates Google services and components into an EmberJS application.
 
 ## Features
 
