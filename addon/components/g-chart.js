@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   /// @{
 
-  options: null,
+  options: {},
 
   /// @}
 
