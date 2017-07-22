@@ -25,7 +25,7 @@ export default Ember.Component.extend({
    * 
    * @param attrs
    */
-  didUpdateAttrs (attrs) {
+  didUpdateAttrs () {
     this._super (...arguments);
 
     const reset = this.get ('reset');
