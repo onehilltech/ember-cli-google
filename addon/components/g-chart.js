@@ -6,12 +6,6 @@ export default Ember.Component.extend({
 
   gCharts: Ember.inject.service (),
 
-  options: null,
-
-  init () {
-    this._super (...arguments);
-  },
-
   didInsertElement () {
     this._super (...arguments);
 
@@ -52,5 +46,9 @@ export default Ember.Component.extend({
     let chart = this.get ('chart');
 
     chart.draw (data, options);
-  }
+  },
+
+  _initDefaultOptions: function () {
+    this.set ('options', {});
+  }.on ('init')
 });
