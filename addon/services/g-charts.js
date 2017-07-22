@@ -8,11 +8,17 @@ export default Ember.Service.extend({
    *
    * @param packages
    */
-  load (packages, onLoadCallback) {
+  load (packages, options, onLoadCallback) {
+    if (Ember.isNone (onLoadCallback)) {
+      onLoadCallback = options;
+      options = {};
+    }
+
     this.get ('_charts').then (() => {
       // Load the packages. As of version 45, you can call this method multiple times
       // and not have any negative side-effects.
-      google.charts.load ('current', {packages: packages});
+      let loadOptions = Ember.merge ({ packages: packages }, options);
+      google.charts.load ('current', loadOptions);
 
       if (onLoadCallback) {
         google.charts.setOnLoadCallback (() => {
