@@ -6,8 +6,9 @@ export default Ember.Component.extend({
 
   gCharts: Ember.inject.service (),
 
+  options: null,
+
   init () {
-    this.set ('options', {});
     this._super (...arguments);
   },
 
