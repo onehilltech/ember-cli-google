@@ -36,9 +36,14 @@ export default Ember.Component.extend({
   }),
 
   drawChartOnce () {
-    let chart = this.get ('chart');
     let data = this.get ('data');
+
+    if (Ember.isArray (data)) {
+      data = google.visualization.arrayToDataTable (data);
+    }
+
     let options = this.get ('options');
+    let chart = this.get ('chart');
 
     chart.draw (data, options);
   }
