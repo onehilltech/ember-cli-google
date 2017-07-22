@@ -8,13 +8,9 @@ export default Ember.Component.extend({
 
   /// @{
 
+  options: null,
+
   /// @}
-
-  init () {
-    this._super (...arguments);
-
-    this.set ('options', {});
-  },
 
   didInsertElement () {
     this._super (...arguments);
