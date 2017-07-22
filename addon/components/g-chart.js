@@ -7,8 +7,8 @@ export default Ember.Component.extend({
   gCharts: Ember.inject.service (),
 
   init () {
-    this._super (...arguments);
     this.set ('options', {});
+    this._super (...arguments);
   },
 
   didInsertElement () {
