@@ -6,6 +6,16 @@ export default Ember.Component.extend({
 
   gCharts: Ember.inject.service (),
 
+  /// @{
+
+  /// @}
+
+  init () {
+    this._super (...arguments);
+
+    this.set ('options', {});
+  },
+
   didInsertElement () {
     this._super (...arguments);
 
