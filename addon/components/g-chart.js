@@ -121,15 +121,19 @@ export default Ember.Component.extend({
       // Instruct the subclass to create the concrete chart object so we can
       // store a reference to it.
       let chart = this.createChart (this.$()[0]);
-
-      // Add event listeners to the chart.
-      google.visualization.events.addListener (chart, 'ready', () => { this.onReady (...arguments); });
-      google.visualization.events.addListener (chart, 'select', () => { this.onSelect (...arguments); });
-      google.visualization.events.addListener (chart, 'error', () => { this.onError (...arguments); });
+      this.didCreateChart (chart);
 
       this.set ('chart', chart);
       this.drawChart ();
     });
+  },
+
+  didCreateChart (chart) {
+    google.visualization.events.addListener (chart, 'ready', () => { this.onReady (...arguments); });
+    google.visualization.events.addListener (chart, 'select', () => { this.onSelect (...arguments); });
+    google.visualization.events.addListener (chart, 'error', () => { this.onError (...arguments); });
+    google.visualization.events.addListener (chart, 'mouseover', () => { this.onMouseOver (...arguments); });
+    google.visualization.events.addListener (chart, 'mouseout', () => { this.onMouseOut (...arguments); });
   },
 
   drawChart () {
@@ -151,26 +155,42 @@ export default Ember.Component.extend({
   },
 
   onReady () {
-    let handler = this.get ('ready');
+    let readyHandler = this.get ('ready');
 
-    if (handler) {
-      handler (...arguments);
+    if (readyHandler) {
+      readyHandler (this);
     }
   },
 
-  onError () {
-    let handler = this.get ('error');
+  onError (id, message) {
+    let errorHandler = this.get ('error');
 
-    if (handler) {
-      handler (...arguments);
+    if (errorHandler) {
+      errorHandler (this, id, message);
     }
   },
 
   onSelect () {
-    let handler = this.get ('select');
+    let selectHandler = this.get ('select');
 
-    if (handler) {
-      handler (...arguments);
+    if (selectHandler) {
+      selectHandler (this);
+    }
+  },
+
+  onMouseOver (row, column) {
+    let onMouseOverHandler = this.get ('mouseover');
+
+    if (onMouseOverHandler) {
+      onMouseOverHandler (this, row, column);
+    }
+  },
+
+  onMouseOut (row, column) {
+    let onMouseOutHandler = this.get ('mouseout');
+
+    if (onMouseOutHandler) {
+      onMouseOutHandler (this, row, column);
     }
   }
 });
