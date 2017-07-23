@@ -67,6 +67,10 @@ export default Ember.Component.extend({
     this.set ('options', {});
   },
 
+  imageURI: Ember.computed ('chart', function () {
+    return this.get ('chart').getImageURI ();
+  }),
+
   didReceiveAttrs (changeSet) {
     this._super (...arguments);
 
