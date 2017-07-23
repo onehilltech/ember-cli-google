@@ -11,7 +11,7 @@ EmberJS add-on for a variety of Google services and products.
 
 ## Supported Products 
 
-* [Google Charts](https://developers.google.com/chart/) (partial)
+* [Google Charts](https://developers.google.com/chart/) (area, bar, bubble, geo, line, pie)
 * [Google reCAPTCHA](https://www.google.com/recaptcha/intro/)
 
 ## Installation
