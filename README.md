@@ -17,6 +17,16 @@ EmberJS add-on for a variety of Google services and products.
 ## Installation
 
     ember install ember-cli-google --save-dev
+    
+## Quick Example
+
+Here is an example of creating 
+[the following line chart](https://developers.google.com/chart/interactive/docs/gallery/linechart#curving-the-lines):
+
+    {{g-linechart data=lineChartData title="Company Performance" curveType="function" legendPosition="bottom"}}
+    
+Each of the chart options above can bind to a variable. When the variable is updated, 
+the chart is redrawn.
 
 ## Documentation
 
