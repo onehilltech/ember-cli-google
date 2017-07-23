@@ -158,7 +158,7 @@ export default Ember.Component.extend({
     let readyHandler = this.get ('ready');
 
     if (readyHandler) {
-      readyHandler (this);
+      readyHandler (this, ev);
     }
   },
 
@@ -166,7 +166,7 @@ export default Ember.Component.extend({
     let errorHandler = this.get ('error');
 
     if (errorHandler) {
-      errorHandler (this, id, message);
+      errorHandler (this, ev);
     }
   },
 
