@@ -2,6 +2,8 @@ import Ember from 'ember';
 import Chart from './g-chart';
 
 export default Chart.extend({
+  packages: ['geochart'],
+
   chartOptionsMapping: {
     colorAxis: 'colorAxis',
     colorAxisMinValue: 'colorAxis.minValue',
