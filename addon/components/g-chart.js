@@ -71,6 +71,16 @@ export default Ember.Component.extend({
     return this.get ('chart').getImageURI ();
   }),
 
+  selection: Ember.computed ('chart', {
+    get (key) {
+      return this.get ('chart').getSelection ();
+    },
+
+    set (key, value) {
+      this.get ('chart').setSelection (value);
+    }
+  }),
+
   didReceiveAttrs (changeSet) {
     this._super (...arguments);
 
@@ -111,8 +121,13 @@ export default Ember.Component.extend({
       // Instruct the subclass to create the concrete chart object so we can
       // store a reference to it.
       let chart = this.createChart (this.$()[0]);
-      this.set ('chart', chart);
 
+      // Add event listeners to the chart.
+      google.visualization.events.addListener (chart, 'ready', () => { this.onReady (...arguments); });
+      google.visualization.events.addListener (chart, 'select', () => { this.onSelect (...arguments); });
+      google.visualization.events.addListener (chart, 'error', () => { this.onError (...arguments); });
+
+      this.set ('chart', chart);
       this.drawChart ();
     });
   },
@@ -124,10 +139,38 @@ export default Ember.Component.extend({
     let data = this.get ('data');
 
     if (Ember.isArray (data)) {
-      data = window.google.visualization.arrayToDataTable (data);
+      data = google.visualization.arrayToDataTable (data);
     }
 
     let options = this.get ('options') || {};
     this.get ('chart').draw (data, options);
+  },
+  
+  clear () {
+    this.get ('chart').clearChart ();
+  },
+
+  onReady () {
+    let handler = this.get ('ready');
+
+    if (handler) {
+      handler (...arguments);
+    }
+  },
+
+  onError () {
+    let handler = this.get ('error');
+
+    if (handler) {
+      handler (...arguments);
+    }
+  },
+
+  onSelect () {
+    let handler = this.get ('select');
+
+    if (handler) {
+      handler (...arguments);
+    }
   }
 });
