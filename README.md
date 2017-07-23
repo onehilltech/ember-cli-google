@@ -2,6 +2,13 @@
 
 EmberJS add-on for a variety of Google services and products.
 
+## Features
+
+* Designed to support seamless integration into an EmberJS application.
+* Proper binding of attributes to options for real-time, dynamic updates.
+* Handle events as actions for interactive designs.
+* Auto-loading and configuring of scripts that correspond with appropriate lifecycle events.
+
 ## Supported Products 
 
 * [Google Charts](https://developers.google.com/chart/) (partial)
