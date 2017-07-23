@@ -97,8 +97,24 @@ export default Ember.Component.extend({
         let targetChartOption = this.chartOptionsMapping[prop];
 
         if (Ember.isPresent (targetChartOption)) {
+          // If this is a nested option, make sure the parent option exists.
+          let targetChartOptionParts = targetChartOption.split ('.');
+
+          if (targetChartOptionParts.length === 2) {
+            let parentOption = targetChartOptionParts[0];
+            let parentOptionKey = `options.${parentOption}`;
+            let option = this.get (parentOptionKey);
+
+            if (Ember.isNone (option)) {
+              this.set (parentOptionKey, {});
+            }
+          }
+
+          // Now, we can set the value on the options.
           let value = this.get (prop);
-          this.set (`options.${targetChartOption}`, value);
+          let optionKey = `options.${targetChartOption}`;
+
+          this.set (optionKey, value);
 
           redrawChart = true;
         }
