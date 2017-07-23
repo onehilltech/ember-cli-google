@@ -130,10 +130,10 @@ export default Ember.Component.extend({
 
   didCreateChart (chart) {
     google.visualization.events.addListener (chart, 'ready', () => { this.onReady (...arguments); });
-    google.visualization.events.addListener (chart, 'select', () => { this.onSelect (...arguments); });
-    google.visualization.events.addListener (chart, 'error', () => { this.onError (...arguments); });
-    google.visualization.events.addListener (chart, 'mouseover', () => { this.onMouseOver (...arguments); });
-    google.visualization.events.addListener (chart, 'mouseout', () => { this.onMouseOut (...arguments); });
+    google.visualization.events.addListener (chart, 'select', () => { this.didSelect (...arguments); });
+    google.visualization.events.addListener (chart, 'error', () => { this.didError (...arguments); });
+    google.visualization.events.addListener (chart, 'onmouseover', () => { this.didMouseOver (...arguments); });
+    google.visualization.events.addListener (chart, 'onmouseout', () => { this.didMouseOut (...arguments); });
   },
 
   drawChart () {
@@ -162,7 +162,7 @@ export default Ember.Component.extend({
     }
   },
 
-  onError (id, message) {
+  didError (id, message) {
     let errorHandler = this.get ('error');
 
     if (errorHandler) {
@@ -170,7 +170,7 @@ export default Ember.Component.extend({
     }
   },
 
-  onSelect () {
+  didSelect () {
     let selectHandler = this.get ('select');
 
     if (selectHandler) {
@@ -178,7 +178,7 @@ export default Ember.Component.extend({
     }
   },
 
-  onMouseOver (row, column) {
+  didMouseOver (row, column) {
     let onMouseOverHandler = this.get ('mouseover');
 
     if (onMouseOverHandler) {
@@ -186,7 +186,7 @@ export default Ember.Component.extend({
     }
   },
 
-  onMouseOut (row, column) {
+  didMouseOut (row, column) {
     let onMouseOutHandler = this.get ('mouseout');
 
     if (onMouseOutHandler) {

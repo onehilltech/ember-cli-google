@@ -131,5 +131,19 @@ export default Chart.extend({
     vAxisViewWindow: 'vAxis.viewWindow',
     vAxisViewWindowMax: 'vAxis.viewWindow.max',
     vAxisViewWindowMin: 'vAxis.viewWindow.min'
+  },
+
+  didCreateChart (chart) {
+    this._super (...arguments);
+
+    google.visualization.events.addListener (chart, 'animationfinish', () => { this.didFinishAnimation (...arguments); });
+  },
+
+  didFinishAnimation () {
+    let finishAnimationHandler = this.get ('finishAnimation');
+
+    if (finishAnimationHandler) {
+      finishAnimationHandler (this);
+    }
   }
 });
