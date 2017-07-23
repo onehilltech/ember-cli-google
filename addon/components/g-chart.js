@@ -47,6 +47,7 @@ export default Ember.Component.extend({
     legendTextStyle: 'legend.textStyle',
 
     title: 'title',
+    titlePosition: 'titlePosition',
     titleTextStyle: 'titleTextStyle',
 
     tooltip: 'tooltip',

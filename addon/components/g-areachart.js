@@ -1,12 +1,8 @@
-/*global google*/
-
 import XYChart from './g-xychart';
 
 export default XYChart.extend({
   chartOptionsMapping: {
-    curveType: 'curveType',
-
-    trendlines: 'trendlines',
+    isStacked: 'isStacked'
   },
 
   createChart (element) {
