@@ -24,6 +24,10 @@ module.exports = function(environment) {
     },
 
     GoogleENV: {
+      charts: {
+        mapsApiKey: '1234567890'
+      },
+
       reCAPTCHA: {
         siteKey: '1234567890'
       }
