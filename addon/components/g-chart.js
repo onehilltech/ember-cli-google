@@ -23,6 +23,7 @@ export default Ember.Component.extend({
     chartArea: 'chartArea',
     chartAreaBackgroundColor: 'chartArea.backgroundColor',
     chartAreaLeft: 'chartArea.left',
+    chartAreaRight: 'chartArea.right',
     chartAreaTop: 'chartArea.top',
     chartAreaWidth: 'chartArea.width',
     chartAreaHeight: 'chartArea.height',
@@ -84,6 +85,7 @@ export default Ember.Component.extend({
   didReceiveAttrs (changeSet) {
     this._super (...arguments);
 
+
     if (Ember.isPresent (changeSet.newAttrs)) {
       // This determine if we need to redraw the chart. We redraw the chart if the
       // data has changed, or one of the chart options has changed.
@@ -100,14 +102,22 @@ export default Ember.Component.extend({
           // If this is a nested option, make sure the parent option exists.
           let targetChartOptionParts = targetChartOption.split ('.');
 
-          if (targetChartOptionParts.length === 2) {
-            let parentOption = targetChartOptionParts[0];
-            let parentOptionKey = `options.${parentOption}`;
-            let option = this.get (parentOptionKey);
+          if (targetChartOptionParts.length > 1) {
+            // Remove the last element in the array, which is the leaf option
+            // that we are setting.
+            targetChartOptionParts.pop ();
 
-            if (Ember.isNone (option)) {
-              this.set (parentOptionKey, {});
-            }
+            let parentOptionKey = 'options';
+
+            targetChartOptionParts.forEach ((part) => {
+              parentOptionKey += `.${part}`;
+
+              let option = this.get (parentOptionKey);
+
+              if (Ember.isNone (option)) {
+                this.set (parentOptionKey, {});
+              }
+            });
           }
 
           // Now, we can set the value on the options.
