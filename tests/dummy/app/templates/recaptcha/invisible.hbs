@@ -1,0 +1,4 @@
+<p>{{g-recaptcha-invisible response=(action (mut recaptcha)) expired=(action (mut expired)) reset=reset}}</p>
+
+{{#if recaptcha}}<p>The invisible reCAPTCHA has been verified. <a href="#" {{action (mut reset) true}}>Click to reset.</a></p>{{/if}}
+{{#if expired}}<p>The reCAPTCHA has expired.</p>{{/if}}

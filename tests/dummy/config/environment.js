@@ -23,13 +23,9 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    GoogleENV: {
-      charts: {
-        mapsApiKey: '1234567890'
-      },
-
-      reCAPTCHA: {
-        siteKey: '1234567890'
+    'ember-cli-google': {
+      recaptcha: {
+        siteKey: '6LesnxkUAAAAAL2IIyKM__qvHYerg17EaC8jHOzu'
       }
     }
   };

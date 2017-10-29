@@ -7,6 +7,9 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('recaptcha', function() {
+    this.route('invisible');
+  });
 });
 
 export default Router;

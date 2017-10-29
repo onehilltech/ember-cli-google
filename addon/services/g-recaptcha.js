@@ -7,16 +7,20 @@ import Ember from 'ember';
  *
  * The service is used by reCAPTCHA-v2 and reCAPTCHA-invisible.
  */
-export default Ember.Service.extend({
+export default Ember.Service.extend ({
   init () {
     this._super (...arguments);
 
-    const ENV = Ember.getOwner(this).resolveRegistration('config:environment');
-    this.set ('_siteKey', ENV.GoogleENV.reCAPTCHA.siteKey);
+    const ENV = Ember.getOwner (this).resolveRegistration ('config:environment');
+    let siteKey = Ember.get (ENV, 'ember-cli-google.recaptcha.siteKey');
+
+    Ember.assert ('Missing ember-cli-google.recaptcha.siteKey in config/environment.', siteKey);
+
+    this.set ('_siteKey', siteKey);
   },
 
   /// Site key for the application.
-  siteKey: Ember.computed.alias ('_siteKey'),
+  siteKey: Ember.computed.readOnly ('_siteKey'),
 
   /**
    * Renders the container as a reCAPTCHA widget and returns the ID of the newly
@@ -27,11 +31,12 @@ export default Ember.Service.extend({
    * @returns {RSVP.Promise|*}
    */
   render (container, params) {
-    params = Ember.merge (params, {sitekey: this.get ('_siteKey')});
+    let siteKey = this.get ('_siteKey');
+    let options = Ember.merge ({sitekey: siteKey}, params);
 
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then ((grecaptcha) => {
-        const widgetId = grecaptcha.render (container, params);
+      this.get ('_instance').then (grecaptcha => {
+        const widgetId = grecaptcha.render (container, options);
 
         Ember.run (null, resolve, widgetId);
       }).catch (reject);
@@ -39,15 +44,15 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Programatically invoke the reCAPTCHA check. Used if the invisible reCAPTCHA
-   * is on a div instead of a button.
+   * Manually invoke the reCAPTCHA check. Used if the invisible reCAPTCHA is on a
+   * div instead of a button.
    *
    * @param widgetId
    * @returns {RSVP.Promise|*}
    */
   execute (widgetId) {
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then ((grecaptcha) => {
+      this.get ('_instance').then (grecaptcha => {
         grecaptcha.execute (widgetId);
 
         Ember.run (null, resolve);
@@ -63,7 +68,7 @@ export default Ember.Service.extend({
    */
   reset (widgetId) {
     return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then ((grecaptcha) => {
+      this.get ('_instance').then (grecaptcha => {
         grecaptcha.reset (widgetId);
 
         Ember.run (null, resolve);
@@ -78,14 +83,12 @@ export default Ember.Service.extend({
    * @returns {RSVP.Promise|*}
    */
   getResponse (widgetId) {
-    return new Ember.RSVP.Promise (function (resolve, reject) {
-      this.get ('_instance')
-        .then ((grecaptcha) => {
-          const res = grecaptcha.getResponse (widgetId);
-          Ember.run (null, resolve, res);
-        })
-        .catch (reject);
-    }.bind (this));
+    return new Ember.RSVP.Promise ((resolve, reject) => {
+      this.get ('_instance').then (grecaptcha => {
+        const res = grecaptcha.getResponse (widgetId);
+        Ember.run (null, resolve, res);
+      }).catch (reject);
+    });
   },
 
   /**
@@ -99,10 +102,9 @@ export default Ember.Service.extend({
     };
 
     Ember.$ (window).ready (() => {
-      Ember.$.getScript ('https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit')
-        .fail ((jqxhr) => {
-          Ember.run (null, reject, jqxhr);
-        });
+      Ember.$.getScript ('https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit').fail (xhr => {
+        Ember.run (null, reject, xhr);
+      });
     });
   })
 });
