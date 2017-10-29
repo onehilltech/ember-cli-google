@@ -110,11 +110,11 @@ export default Ember.Component.extend({
     // Let the client (or parent) know that we have received a response. We,
     // however, are not going to tell them the response value since that is not
     // really important to them.
-    let {_response, response} = this.getProperties (['_response', 'response']);
+    let {_response, verified} = this.getProperties (['_response', 'verified']);
 
 
-    if (response)
-      response (_response);
+    if (verified)
+      verified (_response);
   }),
 
   /**
