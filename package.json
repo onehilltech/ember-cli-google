@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-google",
-  "version": "0.3.3",
+  "version": "0.3.2",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
