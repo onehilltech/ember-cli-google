@@ -14,7 +14,12 @@ export default CaptchaComponent.extend({
 
   didRenderCaptcha () {
     this._super (...arguments);
-    this.execute ();
+
+    let executeOnInitialRender = this.get ('executeOnInitialRender');
+
+    if (executeOnInitialRender) {
+      this.execute ();
+    }
   },
 
   /**
