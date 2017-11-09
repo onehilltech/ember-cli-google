@@ -1,6 +1,4 @@
-/*global google*/
-
-import Chart from './g-chart';
+import Chart from '../-private/g-chart';
 
 export default Chart.extend({
   classNames: ['g-piechart'],

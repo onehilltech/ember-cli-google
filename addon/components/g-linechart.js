@@ -1,6 +1,4 @@
-/*global google*/
-
-import XYChart from './g-xychart';
+import XYChart from '../-private/g-xychart';
 
 export default XYChart.extend({
   classNames: ['g-linechart'],
