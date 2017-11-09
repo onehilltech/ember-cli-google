@@ -111,10 +111,7 @@ export default Ember.Component.extend({
     // however, are not going to tell them the response value since that is not
     // really important to them.
     let {_response, verified} = this.getProperties (['_response', 'verified']);
-
-
-    if (verified)
-      verified (_response);
+    this.sendAction ('verified', _response);
   }),
 
   /**
@@ -124,9 +121,6 @@ export default Ember.Component.extend({
    * @private
    */
   _expiredCallback () {
-    let expiredCallback = this.get ('expired');
-
-    if (expiredCallback)
-      expiredCallback ();
+    this.sendAction ('expired');
   }
 });
