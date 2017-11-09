@@ -4,6 +4,7 @@ EmberJS add-on for using Google reCAPTCHA services
 
 [![npm version](https://img.shields.io/npm/v/ember-cli-google-recaptcha.svg?maxAge=2592000)](https://www.npmjs.com/package/ember-cli-google-recaptcha)
 [![Dependencies](https://david-dm.org/onehilltech/ember-cli-google-recaptcha.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha)
+[![devDependencies Status](https://david-dm.org/onehilltech/ember-cli-google-recaptcha/dev-status.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha?type=dev)
 
 ## Features
 
