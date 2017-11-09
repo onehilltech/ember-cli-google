@@ -52,8 +52,10 @@ export default Ember.Component.extend({
     title: 'title',
     titlePosition: 'titlePosition',
     titleTextStyle: 'titleTextStyle',
+    subtitle: 'subtitle',
 
     tooltip: 'tooltip',
+
     tooltipIgnoreBounds: 'tooltip.ignoreBounds',
     tooltipIsHtml: 'tooltip.isHtml',
     tooltipShowColorCode: 'tooltip.showColorCode',
@@ -194,7 +196,21 @@ export default Ember.Component.extend({
       data = google.visualization.arrayToDataTable (data);
     }
 
+    let material = this.getWithDefault ('material', false);
+
+    if (material) {
+      options = this.convertOptions (options);
+    }
+
     chart.draw (data, options);
+  },
+
+  /**
+   * Convert the options to material design options. This method is only called if
+   * the `material` property is true.
+   */
+  convertOptions (opts) {
+    return opts;
   },
 
   /**
