@@ -7,6 +7,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('v2');
+  this.route('invisible');
 });
 
 export default Router;

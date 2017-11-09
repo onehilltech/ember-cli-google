@@ -1,0 +1,7 @@
+<form>
+  {{g-recaptcha-invisible verified=(action (mut recaptcha)) expired=(action "expired") reset=reset executeOnInitialRender=true}}
+</form>
+
+{{#if recaptcha}}
+  <p>Response: {{recaptcha}}</p>
+{{/if}}

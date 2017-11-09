@@ -1,4 +1,5 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
+import Ember from 'ember';
 
 export default CaptchaComponent.extend({
   badge: 'bottomright',
