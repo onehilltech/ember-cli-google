@@ -47,7 +47,7 @@ or invisible) inside the form html tags:
 <form>
   <!-- other form elements -->
   
-  {{g-recaptcha-v2 verified=(action (mut recaptcha)) expired=(action "expired") reset=reset}}
+  {{g-recaptcha-invisible verified=(action (mut recaptcha)) expired=(action "expired") reset=reset}}
 </form>
 ```
 
