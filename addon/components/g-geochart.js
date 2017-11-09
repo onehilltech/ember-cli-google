@@ -2,6 +2,8 @@ import Ember from 'ember';
 import Chart from './g-chart';
 
 export default Chart.extend({
+  classNames: ['g-geochart'],
+
   packages: ['geochart'],
 
   chartOptionsMapping: {
@@ -30,28 +32,24 @@ export default Chart.extend({
   },
 
   packagesOptions: Ember.computed (function () {
-    let thisEnv = Ember.getOwner (this).resolveRegistration ('config:environment');
+    let ENV = Ember.getOwner (this).resolveRegistration ('config:environment');
 
     return {
-      mapsApiKey: thisEnv.GoogleENV.charts.mapsApiKey
+      mapsApiKey: Ember.get (ENV, 'ember-cli-google.charts.mapsApiKey')
     };
   }),
 
-  createChart (element) {
-    return new google.visualization.GeoChart (element);
+  createChart () {
+    return new google.visualization.GeoChart (this.element);
   },
 
   didCreateChart (chart) {
     this._super (...arguments);
 
-    google.visualization.events.addListener (chart, 'regionClick', (ev) => { this.didClickRegion (ev); });
+    google.visualization.events.addListener (chart, 'regionClick', this.didClickRegion.bind (this));
   },
 
   didClickRegion (ev) {
-    let clickRegionHandler = this.get ('regionClick');
-
-    if (clickRegionHandler) {
-      clickRegionHandler (this, ev);
-    }
+    this.sendAction ('regionClick', ev);
   }
 });

@@ -1,6 +1,8 @@
 import XYChart from './g-xychart';
 
 export default XYChart.extend({
+  classNames: ['g-bubblechart'],
+
   packages: ['corechart'],
 
   chartOptionsMapping: {
@@ -10,7 +12,7 @@ export default XYChart.extend({
     bubbleTextStyle: 'bubble.textStyle'
   },
 
-  createChart (element) {
-    return new google.visualization.BubbleChart (element);
+  createChart () {
+    return new google.visualization.BubbleChart (this.element);
   }
 });

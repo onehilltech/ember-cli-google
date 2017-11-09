@@ -1,6 +1,8 @@
 import XYChart from './g-xychart';
 
 export default XYChart.extend({
+  classNames: ['g-barchart'],
+
   packages: ['corechart'],
 
   chartOptionsMapping: {
@@ -8,7 +10,7 @@ export default XYChart.extend({
     bars: 'bars'
   },
 
-  createChart (element) {
-    return new google.visualization.BarChart (element);
+  createChart () {
+    return new google.visualization.BarChart (this.element);
   }
 });

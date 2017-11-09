@@ -3,6 +3,8 @@
 import Chart from './g-chart';
 
 export default Chart.extend({
+  classNames: ['g-piechart'],
+
   packages: ['corechart'],
 
   chartOptionsMapping: {
@@ -18,7 +20,7 @@ export default Chart.extend({
     sliceVisibilityThreshold: 'sliceVisibilityThreshold'
   },
 
-  createChart (element) {
-    return new google.visualization.PieChart (element);
+  createChart () {
+    return new google.visualization.PieChart (this.element);
   }
 });

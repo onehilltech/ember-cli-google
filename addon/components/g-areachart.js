@@ -1,11 +1,13 @@
 import XYChart from './g-xychart';
 
 export default XYChart.extend({
+  classNames: ['g-areachart'],
+
   chartOptionsMapping: {
     isStacked: 'isStacked'
   },
 
-  createChart (element) {
-    return new google.visualization.LineChart (element);
+  createChart () {
+    return new google.visualization.LineChart (this.element);
   }
 });

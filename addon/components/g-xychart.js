@@ -3,6 +3,8 @@
 import Chart from './g-chart';
 
 export default Chart.extend({
+  classNames: ['g-xychart'],
+
   packages: ['corechart'],
 
   chartOptionsMapping: {
@@ -136,14 +138,10 @@ export default Chart.extend({
   didCreateChart (chart) {
     this._super (...arguments);
 
-    google.visualization.events.addListener (chart, 'animationfinish', (ev) => { this.didFinishAnimation (ev); });
+    google.visualization.events.addListener (chart, 'animationfinish', this.didFinishAnimation.bind (this));
   },
 
   didFinishAnimation (ev) {
-    let finishAnimationHandler = this.get ('finishAnimation');
-
-    if (finishAnimationHandler) {
-      finishAnimationHandler (this, ev);
-    }
+    this.sendAction ('finishAnimation', ev);
   }
 });

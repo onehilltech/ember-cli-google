@@ -4,6 +4,8 @@ import layout from '../templates/components/g-chart';
 export default Ember.Component.extend({
   layout,
 
+  classNames: ['g-chart'],
+
   gCharts: Ember.inject.service (),
 
   mergedProperties: ['chartOptionsMapping', 'packagesOptions'],
@@ -68,155 +70,166 @@ export default Ember.Component.extend({
     this.set ('options', {});
   },
 
+  exists: Ember.computed.bool ('chart'),
+
   imageURI: Ember.computed ('chart', function () {
     return this.get ('chart').getImageURI ();
   }),
 
   selection: Ember.computed ('chart', {
-    get (key) {
+    get () {
       return this.get ('chart').getSelection ();
     },
 
     set (key, value) {
       this.get ('chart').setSelection (value);
+
+      return value;
     }
   }),
 
-  didReceiveAttrs (changeSet) {
+  didReceiveAttrs () {
     this._super (...arguments);
 
-
-    if (Ember.isPresent (changeSet.newAttrs)) {
-      // This determine if we need to redraw the chart. We redraw the chart if the
-      // data has changed, or one of the chart options has changed.
-      let redrawChart = false;
-
-      if (Ember.isPresent (changeSet.newAttrs.data)) {
-        redrawChart = true;
-      }
-
-      for (let prop in changeSet.newAttrs) {
-        let targetChartOption = this.chartOptionsMapping[prop];
-
-        if (Ember.isPresent (targetChartOption)) {
-          // If this is a nested option, make sure the parent option exists.
-          let targetChartOptionParts = targetChartOption.split ('.');
-
-          if (targetChartOptionParts.length > 1) {
-            // Remove the last element in the array, which is the leaf option
-            // that we are setting.
-            targetChartOptionParts.pop ();
-
-            let parentOptionKey = 'options';
-
-            targetChartOptionParts.forEach ((part) => {
-              parentOptionKey += `.${part}`;
-
-              let option = this.get (parentOptionKey);
-
-              if (Ember.isNone (option)) {
-                this.set (parentOptionKey, {});
-              }
-            });
-          }
-
-          // Now, we can set the value on the options.
-          let value = this.get (prop);
-          let optionKey = `options.${targetChartOption}`;
-
-          this.set (optionKey, value);
-
-          redrawChart = true;
-        }
-      }
-
-      if (redrawChart && Ember.isPresent (this.get ('chart'))) {
-        this.drawChart ();
-      }
-    }
+    this._buildChartOptions ();
   },
 
   didInsertElement () {
     this._super (...arguments);
 
     // Request the packages used by the concrete chart.
-    let packages = this.get ('packages');
-    let packagesOptions = this.get ('packagesOptions');
+    let {packages, packagesOptions} = this.getProperties (['packages', 'packagesOptions']);
 
     this.get ('gCharts').load (packages, packagesOptions,  () => {
       // Instruct the subclass to create the concrete chart object so we can
       // store a reference to it.
-      let chart = this.createChart (this.$()[0]);
+      let chart = this.createChart ();
       this.didCreateChart (chart);
 
       this.set ('chart', chart);
+
       this.drawChart ();
+      this.didDrawChart ();
     });
   },
 
-  didCreateChart (chart) {
-    google.visualization.events.addListener (chart, 'ready', (ev) => { this.onReady (ev); });
-    google.visualization.events.addListener (chart, 'select', (ev) => { this.didSelect (ev); });
-    google.visualization.events.addListener (chart, 'error', (ev) => { this.didError (ev); });
-    google.visualization.events.addListener (chart, 'onmouseover', (ev) => { this.didMouseOver (ev); });
-    google.visualization.events.addListener (chart, 'onmouseout', (ev) => { this.didMouseOut (ev); });
+  _buildChartOptions () {
+    let chartOptionsMapping = this.get ('chartOptionsMapping');
+    let chartOptions = Ember.Object.create ();
+
+    for (let propName in chartOptionsMapping) {
+      if (!chartOptionsMapping.hasOwnProperty (propName)) {
+        continue;
+      }
+
+      // Check if we have a value in our component for this chart option.
+      let value = this.get (propName);
+
+      if (Ember.isNone (value)) {
+        continue;
+      }
+
+      let targetChartOption = this.chartOptionsMapping[propName];
+      let targetChartOptionParts = targetChartOption.split ('.');
+
+      if (targetChartOptionParts.length > 1) {
+        // Make sure the parents of this option exist.
+        targetChartOptionParts.pop ();
+        let parentOptionKey = targetChartOptionParts[0];
+        let option = chartOptions.get (parentOptionKey);
+
+        if (Ember.isNone (option)) {
+          chartOptions.set (parentOptionKey, {});
+        }
+
+        for (let i = 1; i < targetChartOptionParts.length; ++ i) {
+          let part = targetChartOptionParts[i];
+          parentOptionKey += `.${part}`;
+
+          if (Ember.isNone (option)) {
+            this.set (parentOptionKey, {});
+          }
+        }
+      }
+
+      // Now, we can set the value on the options.
+      chartOptions.set (targetChartOption, value);
+    }
+
+    this.set ('options', chartOptions);
   },
 
+  _setBuiltinStyle () {
+
+  },
+
+  /**
+   * The chart has been created. At this point, the class can perform some do some
+   * post creation configuration.
+   *
+   * @param chart
+   */
+  didCreateChart (chart) {
+    google.visualization.events.addListener (chart, 'ready', this.didReady.bind (this));
+    google.visualization.events.addListener (chart, 'select', this.didSelect.bind (this));
+    google.visualization.events.addListener (chart, 'error', this.didError.bind (this));
+    google.visualization.events.addListener (chart, 'onmouseover', this.didMouseOver.bind (this));
+    google.visualization.events.addListener (chart, 'onmouseout', this.didMouseOut.bind (this));
+  },
+
+  /**
+   * Draw the chart.
+   */
   drawChart () {
     // Prepare the data. If the data object is an array, then we need to convert
     // the data object to a DataTable object. Otherwise, we are going to assume the
     // data is a DataTable or a DataView.
-    let data = this.get ('data');
+    let {options, chart, data} = this.getProperties (['options', 'chart', 'data']);
+
+    if (Ember.isNone (chart)) {
+      return;
+    }
 
     if (Ember.isArray (data)) {
       data = google.visualization.arrayToDataTable (data);
     }
 
-    let options = this.get ('options') || {};
-    this.get ('chart').draw (data, options);
+    chart.draw (data, options);
+  },
+
+  /**
+   * Notify the subclass the chart has been drawn.
+   */
+  didDrawChart () {
+
   },
 
   clear () {
     this.get ('chart').clearChart ();
+    this.didClear ();
   },
 
-  onReady (ev) {
-    let readyHandler = this.get ('ready');
+  didClear () {
+    this.sendAction ('clear');
+  },
 
-    if (readyHandler) {
-      readyHandler (this, ev);
-    }
+  didReady (ev) {
+    this.sendAction ('ready', ev);
   },
 
   didError (ev) {
-    let errorHandler = this.get ('error');
-
-    if (errorHandler) {
-      errorHandler (this, ev);
-    }
+    this.sendAction ('error', ev);
   },
 
   didSelect (ev) {
-    let selectHandler = this.get ('select');
-
-    if (selectHandler) {
-      selectHandler (this, ev);
-    }
+    this.sendAction ('select', ev);
   },
 
   didMouseOver (ev) {
-    let onMouseOverHandler = this.get ('mouseover');
-
-    if (onMouseOverHandler) {
-      onMouseOverHandler (this, ev);
-    }
+    this.sendAction ('mouseOver', ev);
   },
 
   didMouseOut (ev) {
-    let onMouseOutHandler = this.get ('mouseout');
-
-    if (onMouseOutHandler) {
-      onMouseOutHandler (this, ev);
-    }
+    this.sendAction ('mouseOut', ev);
   }
 });
