@@ -11,23 +11,10 @@ EmberJS add-on for a variety of Google services and products.
 
 ## Supported Products 
 
-* [Google Charts](https://developers.google.com/chart/) (area, bar, bubble, geo, line, pie)
-* [Google reCAPTCHA](https://www.google.com/recaptcha/intro/)
+* [ember-cli-google-charts](https://github.com/onehilltech/ember-cli-google-charts)
+* [ember-cli-google-recaptcha](https://github.com/onehilltech/ember-cli-google-recaptcha)
 
 ## Installation
 
-    ember install ember-cli-google --save-dev
+    ember install ember-cli-google
     
-## Quick Example
-
-Here is an example of creating 
-[the following line chart](https://developers.google.com/chart/interactive/docs/gallery/linechart#curving-the-lines):
-
-    {{g-linechart data=lineChartData title="Company Performance" curveType="function" legendPosition="bottom"}}
-    
-Each of the chart options above can bind to a variable. When the variable is updated, 
-the chart is redrawn.
-
-## Documentation
-
-View the Wiki to learn more about using this add-on in your project.
