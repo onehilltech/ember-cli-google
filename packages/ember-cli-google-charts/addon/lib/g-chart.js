@@ -69,7 +69,10 @@ export default Ember.Component.extend({
   init () {
     this._super (...arguments);
 
-    this.set ('options', {});
+    let ENV = Ember.getOwner (this).resolveRegistration ('config:environment');
+    let material = Ember.get (ENV, 'ember-cli-google.charts.material', false);
+
+    this.setProperties ({ options: {}, material: material });
   },
 
   exists: Ember.computed.bool ('chart'),
