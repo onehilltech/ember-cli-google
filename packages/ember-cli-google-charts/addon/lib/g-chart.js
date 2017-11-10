@@ -99,6 +99,10 @@ export default Ember.Component.extend({
   didInsertElement () {
     this._super (...arguments);
 
+    // Let's register for the resize event for the window so we can redraw the chart
+    // when the window resize. This will make the chart responsive.
+    Ember.$ (window).on ('resize', this.didResize.bind (this));
+
     // Request the packages used by the concrete chart.
     let {packages, packagesOptions} = this.getProperties (['packages', 'packagesOptions']);
 
@@ -109,21 +113,21 @@ export default Ember.Component.extend({
       this.didCreateChart (chart);
 
       this.set ('chart', chart);
-
       this.drawChart ();
-      this.didDrawChart ();
     });
+  },
+
+  willDestroyElement () {
+    this._super (...arguments);
+
+    Ember.$ (window).off ('resize', this.didResize.bind (this));
   },
 
   _buildChartOptions () {
     let chartOptionsMapping = this.get ('chartOptionsMapping');
-    let chartOptions = Ember.Object.create ();
+    let chartOptions = {};
 
     for (let propName in this.attrs) {
-      if (!chartOptionsMapping.hasOwnProperty (propName)) {
-        continue;
-      }
-
       // Check if we have a value in our component for this chart option.
       let value = this.get (propName);
 
@@ -131,38 +135,42 @@ export default Ember.Component.extend({
         continue;
       }
 
-      let targetChartOption = this.chartOptionsMapping[propName];
+      let targetChartOption = chartOptionsMapping[propName];
+
+      if (Ember.isNone (targetChartOption)) {
+        continue;
+      }
+
       let targetChartOptionParts = targetChartOption.split ('.');
 
       if (targetChartOptionParts.length > 1) {
         // Make sure the parents of this option exist.
         targetChartOptionParts.pop ();
+
         let parentOptionKey = targetChartOptionParts[0];
-        let option = chartOptions.get (parentOptionKey);
+        let option = Ember.get (chartOptions, parentOptionKey);
 
         if (Ember.isNone (option)) {
-          chartOptions.set (parentOptionKey, {});
+          Ember.set (chartOptions, parentOptionKey, {});
         }
 
         for (let i = 1; i < targetChartOptionParts.length; ++ i) {
           let part = targetChartOptionParts[i];
           parentOptionKey += `.${part}`;
 
-          if (Ember.isNone (option)) {
-            this.set (parentOptionKey, {});
+          let parentOption = Ember.get (chartOptions, parentOptionKey);
+
+          if (Ember.isNone (parentOption)) {
+            Ember.set (chartOptions, parentOptionKey, {});
           }
         }
       }
 
       // Now, we can set the value on the options.
-      chartOptions.set (targetChartOption, value);
+      Ember.set (chartOptions, targetChartOption, value);
     }
 
     this.set ('options', chartOptions);
-  },
-
-  _setBuiltinStyle () {
-
   },
 
   /**
@@ -202,7 +210,10 @@ export default Ember.Component.extend({
       options = this.convertOptions (options);
     }
 
+    // Draw the chart, and then notify the subclass.
     chart.draw (data, options);
+
+    this.didDrawChart ();
   },
 
   /**
@@ -213,16 +224,22 @@ export default Ember.Component.extend({
     return opts;
   },
 
+  clear () {
+    this.get ('chart').clearChart ();
+    this.didClear ();
+  },
+
   /**
    * Notify the subclass the chart has been drawn.
    */
   didDrawChart () {
-
+    this.sendAction ('draw');
   },
 
-  clear () {
-    this.get ('chart').clearChart ();
-    this.didClear ();
+  didResize () {
+    // Force the chart to redraw itself.
+    this.drawChart ();
+    this.sendAction ('resize');
   },
 
   didClear () {

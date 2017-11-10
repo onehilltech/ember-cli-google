@@ -1,4 +1,5 @@
 import XYChart from '../lib/g-xychart';
+import Ember from 'ember';
 
 export default XYChart.extend({
   classNames: ['g-columnchart'],
