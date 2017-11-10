@@ -22,7 +22,9 @@ EmberJS add-on for using Google Charts
 Here is an example of creating 
 [the following line chart](https://developers.google.com/chart/interactive/docs/gallery/linechart#curving-the-lines):
 
-    {{g-linechart data=lineChartData title="Company Performance" curveType="function" legendPosition="bottom"}}
+```handlebars
+{{g-linechart data=lineChartData title="Company Performance" curveType="function" legendPosition="bottom"}}
+```
     
 Each of the chart options above can bind to a variable. When the variable is updated, 
 the chart is redrawn.
