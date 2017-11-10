@@ -70,7 +70,7 @@ export default Ember.Component.extend({
     this._super (...arguments);
 
     let ENV = Ember.getOwner (this).resolveRegistration ('config:environment');
-    let material = Ember.get (ENV, 'ember-cli-google.charts.material', false);
+    let material = Ember.getWithDefault (ENV, 'ember-cli-google.charts.material', false);
 
     this.setProperties ({ options: {}, material: material });
   },
