@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('barchart');
+  this.route('columnchart');
 });
 
 export default Router;

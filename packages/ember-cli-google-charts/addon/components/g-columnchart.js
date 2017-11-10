@@ -3,7 +3,10 @@ import XYChart from '../lib/g-xychart';
 export default XYChart.extend({
   classNames: ['g-columnchart'],
 
-  packages: ['corechart'],
+  packages: Ember.computed ('material', function () {
+    let material = this.getWithDefault ('material', false);
+    return material ? ['bar'] : ['corechart'];
+  }),
 
   chartOptionsMapping: {
     barGroupWidth: 'bar.groupWidth',
@@ -11,6 +14,14 @@ export default XYChart.extend({
   },
 
   createChart () {
-    return new google.visualization.ColumnChart (this.element);
+    let material = this.getWithDefault ('material', false);
+    let Chart = material ? google.charts.Bar : google.visualization.ColumnChart;
+
+    return new Chart (this.element);
+  },
+
+  convertOptions (opts) {
+    let newOptions = Ember.merge ({}, opts);
+    return google.charts.Bar.convertOptions (newOptions);
   }
 });

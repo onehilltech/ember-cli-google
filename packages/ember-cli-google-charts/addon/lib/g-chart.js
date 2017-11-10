@@ -119,7 +119,7 @@ export default Ember.Component.extend({
     let chartOptionsMapping = this.get ('chartOptionsMapping');
     let chartOptions = Ember.Object.create ();
 
-    for (let propName in chartOptionsMapping) {
+    for (let propName in this.attrs) {
       if (!chartOptionsMapping.hasOwnProperty (propName)) {
         continue;
       }
