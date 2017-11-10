@@ -54,6 +54,8 @@ export default Ember.Component.extend({
     titleTextStyle: 'titleTextStyle',
     subtitle: 'subtitle',
 
+    theme: 'theme',
+
     tooltip: 'tooltip',
 
     tooltipIgnoreBounds: 'tooltip.ignoreBounds',
