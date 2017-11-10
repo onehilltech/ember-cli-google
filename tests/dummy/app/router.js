@@ -7,13 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('recaptcha', function() {
-    this.route('invisible');
-  });
 
-  this.route('charts', function() {
-    this.route('line-chart');
-  });
 });
 
 export default Router;
