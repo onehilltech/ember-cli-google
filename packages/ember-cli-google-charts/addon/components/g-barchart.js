@@ -13,7 +13,8 @@ export default XYChart.extend({
 
   chartOptionsMapping: {
     barGroupWidth: 'bar.groupWidth',
-    bars: 'bars'
+    bars: 'bars',
+    isStacked: 'isStacked'
   },
 
   createChart () {
