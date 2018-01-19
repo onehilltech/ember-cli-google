@@ -11,6 +11,7 @@ EmberJS add-on for a variety of Google services and products.
 
 ## Supported Products 
 
+* [ember-cli-google-analytics](https://github.com/onehilltech/ember-cli-google-analytics)
 * [ember-cli-google-charts](https://github.com/onehilltech/ember-cli-google-charts)
 * [ember-cli-google-recaptcha](https://github.com/onehilltech/ember-cli-google-recaptcha)
 
