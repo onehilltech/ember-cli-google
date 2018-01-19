@@ -5,7 +5,7 @@ import Ember from 'ember';
 export function initialize (app) {
   // Create the one and only tracker need for the application.
   let ENV = app.resolveRegistration ('config:environment');
-  let {trackerId} = Ember.get (ENV, 'ember-cli-google.analytics.trackerId');
+  let trackerId = Ember.get (ENV, 'ember-cli-google.analytics.trackerId');
 
   Ember.assert ('Missing ember-cli-google.analytics.trackerId in config/environment.', !!trackerId);
 
