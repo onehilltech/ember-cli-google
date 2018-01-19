@@ -1,26 +1,24 @@
 # ember-cli-google-analytics
 
-This README outlines the details of collaborating on this Ember addon.
+EmberJS add-on for Google Analytics
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-cli-google-analytics`
-* `npm install`
+    ember install @onehilltech/ember-cli-google-analytics
+    
+## Configuration
 
-## Running
+```javascript
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+// config/environment.js
 
-## Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+let ENV = {
+  'ember-cli-google': {
+    analytics: {
+      trackerId: 'UA-XXXXX-Y',        // tracker id
+      trackerName: '',                // [optional] tracker name
+      cookieDomain: '',               // [optional] cookie domain; default = 'auto'
+    }
+  }
+}
+```
