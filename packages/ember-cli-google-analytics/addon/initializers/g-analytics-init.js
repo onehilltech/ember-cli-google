@@ -12,18 +12,31 @@ export function initialize (app) {
   let cookieDomain = Ember.getWithDefault (ENV, 'ember-cli-google.analytics.cookieDomain', 'auto');
   let trackerName = Ember.get (ENV, 'ember-cli-google.analytics.trackerName');
 
-  ga ('create', trackerId, cookieDomain, trackerName);
+  // We only apply Google Analytics in the production environment. Otherwise, we run
+  // the risk of collecting analytics of the application while it is in development,
+  // testing, or any non-production environment.
+  let {environment} = ENV;
+  let isProductionEnv = environment === 'production';
+
+  if (isProductionEnv) {
+    ga ('create', trackerId, cookieDomain, trackerName);
+  }
+
+  // We still go through the steps so we ensure the behavior is the same in all
+  // environments and we do not run into any surprises.
 
   Ember.Route.reopen ({
     actions: {
       didTransition () {
         this._super (...arguments);
 
-        let {router} = this.getProperties (['routeName', 'router']);
-        let url = router.get ('url');
+        if (isProductionEnv) {
+          let {router} = this.getProperties (['routeName', 'router']);
+          let url = router.get ('url');
 
-        ga ('set', 'page', url);
-        ga ('send', 'pageview');
+          ga ('set', 'page', url);
+          ga ('send', 'pageview');
+        }
       }
     }
   });
