@@ -18,7 +18,7 @@ export function initialize (app) {
   let {environment} = ENV;
   let isProductionEnv = environment === 'production';
 
-  if (isProductionEnv) {
+  if (isProductionEnv && ga) {
     ga ('create', trackerId, cookieDomain, trackerName);
   }
 
@@ -30,7 +30,7 @@ export function initialize (app) {
       didTransition () {
         this._super (...arguments);
 
-        if (isProductionEnv) {
+        if (isProductionEnv && ga) {
           let {router} = this.getProperties (['routeName', 'router']);
           let url = router.get ('url');
 
