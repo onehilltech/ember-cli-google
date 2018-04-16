@@ -1,5 +1,7 @@
 # ember-cli-google
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/onehilltech/ember-cli-google.svg)](https://greenkeeper.io/)
+
 EmberJS add-on for a variety of Google services and products.
 
 ## Features
