@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9496f776-93de-4fcf-a8a0-e739625590df" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -30,6 +29,7 @@
           <entry key="hbs" value="3" />
           <entry key="js" value="8" />
           <entry key="json" value="2" />
+          <entry key="md" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -37,6 +37,7 @@
           <entry key="Handlebars/Mustache" value="3" />
           <entry key="JSON" value="2" />
           <entry key="JavaScript" value="8" />
+          <entry key="Markdown" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -44,6 +45,7 @@
           <entry key="hbs" value="108" />
           <entry key="js" value="434" />
           <entry key="json" value="57" />
+          <entry key="md" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -51,6 +53,7 @@
           <entry key="Handlebars/Mustache" value="108" />
           <entry key="JSON" value="57" />
           <entry key="JavaScript" value="434" />
+          <entry key="Markdown" value="31" />
         </counts>
       </usages-collector>
     </session>
@@ -78,11 +81,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="234">
+              <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="195">
+                <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -122,7 +137,6 @@
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/index.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/controllers/v2.js" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
         <option value="$PROJECT_DIR$/tests/dummy/config/environment.js" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" />
@@ -132,6 +146,7 @@
         <option value="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" />
         <option value="$PROJECT_DIR$/addon/services/g-recaptcha.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -231,24 +246,24 @@
       <workItem from="1513926149532" duration="391000" />
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
-      <workItem from="1535602302730" duration="1652000" />
+      <workItem from="1535602302730" duration="1748000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9490000" />
+    <option name="totallyTimeSpent" value="9586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
+      <window_info active="true" id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info id="npm" order="3" sideWeight="0.5096419" side_tool="true" weight="0.22057787" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3288889" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
       <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
@@ -283,19 +298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="259">
-            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -374,10 +376,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="312">
+            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="234">
+          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="195">
+            <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -13,6 +13,7 @@ EmberJS add-on for using Google reCAPTCHA services
 * Proper binding of attributes to options for real-time, dynamic updates.
 * Handle events as actions for interactive designs.
 * Auto-loading and configuring of scripts that correspond with appropriate lifecycle events.
+* [FastBoot](https://www.ember-fastboot.com/) compatible.
 
 ## Installation
 
