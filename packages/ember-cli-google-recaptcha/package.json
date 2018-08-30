@@ -17,7 +17,9 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "postversion": "npm publish",
+    "postpublish": "git push origin master ; git push origin --tags"
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",

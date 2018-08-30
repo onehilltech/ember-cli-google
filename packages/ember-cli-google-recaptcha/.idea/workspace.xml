@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9496f776-93de-4fcf-a8a0-e739625590df" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/services/g-recaptcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/services/g-recaptcha.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -30,13 +28,13 @@
         <counts>
           <entry key="hbs" value="3" />
           <entry key="js" value="8" />
-          <entry key="json" value="1" />
+          <entry key="json" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Handlebars/Mustache" value="3" />
-          <entry key="JSON" value="1" />
+          <entry key="JSON" value="2" />
           <entry key="JavaScript" value="8" />
         </counts>
       </usages-collector>
@@ -44,13 +42,13 @@
         <counts>
           <entry key="hbs" value="108" />
           <entry key="js" value="434" />
-          <entry key="json" value="12" />
+          <entry key="json" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Handlebars/Mustache" value="108" />
-          <entry key="JSON" value="12" />
+          <entry key="JSON" value="16" />
           <entry key="JavaScript" value="434" />
         </counts>
       </usages-collector>
@@ -70,11 +68,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addon/services/g-recaptcha.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="104">
               <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -97,7 +104,11 @@
     <findStrings>
       <find>reset</find>
       <find>Ember</find>
+      <find>Ember.isPresent</find>
     </findStrings>
+    <replaceStrings>
+      <replace>isPresent</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -113,13 +124,13 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
         <option value="$PROJECT_DIR$/tests/dummy/config/environment.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js" />
         <option value="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" />
         <option value="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" />
         <option value="$PROJECT_DIR$/addon/services/g-recaptcha.js" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -152,23 +163,6 @@
             <path>
               <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
               <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -236,27 +230,27 @@
       <workItem from="1513926149532" duration="391000" />
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
-      <workItem from="1535602302730" duration="1464000" />
+      <workItem from="1535602302730" duration="1580000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9302000" />
+    <option name="totallyTimeSpent" value="9418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
+      <window_info active="true" id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info id="npm" order="3" sideWeight="0.5096419" side_tool="true" weight="0.22057787" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" weight="0.32599118" />
+      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
-      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.4855532" visible="true" weight="0.46255508" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
       <window_info anchor="bottom" id="Debug" order="6" sideWeight="0.49326718" weight="0.38222224" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -339,13 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/environment.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -383,6 +370,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
           <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
       </provider>
     </entry>
