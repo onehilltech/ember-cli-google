@@ -4,8 +4,8 @@ export default Controller.extend({
   reset: true,
 
   actions: {
-    expired () {
-      alert ('The reCAPTCHA has expired');
+    reset () {
+      this.setProperties ({expired: false, reset: true});
     }
   }
 });

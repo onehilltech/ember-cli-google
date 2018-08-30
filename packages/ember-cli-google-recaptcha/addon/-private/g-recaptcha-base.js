@@ -54,46 +54,6 @@ export default Component.extend({
   },
 
   didRenderCaptcha () {
-    // Handle reset the recaptcha.
-    let reset = this.get ('reset');
-
-    if (reset) {
-      this.resetCaptcha ();
-    }
-  },
-
-  didUpdate () {
-    this._super (...arguments);
-
-    let reset = this.get ('reset');
-
-    if (reset) {
-      this.resetCaptcha ();
-    }
-  },
-
-  execute () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-    return grecaptcha.execute (widgetId);
-  },
-
-  /**
-   * Reset the reCATPCHA component.
-   */
-  resetCaptcha () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-
-    return grecaptcha.reset (widgetId).then (() => {
-      this.setProperties ({reset: false, _response: null});
-
-      return this.didReset ();
-    });
-  },
-
-  /**
-   * Callback that the widget has been reset.
-   */
-  didReset () {
 
   },
 

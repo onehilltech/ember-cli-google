@@ -1,7 +1,3 @@
-{{g-recaptcha-v2 verified=(action (mut response)) expired=(action "expired") reset=reset}}
+{{g-recaptcha-v2 verified=(action (mut response))}}
 
-{{#if response}}
-  <p>Response: {{response}}</p>
-
-  <a href="#" {{action (mut reset) true}}>Reset</a>
-{{/if}}
+<p>Response: {{response}}</p>

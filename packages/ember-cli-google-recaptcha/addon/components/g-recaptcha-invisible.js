@@ -1,5 +1,6 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
 import { computed } from '@ember/object';
+import { Promise } from 'rsvp';
 
 export default CaptchaComponent.extend({
   badge: 'bottomright',
@@ -13,13 +14,61 @@ export default CaptchaComponent.extend({
     return {badge};
   }),
 
-  /**
-   * Callback to the reset the component. Resetting the invisible reCAPTCHA will
-   * automatically execute it again. This will force the widget to show the test
-   * again, if necessary.
-   */
-  didReset () {
-    this._super (...arguments);
-    this.execute ();
+  didRenderCaptcha () {
+    // Handle reset the recaptcha.
+    let execute = this.get ('execute');
+
+    if (execute) {
+      this._execute ();
+    }
   },
+
+  didUpdate () {
+    this._super (...arguments);
+
+    const { reset, execute } = this.getProperties (['reset', 'execute']);
+
+    let promises = [];
+
+    if (reset) {
+      promises.push (this._reset ());
+    }
+
+    if (execute) {
+      promises.push (this._execute ());
+    }
+
+    return Promise.all (promises);
+  },
+
+  _execute () {
+    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+    return grecaptcha.execute (widgetId).then (() => {
+      this.didExecute ();
+      this.set ('execute', false);
+    });
+  },
+
+  /**
+   * The component did execute.
+   */
+  didExecute () {
+
+  },
+
+  /**
+   * Reset the reCATPCHA component.
+   */
+  _reset () {
+    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+
+    return grecaptcha.reset (widgetId).then (() => {
+      this.didReset ();
+      this.setProperties ({reset: false, _response: null});
+    });
+  },
+
+  didReset () {
+
+  }
 });
