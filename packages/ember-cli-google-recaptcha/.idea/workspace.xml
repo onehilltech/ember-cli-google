@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9496f776-93de-4fcf-a8a0-e739625590df" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/services/g-recaptcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/services/g-recaptcha.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -31,7 +29,7 @@
           <entry key="hbs" value="8" />
           <entry key="js" value="16" />
           <entry key="json" value="3" />
-          <entry key="md" value="3" />
+          <entry key="md" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -39,7 +37,7 @@
           <entry key="Handlebars/Mustache" value="8" />
           <entry key="JSON" value="3" />
           <entry key="JavaScript" value="16" />
-          <entry key="Markdown" value="3" />
+          <entry key="Markdown" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -47,15 +45,15 @@
           <entry key="hbs" value="308" />
           <entry key="js" value="1361" />
           <entry key="json" value="80" />
-          <entry key="md" value="31" />
+          <entry key="md" value="1869" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Handlebars/Mustache" value="308" />
+          <entry key="Handlebars/Mustache" value="314" />
           <entry key="JSON" value="80" />
           <entry key="JavaScript" value="1361" />
-          <entry key="Markdown" value="31" />
+          <entry key="Markdown" value="1863" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -72,11 +70,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/dummy/config/environment.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="163">
               <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="358">
+                <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -127,7 +137,6 @@
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/index.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/controllers/v2.js" />
@@ -137,6 +146,7 @@
         <option value="$PROJECT_DIR$/addon/services/g-recaptcha.js" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/config/environment.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -174,41 +184,6 @@
               <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
               <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
               <item name="addon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -277,12 +252,12 @@
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
       <workItem from="1535602302730" duration="2667000" />
-      <workItem from="1535635246096" duration="2940000" />
+      <workItem from="1535635246096" duration="3786000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13445000" />
+    <option name="totallyTimeSpent" value="14291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
@@ -297,7 +272,7 @@
       <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" visible="true" weight="0.46255508" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
       <window_info anchor="bottom" id="Debug" order="6" sideWeight="0.49326718" weight="0.38222224" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -337,17 +312,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ember-cli-build.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="13">
-            <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -432,6 +396,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="358">
+            <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
