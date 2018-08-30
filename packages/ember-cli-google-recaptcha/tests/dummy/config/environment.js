@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 module.exports = function(environment) {
@@ -21,12 +20,6 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-
-    'ember-cli-google': {
-      recaptcha: {
-        siteKey: '6Ler5jcUAAAAAF3XTDnsEPKx4c2oQtW3wxE1rzIC'
-      }
     }
   };
 
@@ -47,6 +40,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
