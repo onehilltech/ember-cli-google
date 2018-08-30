@@ -3,7 +3,9 @@
   "version": "0.1.3",
   "description": "ember-cli addon for Google ReCAPTCHA.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "google",
+    "recaptcha"
   ],
   "repository": "github:onehilltech/ember-cli-google-recaptcha",
   "license": "Apache-2.0",
