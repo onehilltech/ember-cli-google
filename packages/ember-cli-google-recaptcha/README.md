@@ -24,7 +24,6 @@ EmberJS add-on for using Google reCAPTCHA services
 
 ### Configuring application for reCAPTCHA
 
-
 Before you can use reCAPTCHA, you must first [sign up for the service](https://www.google.com/recaptcha), 
 and register a new site. 
 

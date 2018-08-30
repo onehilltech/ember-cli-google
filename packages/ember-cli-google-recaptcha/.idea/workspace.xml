@@ -83,8 +83,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="358">
-                <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
+              <first_editor relative-caret-position="196">
+                <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
               </first_editor>
               <second_editor />
             </state>
@@ -252,24 +252,24 @@
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
       <workItem from="1535602302730" duration="2667000" />
-      <workItem from="1535635246096" duration="3786000" />
+      <workItem from="1535635246096" duration="3809000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14291000" />
+    <option name="totallyTimeSpent" value="14314000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
+      <window_info id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info id="npm" order="3" sideWeight="0.5096419" side_tool="true" weight="0.22057787" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" weight="0.32599118" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
       <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
@@ -403,8 +403,8 @@
       <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="358">
-            <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
+          <first_editor relative-caret-position="196">
+            <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           </first_editor>
           <second_editor />
         </state>
