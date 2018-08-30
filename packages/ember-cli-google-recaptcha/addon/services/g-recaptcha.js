@@ -31,16 +31,10 @@ export default Ember.Service.extend ({
    * @returns {RSVP.Promise|*}
    */
   render (container, params) {
-    let siteKey = this.get ('_siteKey');
+    let siteKey = this.get ('siteKey');
     let options = Ember.merge ({sitekey: siteKey}, params);
 
-    return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then (grecaptcha => {
-        const widgetId = grecaptcha.render (container, options);
-
-        Ember.run (null, resolve, widgetId);
-      }).catch (reject);
-    });
+    return this.getInstance ().then (grecaptcha => grecaptcha.render (container, options));
   },
 
   /**
@@ -51,13 +45,7 @@ export default Ember.Service.extend ({
    * @returns {RSVP.Promise|*}
    */
   execute (widgetId) {
-    return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then (grecaptcha => {
-        grecaptcha.execute (widgetId);
-
-        Ember.run (null, resolve);
-      }).catch (reject);
-    });
+    return this.getInstance ().then (grecaptcha => grecaptcha.execute (widgetId));
   },
 
   /**
@@ -67,13 +55,7 @@ export default Ember.Service.extend ({
    * @returns {RSVP.Promise|*}
    */
   reset (widgetId) {
-    return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then (grecaptcha => {
-        grecaptcha.reset (widgetId);
-
-        Ember.run (null, resolve);
-      }).catch (reject);
-    });
+    return this.getInstance ().then (grecaptcha => grecaptcha.reset (widgetId));
   },
 
   /**
@@ -83,28 +65,36 @@ export default Ember.Service.extend ({
    * @returns {RSVP.Promise|*}
    */
   getResponse (widgetId) {
-    return new Ember.RSVP.Promise ((resolve, reject) => {
-      this.get ('_instance').then (grecaptcha => {
-        const res = grecaptcha.getResponse (widgetId);
-        Ember.run (null, resolve, res);
-      }).catch (reject);
-    });
+    return this.getInstance ().then (grecaptcha => grecaptcha.getResponse (widgetId));
   },
 
-  /**
-   * Get the singleton grecaptha instance from the window. If the instance does
-   * not exist, it is installed by downloading the recaptcha script from online.
-   */
-  _instance: new Ember.RSVP.Promise ((resolve, reject) => {
-    // Install the global callback.
-    window._grecaptcha_onload = () => {
-      Ember.run (null, resolve, window.grecaptcha);
-    };
+  getInstance () {
+    if (Ember.isPresent (this._instance)) {
+      return this._instance;
+    }
 
-    Ember.$ (window).ready (() => {
-      Ember.$.getScript ('https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit').fail (xhr => {
-        Ember.run (null, reject, xhr);
-      });
+    this._instance = new Promise ((resolve, reject) => {
+      // This is for Fastboot support.
+      if (Ember.isNone (window) || Ember.isNone (window.document)) {
+        return resolve ();
+      }
+
+      window._grecaptcha_onload = () => resolve (window.grecaptcha);
+
+      // Load the recaptcha script from Google. We do not use jQuery because it is
+      // easier and faster to load the script manually by injecting the script tag
+      // into the head.
+      const script = document.createElement ('script');
+      script.onerror = (err) => reject (err);
+
+      script.defer = true;
+      script.async = true;
+      script.src = 'https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit';
+
+      const head = document.querySelector ('head');
+      head.appendChild (script);
     });
-  })
+
+    return this._instance;
+  }
 });

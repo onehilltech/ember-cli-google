@@ -13,16 +13,6 @@ export default CaptchaComponent.extend({
     return {badge};
   }),
 
-  didRenderCaptcha () {
-    this._super (...arguments);
-
-    let executeOnInitialRender = this.get ('executeOnInitialRender');
-
-    if (executeOnInitialRender) {
-      this.execute ();
-    }
-  },
-
   /**
    * Callback to the reset the component. Resetting the invisible reCAPTCHA will
    * automatically execute it again. This will force the widget to show the test

@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import layout from '../templates/components/g-recaptcha';
 
+function noop () {
+
+}
+
 export default Ember.Component.extend({
   layout,
 
@@ -52,22 +56,27 @@ export default Ember.Component.extend({
   },
 
   didRenderCaptcha () {
-
-  },
-
-  didRender () {
-    this._super (...arguments);
-
     // Handle reset the recaptcha.
     let reset = this.get ('reset');
 
-    if (reset)
+    if (reset) {
       this.resetCaptcha ();
+    }
+  },
+
+  didUpdate () {
+    this._super (...arguments);
+
+    let reset = this.get ('reset');
+
+    if (reset) {
+      this.resetCaptcha ();
+    }
   },
 
   execute () {
     let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-    grecaptcha.execute (widgetId);
+    return grecaptcha.execute (widgetId);
   },
 
   /**
@@ -76,9 +85,10 @@ export default Ember.Component.extend({
   resetCaptcha () {
     let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
 
-    grecaptcha.reset (widgetId).then (() => {
+    return grecaptcha.reset (widgetId).then (() => {
       this.setProperties ({reset: false, _response: null});
-      this.didReset ();
+
+      return this.didReset ();
     });
   },
 
@@ -100,19 +110,10 @@ export default Ember.Component.extend({
     let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
 
     grecaptcha.getResponse (widgetId).then (response => {
-      // Store the response for the reCAPTCHA widget. This will allow us to
-      // access it at a later time.
       this.set ('_response', response);
+      this.getWithDefault ('verified', noop) (response);
     });
   },
-
-  _responseChanged: Ember.observer ('_response', function () {
-    // Let the client (or parent) know that we have received a response. We,
-    // however, are not going to tell them the response value since that is not
-    // really important to them.
-    let response = this.get ('_response');
-    this.sendAction ('verified', response);
-  }),
 
   /**
    * Callback function to be executed when the recaptcha response expires and the
@@ -121,6 +122,6 @@ export default Ember.Component.extend({
    * @private
    */
   _expiredCallback () {
-    this.sendAction ('expired');
+    this.getWithDefault ('expired', noop) ();
   }
 });
