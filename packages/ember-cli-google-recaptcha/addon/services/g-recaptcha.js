@@ -1,4 +1,12 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+
+import { getOwner } from '@ember/application';
+import { get } from '@ember/object';
+import { assert } from '@ember/debug';
+import { merge } from '@ember/polyfills';
+import { readOnly } from '@ember/object/computed';
+import { Promise } from 'rsvp';
+import { isNone, isPresent } from '@ember/utils';
 
 /**
  * Ember.js service for g-recaptcha. The service is the preferred approach because
@@ -7,20 +15,20 @@ import Ember from 'ember';
  *
  * The service is used by reCAPTCHA-v2 and reCAPTCHA-invisible.
  */
-export default Ember.Service.extend ({
+export default Service.extend ({
   init () {
     this._super (...arguments);
 
-    const ENV = Ember.getOwner (this).resolveRegistration ('config:environment');
-    let siteKey = Ember.get (ENV, 'ember-cli-google.recaptcha.siteKey');
+    const ENV = getOwner (this).resolveRegistration ('config:environment');
+    let siteKey = get (ENV, 'ember-cli-google.recaptcha.siteKey');
 
-    Ember.assert ('Missing ember-cli-google.recaptcha.siteKey in config/environment.', !!siteKey);
+    assert ('Missing ember-cli-google.recaptcha.siteKey in config/environment.', !!siteKey);
 
     this.set ('_siteKey', siteKey);
   },
 
   /// Site key for the application.
-  siteKey: Ember.computed.readOnly ('_siteKey'),
+  siteKey: readOnly ('_siteKey'),
 
   /**
    * Renders the container as a reCAPTCHA widget and returns the ID of the newly
@@ -32,7 +40,7 @@ export default Ember.Service.extend ({
    */
   render (container, params) {
     let siteKey = this.get ('siteKey');
-    let options = Ember.merge ({sitekey: siteKey}, params);
+    let options = merge ({sitekey: siteKey}, params);
 
     return this.getInstance ().then (grecaptcha => grecaptcha.render (container, options));
   },
@@ -69,13 +77,13 @@ export default Ember.Service.extend ({
   },
 
   getInstance () {
-    if (Ember.isPresent (this._instance)) {
+    if (isPresent (this._instance)) {
       return this._instance;
     }
 
     this._instance = new Promise ((resolve, reject) => {
       // This is for Fastboot support.
-      if (Ember.isNone (window) || Ember.isNone (window.document)) {
+      if (isNone (window) || isNone (window.document)) {
         return resolve ();
       }
 

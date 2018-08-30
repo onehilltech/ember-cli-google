@@ -1,5 +1,5 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
-import Ember from 'ember';
+import { computed } from '@ember/object';
 
 export default CaptchaComponent.extend({
   badge: 'bottomright',
@@ -8,7 +8,7 @@ export default CaptchaComponent.extend({
 
   size: 'invisible',
 
-  _extendedOptions: Ember.computed ('badge', function () {
+  _extendedOptions: computed ('badge', function () {
     let badge = this.get ('badge');
     return {badge};
   }),

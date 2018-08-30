@@ -1,17 +1,18 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { merge } from '@ember/polyfills';
+
 import layout from '../templates/components/g-recaptcha';
 
-function noop () {
+function noop () { }
 
-}
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   mergedProperties: ['_extendedOptions'],
 
   /// The Google reCAPTCHA service.
-  grecaptcha: Ember.inject.service ('g-recaptcha'),
+  grecaptcha: service ('g-recaptcha'),
 
   /// Set the required class names for the reCAPTCHA element.
   classNames: ['g-recaptcha'],
@@ -22,9 +23,6 @@ export default Ember.Component.extend({
   theme: 'light',
 
   tabIndex: 0,
-
-  /// Test if the recaptcha has a response.
-  hasResponse: Ember.computed.bool ('_response'),
 
   didInsertElement () {
     this._super (...arguments);
@@ -40,7 +38,7 @@ export default Ember.Component.extend({
       _extendedOptions
     } = this.getProperties (['size', 'type', 'theme', 'tabIndex', 'grecaptcha', '_callback', '_expiredCallback', '_extendedOptions']);
 
-    let options = Ember.merge ({
+    let options = merge ({
       size,
       type,
       theme,
