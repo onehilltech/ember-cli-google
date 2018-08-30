@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9496f776-93de-4fcf-a8a0-e739625590df" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/controllers/v2.js" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/controllers/v2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addon/services/g-recaptcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/addon/services/g-recaptcha.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -31,33 +28,33 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="hbs" value="6" />
-          <entry key="js" value="13" />
+          <entry key="hbs" value="8" />
+          <entry key="js" value="16" />
           <entry key="json" value="3" />
           <entry key="md" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Handlebars/Mustache" value="6" />
+          <entry key="Handlebars/Mustache" value="8" />
           <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="13" />
+          <entry key="JavaScript" value="16" />
           <entry key="Markdown" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="hbs" value="293" />
-          <entry key="js" value="1234" />
+          <entry key="hbs" value="308" />
+          <entry key="js" value="1361" />
           <entry key="json" value="80" />
           <entry key="md" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Handlebars/Mustache" value="293" />
+          <entry key="Handlebars/Mustache" value="308" />
           <entry key="JSON" value="80" />
-          <entry key="JavaScript" value="1234" />
+          <entry key="JavaScript" value="1361" />
           <entry key="Markdown" value="31" />
         </counts>
       </usages-collector>
@@ -66,53 +63,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/dummy/app/controllers/v2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="6" column="9" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addon/-private/g-recaptcha-base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="52">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/dummy/config/environment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addon/services/g-recaptcha.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="21" column="75" selection-start-line="21" selection-start-column="75" selection-end-line="21" selection-end-column="75" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="24" selection-start-column="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -142,16 +127,16 @@
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/index.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/application.hbs" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
-        <option value="$PROJECT_DIR$/tests/dummy/config/environment.js" />
-        <option value="$PROJECT_DIR$/addon/services/g-recaptcha.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" />
         <option value="$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/controllers/v2.js" />
-        <option value="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" />
         <option value="$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js" />
         <option value="$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js" />
+        <option value="$PROJECT_DIR$/addon/-private/g-recaptcha-base.js" />
+        <option value="$PROJECT_DIR$/addon/services/g-recaptcha.js" />
+        <option value="$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs" />
+        <option value="$PROJECT_DIR$/tests/dummy/config/environment.js" />
       </list>
     </option>
   </component>
@@ -193,24 +178,6 @@
             <path>
               <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
               <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="-private" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="addon" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -225,14 +192,6 @@
               <item name="tests" type="462c0819:PsiDirectoryNode" />
               <item name="dummy" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ember-cli-google-recaptcha" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="dummy" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ember-cli-google-recaptcha" type="b2602c69:ProjectViewProjectNode" />
@@ -318,19 +277,19 @@
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
       <workItem from="1535602302730" duration="2667000" />
-      <workItem from="1535635246096" duration="2338000" />
+      <workItem from="1535635246096" duration="2940000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12843000" />
+    <option name="totallyTimeSpent" value="13445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
+      <window_info active="true" id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info id="npm" order="3" sideWeight="0.5096419" side_tool="true" weight="0.22057787" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
@@ -338,7 +297,7 @@
       <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" visible="true" weight="0.46255508" />
       <window_info anchor="bottom" id="Debug" order="6" sideWeight="0.49326718" weight="0.38222224" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
@@ -376,13 +335,6 @@
     <entry file="file://$PROJECT_DIR$/config/environment.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/dummy/config/environment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="26" column="58" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ember-cli-build.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -414,22 +366,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon/-private/g-recaptcha-base.js">
+    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/index.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="91">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon/services/g-recaptcha.js">
+    <entry file="file://$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+        <state relative-caret-position="234">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -441,20 +390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/index.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/dummy/app/controllers/invisible.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -462,20 +397,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs">
+    <entry file="file://$PROJECT_DIR$/addon/-private/g-recaptcha-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        <state relative-caret-position="52">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon/components/g-recaptcha-invisible.js">
+    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/v2.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        <state relative-caret-position="39">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addon/services/g-recaptcha.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="21" column="75" selection-start-line="21" selection-start-column="75" selection-end-line="21" selection-end-column="75" />
           <folding>
-            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/dummy/app/templates/invisible.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/dummy/config/environment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
         </state>
       </provider>
     </entry>

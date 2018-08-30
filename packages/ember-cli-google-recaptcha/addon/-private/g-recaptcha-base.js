@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { merge } from '@ember/polyfills';
+import { isPresent } from '@ember/utils';
 
 import layout from '../templates/components/g-recaptcha';
 
@@ -33,10 +34,11 @@ export default Component.extend({
       theme,
       tabIndex,
       grecaptcha,
+      siteKey,
       _callback,
       _expiredCallback,
       _extendedOptions
-    } = this.getProperties (['size', 'type', 'theme', 'tabIndex', 'grecaptcha', '_callback', '_expiredCallback', '_extendedOptions']);
+    } = this.getProperties (['size', 'type', 'theme', 'tabIndex', 'siteKey', 'grecaptcha', '_callback', '_expiredCallback', '_extendedOptions']);
 
     let options = merge ({
       size,
@@ -46,6 +48,10 @@ export default Component.extend({
       callback: _callback.bind (this),
       'expired-callback': _expiredCallback.bind (this)
     }, _extendedOptions);
+
+    if (isPresent (siteKey)) {
+      options.sitekey = siteKey;
+    }
 
     grecaptcha.render (this.elementId, options).then (widgetId => {
       this.set ('widgetId', widgetId);

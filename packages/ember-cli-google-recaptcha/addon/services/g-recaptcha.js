@@ -20,11 +20,7 @@ export default Service.extend ({
     this._super (...arguments);
 
     const ENV = getOwner (this).resolveRegistration ('config:environment');
-    let siteKey = get (ENV, 'ember-cli-google.recaptcha.siteKey');
-
-    assert ('Missing ember-cli-google.recaptcha.siteKey in config/environment.', !!siteKey);
-
-    this.set ('_siteKey', siteKey);
+    this.set ('_siteKey', get (ENV, 'ember-cli-google.recaptcha.siteKey'));
   },
 
   /// Site key for the application.
