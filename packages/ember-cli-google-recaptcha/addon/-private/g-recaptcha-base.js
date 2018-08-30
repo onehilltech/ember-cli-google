@@ -25,6 +25,10 @@ export default Component.extend({
 
   tabIndex: 0,
 
+  _response: null,
+
+  reset: false,
+
   didInsertElement () {
     this._super (...arguments);
 
@@ -87,5 +91,21 @@ export default Component.extend({
    */
   _expiredCallback () {
     this.getWithDefault ('expired', noop) ();
+  },
+
+  /**
+   * Reset the recaptcha component.
+   */
+  _reset () {
+    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+
+    return grecaptcha.reset (widgetId).then (() => {
+      this.didReset ();
+      this.setProperties ({reset: false, _response: null});
+    });
+  },
+
+  didReset () {
+
   }
 });

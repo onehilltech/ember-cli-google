@@ -54,21 +54,5 @@ export default CaptchaComponent.extend({
    */
   didExecute () {
 
-  },
-
-  /**
-   * Reset the reCATPCHA component.
-   */
-  _reset () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-
-    return grecaptcha.reset (widgetId).then (() => {
-      this.didReset ();
-      this.setProperties ({reset: false, _response: null});
-    });
-  },
-
-  didReset () {
-
   }
 });
