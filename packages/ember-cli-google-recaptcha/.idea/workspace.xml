@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9496f776-93de-4fcf-a8a0-e739625590df" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -42,13 +43,13 @@
         <counts>
           <entry key="hbs" value="108" />
           <entry key="js" value="434" />
-          <entry key="json" value="16" />
+          <entry key="json" value="57" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Handlebars/Mustache" value="108" />
-          <entry key="JSON" value="16" />
+          <entry key="JSON" value="57" />
           <entry key="JavaScript" value="434" />
         </counts>
       </usages-collector>
@@ -80,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+            <state relative-caret-position="104">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -230,24 +231,24 @@
       <workItem from="1513926149532" duration="391000" />
       <workItem from="1516341084843" duration="664000" />
       <workItem from="1534911220967" duration="695000" />
-      <workItem from="1535602302730" duration="1580000" />
+      <workItem from="1535602302730" duration="1652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9418000" />
+    <option name="totallyTimeSpent" value="9490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="796" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
+      <window_info id="Project" order="1" sideWeight="0.4903581" visible="true" weight="0.22057787" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info id="npm" order="3" sideWeight="0.5096419" side_tool="true" weight="0.22057787" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5109232" side_tool="true" weight="0.3288889" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3288889" />
-      <window_info anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="2" sideWeight="0.48907682" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3288889" />
       <window_info anchor="bottom" id="Run" order="5" sideWeight="0.4855532" weight="0.46255508" />
@@ -375,8 +376,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+        <state relative-caret-position="104">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
         </state>
       </provider>
     </entry>

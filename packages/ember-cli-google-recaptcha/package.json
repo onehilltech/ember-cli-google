@@ -1,12 +1,12 @@
 {
   "name": "ember-cli-google-recaptcha",
   "version": "0.1.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "ember-cli addon for Google ReCAPTCHA.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
-  "license": "MIT",
+  "repository": "github:onehilltech/ember-cli-google-recaptcha",
+  "license": "Apache-2.0",
   "author": "",
   "directories": {
     "doc": "doc",
