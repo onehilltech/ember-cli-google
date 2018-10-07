@@ -11,7 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "github:onehilltech/ember-cli-google",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
