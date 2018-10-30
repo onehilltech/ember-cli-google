@@ -2,5 +2,13 @@
   "packages": [
     "packages/*"
   ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ]
+    }
+  },
   "version": "0.0.0"
 }
