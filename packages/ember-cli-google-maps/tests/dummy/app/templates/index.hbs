@@ -1,8 +1,9 @@
-{{#g-map center=(hash lat=-25.344 lng=131.036) zoom=13 mapClick=(action "mapClick")}}
+{{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
   {{g-marker position=(hash lat=-25.344 lng=131.036)
              title="Hello, World!"
              label="My Marker"
              draggable=true
-             icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
              click=(action "toggleBounce")}}
+
+  {{g-heatmap-layer data=heatMapData}}
 {{/g-map}}
