@@ -30,7 +30,7 @@ export default Component.extend (MapEntity, {
   didLoadMap () {
     this._super (...arguments);
 
-    let options = this.getProperties (['position','title','draggable']);
+    let options = this.getProperties (['position','title','draggable','label','icon','shape','zIndex']);
     options.animation = this.get ('animationType');
 
     this._marker = new google.maps.Marker (options);

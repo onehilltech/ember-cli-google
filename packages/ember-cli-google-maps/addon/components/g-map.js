@@ -4,6 +4,8 @@ import layout from '../templates/components/g-map';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
+function noOp () {}
+
 export default Component.extend ({
   layout,
 
@@ -24,14 +26,16 @@ export default Component.extend ({
 
   didInitMap () {
     const options = Object.assign (this.getProperties (['center', 'zoom', 'mapTypeId']));
+
     const map = new google.maps.Map (this.element, options);
+    map.addListener ('click', this.didMapClick.bind (this));
 
     // Update the map attribute for the child elements.
     this.set ('map', map);
     this.trigger ('loaded', map);
   },
 
-  _applyMarkers () {
-
+  didMapClick (ev) {
+    this.getWithDefault ('mapClick', noOp) (ev);
   }
 });
