@@ -6,8 +6,20 @@ html, body {
 
 .ember-application > .ember-view {
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.map-controls--location {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+
+  width: 60%;
 }
 
 .g-map {
   height: 100%;
+  flex-grow: 1;
 }

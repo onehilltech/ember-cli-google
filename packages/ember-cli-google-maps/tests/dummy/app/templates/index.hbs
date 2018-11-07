@@ -1,9 +1,14 @@
+<div class="map-controls">
+  <div class="map-controls--location">
+    <div>Latitude: {{input value=latInput}}</div>
+    <div>Longitude: {{input value=lngInput}}</div>
+  </div>
+</div>
+
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
-  {{g-marker position=(hash lat=-25.344 lng=131.036)
-             title="Hello, World!"
-             label="My Marker"
+  {{g-marker position=(hash lat=lat lng=lng)
              draggable=true
              click=(action "toggleBounce")}}
 
-  {{g-heatmap-layer data=heatMapData}}
+  {{g-heatmap-layer data=heatMapData show=false}}
 {{/g-map}}

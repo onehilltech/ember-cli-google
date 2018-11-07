@@ -25,6 +25,13 @@ export default Component.extend (MapEntity, {
 
     let animation = this.get ('animationType');
     this._marker.setAnimation (animation);
+
+    const { lat, lng } = this.get ('position');
+
+    if (this._marker.position.lat () !== lat || this._marker.position.lng () !== lng) {
+      const latLng = new google.maps.LatLng (lat,lng);
+      this._marker.setPosition (latLng);
+    }
   },
 
   didLoadMap () {

@@ -1,7 +1,28 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 
 export default Controller.extend ({
   animation: 'bounce',
+
+  lat: 37.774546,
+  lng: -122.433523,
+
+  lngInput: computed ('lng', {
+    get () { return this.get ('lng'); },
+
+    set (name, value) {
+      this.set ('lng', parseFloat (value));
+      return value;
+    }
+  }),
+
+  latInput: computed ('lat', {
+    get () { return this.get ('lat'); },
+    set (name, value) {
+      this.set ('lat', parseFloat (value));
+      return value;
+    }
+  }),
 
   heatMapData: Object.freeze ([
     {lat: 37.782, lng: -122.447, weight: 25},
