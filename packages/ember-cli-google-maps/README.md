@@ -87,7 +87,7 @@ attribute, which is an array of `{lat, lng [, weight]}`, adds data to the heatma
 
 ```handlebars
 {{#g-map center=(hash lat=mapLat lng=mapLng)}}
-  {{g-heatmap-layer}}
+  {{g-heatmap-layer data=heatmapData}}
 {{/g-map}}
 ```
 
