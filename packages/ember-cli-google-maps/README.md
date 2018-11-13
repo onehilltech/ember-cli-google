@@ -17,7 +17,7 @@ Installation
     ember install ember-cli-google-maps
 
 
-Usage
+Getting Started
 ------------------------------------------------------------------------------
 
 ### Configuring API Key
@@ -53,3 +53,39 @@ property.
 > The `{{g-map}}` component has the `.g-map` class name, which can be used to 
 > style it (_e.g._, setting its height and width).
 
+## Map Entities
+
+Map entities are added as a child component of the corresponding `{{g-map}}` block component.
+All map entities have a `show` attribute, which can be use to show/hide the entity.
+
+### Adding a marker
+
+The `{{g-marker}}` component is used to add a marker to a map. Just added the `{{g-marker}}` as
+a child of the `{{g-map}}` block component. Use the `position` attribute to set the marker's
+location.
+
+```handlebars
+{{#g-map center=(hash lat=mapLat lng=mapLng)}}
+  {{g-marker position=(hash lat=markerLat lng=markerLng)}}
+{{/g-map}}
+```
+
+## Map Layers
+
+Map layers are added as a child component of the corresponding `{{g-map}}` block component.
+All map layers have a `show` attribute, which can be use to show/hide the layer.
+
+### Heatmap Layer
+
+The `{{g-heatmap-layer}}` is used to add a heatmap layer to the corresponding map. The `data` 
+attribute, which is an array of `{lat, lng [, weight]}`, adds data to the heatmap. 
+
+```handlebars
+{{#g-map center=(hash lat=mapLat lng=mapLng)}}
+  {{g-heatmap-layer}}
+{{/g-map}}
+```
+
+Unlike with the Google Maps API, you can have a single array where some of the data points 
+have a weight and some of the data points do not have a weight. The `{{g-heatmap-layer}}` 
+component is intelligent enough to discern between the two cases, and populate the map accordingly.
