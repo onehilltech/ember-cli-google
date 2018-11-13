@@ -49,7 +49,7 @@ export default Component.extend ({
 
   classNames: ['g-map'],
 
-  type: 'ROADMAP',
+  type: 'roadmap',
 
   mapTypeId: alias ('type'),
 
