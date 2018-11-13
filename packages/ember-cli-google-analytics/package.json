@@ -1,6 +1,6 @@
 {
   "name": "@onehilltech/ember-cli-google-analytics",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "EmberJS add-on for Google Analytics.",
   "keywords": [
     "ember-addon"
