@@ -1,6 +1,10 @@
 {
-  "name": "root",
-  "private": true,
+  "name": "ember-cli-google",
+  "private": false,
+  "description": "A collection of ember-cli addons for Google services",
+  "license": "Apache-2.0",
+  "author": "James H. Hill <james@onehilltech.com>",
+  "repository": "github:onehilltech/ember-cli-google",
   "devDependencies": {
     "lerna": "^3.4.0"
   }
