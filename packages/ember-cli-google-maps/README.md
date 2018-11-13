@@ -46,11 +46,10 @@ Use the `{{g-map}}` component to insert a map onto the page.
 ```
 
 The `{{g-map}}` component must have a `center` property, or the Google Maps component
-will not work.
+will not work. The `{{g-map}}` component has a corresponding attribute for each 
+[`google.maps.MapOptions`](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)
+property.
 
 > The `{{g-map}}` component has the `.g-map` class name, which can be used to 
 > style it (_e.g._, setting its height and width).
 
-The `{{g-map}}` component has a corresponding attribute for each 
-[`google.maps.MapOptions`](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)
-property.
