@@ -49,4 +49,8 @@ The `{{g-map}}` component must have a `center` property, or the Google Maps comp
 will not work.
 
 > The `{{g-map}}` component has the `.g-map` class name, which can be used to 
-> style it (e.g., setting its height and width).
+> style it (_e.g._, setting its height and width).
+
+The `{{g-map}}` component has a corresponding attribute for each 
+[`google.maps.MapOptions`](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)
+property.
