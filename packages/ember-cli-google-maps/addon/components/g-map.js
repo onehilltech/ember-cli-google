@@ -12,7 +12,6 @@ const MAP_OPTIONS = Object.freeze ([
   'clickableIcons',
   'disableDefaultUI',
   'disableDoubleClickZoom',
-  'draggable',
   'draggableCursor',
   'draggingCursor',
   'fullscreenControl',
@@ -50,11 +49,23 @@ export default Component.extend ({
 
   classNames: ['g-map'],
 
+  type: 'ROADMAP',
+
   mapTypeId: alias ('type'),
 
   gMaps: service (),
 
   map: null,
+
+  clickableIcons: true,
+
+  disableDefaultUI: false,
+
+  gestureHandling: 'auto',
+
+  keyboardShortcuts: true,
+
+  scrollwheel: true,
 
   didInsertElement () {
     this._super (...arguments);
