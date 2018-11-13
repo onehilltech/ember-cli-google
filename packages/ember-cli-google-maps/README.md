@@ -1,50 +1,52 @@
 ember-cli-google-maps
 ==============================================================================
 
-[Short description of the addon.]
+A simple Ember add-on from Google Maps API
+
+# Features
+
+* Simplistic design for integrating Google Maps
+* Intelligent configuration based on component utilized
+* No extra steps to configure Google Maps beyond adding API key
+* Extensible component-based design to maximize customization
 
 Installation
 ------------------------------------------------------------------------------
 
-```
-ember install ember-cli-google-maps
-```
+
+    ember install ember-cli-google-maps
 
 
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+### Configuring API Key
 
+Before you can use this add-on, you must first configure our API key. Add 
+your Google Maps API key to `config/environment.js`.
 
-Contributing
-------------------------------------------------------------------------------
+```javascript
+ let ENV = {
+    // ...
 
-### Installation
+    'ember-cli-google': {
+      maps: {
+        apiKey: 'ADD API KEY HERE'
+      }
+    }
+  };
+```
 
-* `git clone <repository-url>`
-* `cd ember-cli-google-maps`
-* `npm install`
+### Inserting a map
 
-### Linting
+Use the `{{g-map}}` component to insert a map onto the page.
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+```handlebars
+{{g-map center=(hash lat=lat lng=lng)}}
+```
 
-### Running tests
+The `{{g-map}}` component must have a `center` property, or the Google Maps component
+will not work.
 
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-* `ember try:each` – Runs the test suite against multiple Ember versions
-
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
-
-License
-------------------------------------------------------------------------------
-
-This project is licensed under the [MIT License](LICENSE.md).
+> The `{{g-map}}` component has the `.g-map` class name, which can be used to 
+> style it (e.g., setting its height and width).
