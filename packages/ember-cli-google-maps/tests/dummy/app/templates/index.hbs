@@ -6,9 +6,11 @@
 </div>
 
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
-  {{g-marker position=(hash lat=lat lng=lng)
+  {{!-- g-marker position=(hash lat=lat lng=lng)
              draggable=true
-             click=(action "toggleBounce")}}
+             click=(action "toggleBounce") --}}
 
-  {{g-heatmap-layer data=heatMapData show=false}}
+  {{g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
+
+  {{g-heatmap-layer data=heatMapData}}
 {{/g-map}}

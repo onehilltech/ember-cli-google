@@ -1,3 +1,5 @@
+/* global google */
+
 import Component from '@ember/component';
 import layout from '../templates/components/g-map';
 
@@ -22,6 +24,21 @@ export default Component.extend ({
 
     this.trigger ('loading');
     this.get ('gMaps').getInstance ().then (this.didInitMap.bind (this));
+  },
+
+  didUpdateAttrs () {
+    this._super (...arguments);
+
+    this._updateCenter ();
+  },
+
+  _updateCenter () {
+    let oldCenter = this.map.getCenter ();
+    let {lat, lng} = this.get ('center');
+
+    if (oldCenter.lat () !== lat || oldCenter.lng () !== lng) {
+       this.map.setCenter (new google.maps.LatLng (lat, lng));
+    }
   },
 
   didInitMap () {

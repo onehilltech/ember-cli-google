@@ -1,3 +1,5 @@
+/* global google */
+
 import Component from '@ember/component';
 import MapEntity from '../mixins/map-entity';
 

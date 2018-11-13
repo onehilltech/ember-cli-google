@@ -25,7 +25,7 @@ export default Controller.extend ({
   }),
 
   heatMapData: Object.freeze ([
-    {lat: 37.782, lng: -122.447, weight: 25},
+    {lat: 37.782, lng: -122.447, weight: 1},
     {lat: 37.782, lng: -122.445},
     {lat: 37.782, lng: -122.443},
     {lat: 37.782, lng: -122.441},
@@ -49,6 +49,10 @@ export default Controller.extend ({
     toggleBounce () {
       let animation = this.get ('animation');
       this.set ('animation', animation === 'bounce' ? null : 'bounce');
+    },
+
+    recenterMap () {
+
     }
   }
 });
