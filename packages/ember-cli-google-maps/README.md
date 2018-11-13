@@ -1,14 +1,19 @@
 ember-cli-google-maps
 ==============================================================================
 
+
 A simple Ember add-on from Google Maps API
 
-# Features
+
+Features
+------------------------------------------------------------------------------
+
 
 * Simplistic design for integrating Google Maps
 * Intelligent configuration based on component utilized
 * No extra steps to configure Google Maps beyond adding API key
 * Extensible component-based design to maximize customization
+
 
 Installation
 ------------------------------------------------------------------------------
