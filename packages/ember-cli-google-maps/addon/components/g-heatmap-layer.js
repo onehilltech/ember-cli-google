@@ -5,6 +5,7 @@ import MapEntity from '../mixins/map-entity';
 
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { isEmpty, isPresent } from '@ember/utils';
 
 export default Component.extend (MapEntity, {
   gMaps: service (),
@@ -43,6 +44,13 @@ export default Component.extend (MapEntity, {
     this.get ('gMaps').include ('visualization');
   },
 
+  didUpdateAttrs () {
+    this._super (...arguments);
+
+    let data = this.get ('heatMapData');
+    this._heatMap.setData (data);
+  },
+
   didLoadMap () {
     this._super (...arguments);
 
@@ -58,6 +66,11 @@ export default Component.extend (MapEntity, {
 
   heatMapData: computed ('data.[]', function () {
     let data = this.getWithDefault ('data', []);
+
+    if (isEmpty (data)) {
+      return [];
+    }
+
     return data.map (({lat, lng, weight}) => weight ? {location: new google.maps.LatLng (lat, lng), weight } : new google.maps.LatLng (lat, lng));
   })
 });
