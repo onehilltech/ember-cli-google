@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-google-recaptcha",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "ember-cli addon for Google ReCAPTCHA.",
   "keywords": [
     "ember-addon",
