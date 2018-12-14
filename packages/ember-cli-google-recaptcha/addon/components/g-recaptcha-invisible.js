@@ -1,6 +1,8 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
 import { computed } from '@ember/object';
-import { Promise } from 'rsvp';
+import { Promise, reject } from 'rsvp';
+
+function noOp () {}
 
 export default CaptchaComponent.extend({
   badge: 'bottomright',
@@ -43,10 +45,22 @@ export default CaptchaComponent.extend({
 
   _execute () {
     let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-    return grecaptcha.execute (widgetId).then (() => {
-      this.didExecute ();
-      this.set ('execute', false);
-    });
+
+    this.getWithDefault ('executing', noOp) (true);
+
+    return grecaptcha.execute (widgetId)
+      .then (() => {
+        this.didExecute ();
+
+        this.set ('execute', false);
+        this.getWithDefault ('executing', noOp) (false);
+      })
+      .catch (reason => {
+        this.set ('execute', false);
+        this.getWithDefault ('executing', noOp) (false);
+
+        return reject (reason);
+      });
   },
 
   /**
