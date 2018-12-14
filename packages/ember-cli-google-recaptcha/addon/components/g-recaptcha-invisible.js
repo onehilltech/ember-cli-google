@@ -1,8 +1,6 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
 import { computed } from '@ember/object';
-import { Promise, reject } from 'rsvp';
-
-function noOp () {}
+import { Promise } from 'rsvp';
 
 export default CaptchaComponent.extend({
   badge: 'bottomright',
@@ -13,7 +11,7 @@ export default CaptchaComponent.extend({
 
   _extendedOptions: computed ('badge', function () {
     let badge = this.get ('badge');
-    return {badge};
+    return { badge };
   }),
 
   didRenderCaptcha () {
@@ -41,32 +39,5 @@ export default CaptchaComponent.extend({
     }
 
     return Promise.all (promises);
-  },
-
-  _execute () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
-
-    this.getWithDefault ('executing', noOp) (true);
-
-    return grecaptcha.execute (widgetId)
-      .then (() => {
-        this.didExecute ();
-
-        this.set ('execute', false);
-        this.getWithDefault ('executing', noOp) (false);
-      })
-      .catch (reason => {
-        this.set ('execute', false);
-        this.getWithDefault ('executing', noOp) (false);
-
-        return reject (reason);
-      });
-  },
-
-  /**
-   * The component did execute.
-   */
-  didExecute () {
-
   }
 });

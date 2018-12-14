@@ -79,7 +79,13 @@ export default Component.extend({
 
     grecaptcha.getResponse (widgetId).then (response => {
       this.set ('_response', response);
+
+      // Let the client know we have verified the user.
       this.getWithDefault ('verified', noop) (response);
+
+      // We also need to let the client know the component has left the verifying
+      // state. This is different from the verified event.
+      this.getWithDefault ('verifying', noop) (false);
     });
   },
 
@@ -103,6 +109,23 @@ export default Component.extend({
       this.didReset ();
       this.setProperties ({reset: false, _response: null});
     });
+  },
+
+  _execute () {
+    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+
+    // Notify the client we started the verification process.
+    this.getWithDefault ('verifying', noop) (true);
+
+    return grecaptcha.execute (widgetId)
+      .then (() => {
+        this.didExecute ();
+        this.set ('execute', false);
+      });
+  },
+
+  didExecute () {
+
   },
 
   didReset () {
