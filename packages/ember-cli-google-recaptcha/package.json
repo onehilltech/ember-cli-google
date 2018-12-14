@@ -20,7 +20,6 @@
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each",
-    "postversion": "npm publish",
     "postpublish": "git push origin master ; git push origin --tags"
   },
   "dependencies": {
@@ -59,5 +58,5 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "gitHead": "157727ce71965a111b9cb194e4c773caf5c198e3"
+  "gitHead": "1bf60c52b752c054b8bbc6c899b7667bd679a68f"
 }
