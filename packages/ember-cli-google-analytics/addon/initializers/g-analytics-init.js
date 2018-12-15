@@ -17,7 +17,7 @@ export function initialize (app) {
   let isProductionEnv = environment === 'production';
 
   if (isProductionEnv) {
-    window.ga = window.ga || function () { (window.ga.q = window.ga.q || []).push( arguments); };
+    window.ga = window.ga || function () { (window.ga.q = window.ga.q || []).push (arguments); };
     window.ga.l =+ new Date();
 
     window.ga ('create', trackerId, cookieDomain, trackerName);
