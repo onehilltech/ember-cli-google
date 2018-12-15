@@ -1,5 +1,3 @@
-/* global ga */
-
 import Ember from 'ember';
 
 export function initialize (app) {
@@ -19,8 +17,10 @@ export function initialize (app) {
   let isProductionEnv = environment === 'production';
 
   if (isProductionEnv) {
-    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-    ga ('create', trackerId, cookieDomain, trackerName);
+    window.ga = window.ga || function () { (window.ga.q = window.ga.q || []).push( arguments); };
+    window.ga.l =+ new Date();
+
+    window.ga ('create', trackerId, cookieDomain, trackerName);
   }
 
   // We still go through the steps so we ensure the behavior is the same in all
@@ -35,8 +35,8 @@ export function initialize (app) {
           let {router} = this.getProperties (['routeName', 'router']);
           let url = router.get ('url');
 
-          ga ('set', 'page', url);
-          ga ('send', 'pageview');
+          window.ga ('set', 'page', url);
+          window.ga ('send', 'pageview');
         }
       }
     }
