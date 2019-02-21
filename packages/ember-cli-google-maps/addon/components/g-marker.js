@@ -8,6 +8,8 @@ import { computed } from '@ember/object';
 function noOp () {}
 
 export default Component.extend (MapEntity, {
+  layout: null,
+
   title: null,
 
   _marker: null,
@@ -36,7 +38,7 @@ export default Component.extend (MapEntity, {
     }
   },
 
-  didLoadMap () {
+  createEntity () {
     this._super (...arguments);
 
     let options = this.getProperties (['position','title','draggable','label','icon','shape','zIndex']);
@@ -44,6 +46,8 @@ export default Component.extend (MapEntity, {
 
     this._marker = new google.maps.Marker (options);
     this._marker.addListener ('click', this.didClick.bind (this));
+
+    return this._marker;
   },
 
   /**

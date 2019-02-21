@@ -8,6 +8,8 @@ import { computed } from '@ember/object';
 import { isEmpty, isPresent } from '@ember/utils';
 
 export default Component.extend (MapEntity, {
+  classNames: ['g-heatmap-layer'],
+
   gMaps: service (),
 
   _heatMap: null,
@@ -51,13 +53,15 @@ export default Component.extend (MapEntity, {
     this._heatMap.setData (data);
   },
 
-  didLoadMap () {
+  createEntity () {
     this._super (...arguments);
 
     let options = this.getProperties (['dissipating','gradient','maxIntensity','radius','opacity']);
     options.data = this.get ('heatMapData');
 
     this._heatMap = new google.maps.visualization.HeatmapLayer (options);
+
+    return this._heatMap;
   },
 
   getEntity () {

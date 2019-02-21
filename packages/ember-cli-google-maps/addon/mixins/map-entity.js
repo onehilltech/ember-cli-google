@@ -3,6 +3,8 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
 export default Mixin.create ({
+  classNames: ['g-entity'],
+
   _entity: null,
 
   /// Show/hide the entity.
@@ -10,8 +12,16 @@ export default Mixin.create ({
 
   didInsertElement () {
     this._super (...arguments);
+
     this.parentView.on ('loading', this, '_mapLoading');
     this.parentView.on ('loaded', this, '_mapLoaded');
+
+    const map = this.get ('map');
+
+    if (isPresent (map)) {
+      const entity = this.createEntity ();
+      this._showEntity (entity);
+    }
   },
 
   willDestroyElement () {
@@ -19,6 +29,12 @@ export default Mixin.create ({
 
     this.parentView.off ('loading', this, '_mapLoading');
     this.parentView.off ('loaded', this, '_mapLoaded');
+
+    let entity = this.getEntity ();
+
+    if (isPresent (entity)) {
+      entity.setMap (null);
+    }
   },
 
   didUpdateAttr () {
@@ -41,10 +57,12 @@ export default Mixin.create ({
   },
 
   didLoadMap (/* map */) {
-    const entity = this.getEntity ();
-    this._showEntity (entity);
+
   },
 
+  createEntity () {
+
+  },
 
   _mapLoading () {
     this.willLoadMap ();
@@ -57,13 +75,12 @@ export default Mixin.create ({
    * @private
    */
   _mapLoaded (map) {
-    // Notify the subclass the map has been loaded. This is where the subclass
-    // should create the entity's implementation.
+    // Notify the subclass the map has been loaded.
 
     this.didLoadMap (map);
 
-    // Get the entity, and set its initial visibility.
-    const entity = this.getEntity ();
+    // Instruct the subclass to create its entity. We will then show the entity.
+    const entity = this.createEntity ();
     this._showEntity (entity);
   },
 
