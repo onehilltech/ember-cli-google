@@ -5,7 +5,7 @@ import MapEntity from '../mixins/map-entity';
 
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { isEmpty, isPresent } from '@ember/utils';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend (MapEntity, {
   classNames: ['g-heatmap-layer'],

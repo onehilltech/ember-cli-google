@@ -47,7 +47,7 @@ function noOp () {}
 export default Component.extend ({
   layout,
 
-  classNames: ['g-map'],
+  classNames: ['g-map-component'],
 
   type: 'roadmap',
 
@@ -92,7 +92,9 @@ export default Component.extend ({
   didInitMap () {
     const options = Object.assign (this.getProperties (MAP_OPTIONS));
 
-    const map = new google.maps.Map (this.element, options);
+    let gMapElement = this.element.querySelector ('.g-map');
+    const map = new google.maps.Map (gMapElement, options);
+
     map.addListener ('click', this.didMapClick.bind (this));
 
     // Update the map attribute for the child elements.
