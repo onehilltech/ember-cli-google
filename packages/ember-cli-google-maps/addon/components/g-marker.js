@@ -8,8 +8,6 @@ import { computed } from '@ember/object';
 function noOp () {}
 
 export default Component.extend (MapEntity, {
-  layout: null,
-
   title: null,
 
   _marker: null,
