@@ -6,11 +6,9 @@
 </div>
 
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
-  {{!-- g-marker position=(hash lat=lat lng=lng)
-             draggable=true
-             click=(action "toggleBounce") --}}
-
-  {{g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
+  {{#g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
+    {{g-directions direction="to" location='San Jose, CA'}}
+  {{/g-custom-marker}}
 
   {{g-heatmap-layer data=heatMapData}}
 {{/g-map}}

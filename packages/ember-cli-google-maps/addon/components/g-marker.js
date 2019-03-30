@@ -8,6 +8,8 @@ import { computed } from '@ember/object';
 function noOp () {}
 
 export default Component.extend (MapEntity, {
+  classNames: ['g-marker'],
+
   title: null,
 
   _marker: null,

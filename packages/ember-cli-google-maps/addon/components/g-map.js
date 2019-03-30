@@ -3,7 +3,9 @@
 import Component from '@ember/component';
 import layout from '../templates/components/g-map';
 
-import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { alias, bool } from '@ember/object/computed';
+
 import { inject as service } from '@ember/service';
 
 const MAP_OPTIONS = Object.freeze ([
@@ -55,7 +57,7 @@ export default Component.extend ({
 
   gMaps: service (),
 
-  map: null,
+  map: undefined,
 
   clickableIcons: true,
 
@@ -66,6 +68,9 @@ export default Component.extend ({
   keyboardShortcuts: true,
 
   scrollwheel: true,
+
+  _directions: null,
+  _directionsDisplay: null,
 
   didInsertElement () {
     this._super (...arguments);
@@ -104,5 +109,27 @@ export default Component.extend ({
 
   didMapClick (ev) {
     this.getWithDefault ('mapClick', noOp) (ev);
-  }
+  },
+
+  directionsDisplay: computed (function () {
+    if (!!this._directionsDisplay) {
+      return this._directionsDisplay;
+    }
+
+    this._directionsDisplay = new google.maps.DirectionsRenderer ();
+    this._directionsDisplay.setMap (this.map);
+
+    return this._directionsDisplay;
+  }),
+
+  directionsService: computed (function () {
+    if (!!this._directions) {
+      return this._directions;
+    }
+
+    this._directions = new google.maps.DirectionsService ();
+    return this._directions;
+  }),
+
+  loaded: bool ('map')
 });
