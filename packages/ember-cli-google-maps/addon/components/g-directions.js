@@ -53,11 +53,12 @@ export default Component.extend ({
 
   _refresh () {
     let service = this.get ('directionsService');
-    const { origin, destination, mode: travelMode } = this.getProperties (['origin', 'destination', 'mode']);
+    const { origin, destination, mode: travelMode, gMap } = this.getProperties (['origin', 'destination', 'mode', 'gMap']);
 
     service.route ({ origin, destination, travelMode} , (response, status) => {
       if (status === 'OK') {
-        this.get ('directionsDisplay').setDirections (response);
+        let renderer = gMap.createDirectionsRenderer ();
+        renderer.setDirections (response);
       } else {
         let error = (this.get ('error'));
 
@@ -89,6 +90,5 @@ export default Component.extend ({
     return this.get ('gMarker').parentView;
   }),
 
-  directionsDisplay: readOnly ('gMap.directionsDisplay'),
   directionsService: readOnly ('gMap.directionsService')
 });

@@ -8,6 +8,7 @@
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
   {{#g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
     {{g-directions direction="to" location='San Jose, CA'}}
+    {{g-directions direction="to" location='Sacramento, CA'}}
   {{/g-custom-marker}}
 
   {{g-heatmap-layer data=heatMapData}}

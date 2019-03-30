@@ -111,17 +111,6 @@ export default Component.extend ({
     this.getWithDefault ('mapClick', noOp) (ev);
   },
 
-  directionsDisplay: computed (function () {
-    if (!!this._directionsDisplay) {
-      return this._directionsDisplay;
-    }
-
-    this._directionsDisplay = new google.maps.DirectionsRenderer ();
-    this._directionsDisplay.setMap (this.map);
-
-    return this._directionsDisplay;
-  }),
-
   directionsService: computed (function () {
     if (!!this._directions) {
       return this._directions;
@@ -130,6 +119,13 @@ export default Component.extend ({
     this._directions = new google.maps.DirectionsService ();
     return this._directions;
   }),
+
+  createDirectionsRenderer () {
+    let renderer = new google.maps.DirectionsRenderer ();
+    renderer.setMap (this.map);
+
+    return renderer;
+  },
 
   loaded: bool ('map')
 });
