@@ -31,6 +31,8 @@ export default Component.extend ({
 
   suppressPolylines: false,
 
+  markerOptions: null,
+
   _renderer: null,
 
   didInsertElement () {
@@ -102,10 +104,11 @@ export default Component.extend ({
     }
   },
 
-  renderOptions: computed ('{draggable,hideRouteList,panel,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}', function (){
+  renderOptions: computed ('{draggable,hideRouteList,markerOptions,panel,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}', function (){
     return this.getProperties ([
       'draggable',
       'hideRouteList',
+      'markerOptions',
       'panel',
       'preserveViewport',
       'routeIndex',
