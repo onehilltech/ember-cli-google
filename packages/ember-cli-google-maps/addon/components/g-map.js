@@ -120,8 +120,8 @@ export default Component.extend ({
     return this._directions;
   }),
 
-  createDirectionsRenderer () {
-    let renderer = new google.maps.DirectionsRenderer ();
+  createDirectionsRenderer (options) {
+    let renderer = new google.maps.DirectionsRenderer (options);
     renderer.setMap (this.map);
 
     return renderer;

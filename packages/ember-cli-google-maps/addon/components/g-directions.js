@@ -3,7 +3,6 @@
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
 
-import { isPresent } from '@ember/utils';
 import { computed } from '@ember/object';
 import { readOnly, equal } from '@ember/object/computed';
 
@@ -11,6 +10,26 @@ export default Component.extend ({
   classNames: ['g-directions'],
 
   mode: 'DRIVING',
+
+  // render options
+
+  draggable: false,
+
+  hideRouteList: false,
+
+  panel: null,
+
+  preserveViewport: false,
+
+  routeIndex: 0,
+
+  suppressBicyclingLayer: true,
+
+  suppressInfoWindows: true,
+
+  suppressMarkers: false,
+
+  suppressPolylines: false,
 
   _renderer: null,
 
@@ -62,7 +81,9 @@ export default Component.extend ({
 
     service.route ({ origin, destination, travelMode} , (response, status) => {
       if (status === 'OK') {
-        this._renderer = gMap.createDirectionsRenderer ();
+        let renderOptions = this.get ('renderOptions');
+
+        this._renderer = gMap.createDirectionsRenderer (renderOptions);
         this._renderer.setDirections (response);
       } else {
         let error = (this.get ('error'));
@@ -80,6 +101,20 @@ export default Component.extend ({
       this._renderer = null;
     }
   },
+
+  renderOptions: computed ('{draggable,hideRouteList,panel,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}', function (){
+    return this.getProperties ([
+      'draggable',
+      'hideRouteList',
+      'panel',
+      'preserveViewport',
+      'routeIndex',
+      'suppressBicyclingLayer',
+      'suppressInfoWindows',
+      'suppressMarkers',
+      'suppressPolylines'
+    ]);
+  }),
 
   isOrigin: equal ('direction', 'from'),
   isDestination: equal ('direction', 'to'),
