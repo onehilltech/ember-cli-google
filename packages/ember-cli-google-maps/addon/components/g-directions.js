@@ -12,8 +12,7 @@ export default Component.extend ({
 
   mode: 'DRIVING',
 
-  _directions: null,
-  _display: null,
+  _renderer: null,
 
   didInsertElement () {
     this._super (...arguments);
@@ -28,6 +27,9 @@ export default Component.extend ({
 
   willDestroyElement () {
     this._super (...arguments);
+
+    // Remove the current directions on the map.
+    this._removeDirections();
 
     let gMap = this.get ('gMap');
     gMap.off ('loading', this, '_mapLoading');
@@ -55,10 +57,13 @@ export default Component.extend ({
     let service = this.get ('directionsService');
     const { origin, destination, mode: travelMode, gMap } = this.getProperties (['origin', 'destination', 'mode', 'gMap']);
 
+    // Delete the old directions.
+    this._removeDirections ();
+
     service.route ({ origin, destination, travelMode} , (response, status) => {
       if (status === 'OK') {
-        let renderer = gMap.createDirectionsRenderer ();
-        renderer.setDirections (response);
+        this._renderer = gMap.createDirectionsRenderer ();
+        this._renderer.setDirections (response);
       } else {
         let error = (this.get ('error'));
 
@@ -67,6 +72,13 @@ export default Component.extend ({
         }
       }
     });
+  },
+
+  _removeDirections () {
+    if (!!this._renderer) {
+      this._renderer.setMap (null);
+      this._renderer = null;
+    }
   },
 
   isOrigin: equal ('direction', 'from'),
