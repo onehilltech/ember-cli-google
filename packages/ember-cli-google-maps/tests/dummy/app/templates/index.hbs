@@ -3,12 +3,21 @@
     <div>Latitude: {{input value=latInput}}</div>
     <div>Longitude: {{input value=lngInput}}</div>
   </div>
+
+
+  {{#if showDirections}}
+    <button {{action (mut showDirections) false}}>Hide Directions</button>
+  {{else}}
+    <button {{action (mut showDirections) true}}>Show Directions</button>
+  {{/if}}
 </div>
 
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
   {{#g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
-    {{g-directions direction="to" location='San Jose, CA' draggable=true}}
-    {{g-directions direction="to" location='Sacramento, CA' suppressMarkers=true}}
+    {{#if showDirections}}
+      {{g-directions direction="to" location='San Jose, CA' draggable=true}}
+      {{g-directions direction="to" location='Sacramento, CA' suppressMarkers=true}}
+    {{/if}}
   {{/g-custom-marker}}
 
   {{g-heatmap-layer data=heatMapData}}

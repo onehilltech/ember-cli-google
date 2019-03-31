@@ -6,7 +6,9 @@ import { assert } from '@ember/debug';
 import { computed } from '@ember/object';
 import { readOnly, equal } from '@ember/object/computed';
 
-export default Component.extend ({
+import MapEntity from '../mixins/map-entity';
+
+export default Component.extend (MapEntity, {
   classNames: ['g-directions'],
 
   mode: 'DRIVING',
@@ -35,30 +37,15 @@ export default Component.extend ({
 
   _renderer: null,
 
+  map: computed (function () {
+    return this.parentView.parentView.map;
+  }).volatile (),
+
   didInsertElement () {
     this._super (...arguments);
 
     let gMarker = this.parentView;
     assert ('The parent of g-directions must be a g-marker component.', gMarker.element.classList.contains ('g-marker'));
-
-    let gMap = gMarker.parentView;
-    gMap.on ('loading', this, '_mapLoading');
-    gMap.on ('loaded', this, '_mapLoaded');
-    
-    if (gMap.get ('loaded')) {
-      this._renderDirections ();
-    }
-  },
-
-  willDestroyElement () {
-    this._super (...arguments);
-
-    // Remove the current directions on the map.
-    this._removeDirections();
-
-    let gMap = this.get ('gMap');
-    gMap.off ('loading', this, '_mapLoading');
-    gMap.off ('loaded', this, '_mapLoaded');
   },
 
   _mapLoading () {
@@ -69,7 +56,11 @@ export default Component.extend ({
     this._renderDirections ();
   },
 
-  _renderDirections () {
+  getEntity () {
+    return this._renderer;
+  },
+
+  createEntity () {
     let service = this.get ('directionsService');
     const { origin, destination, mode: travelMode, gMap } = this.getProperties (['origin', 'destination', 'mode', 'gMap']);
 
