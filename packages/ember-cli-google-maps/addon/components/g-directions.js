@@ -44,6 +44,10 @@ export default Component.extend ({
     let gMap = gMarker.parentView;
     gMap.on ('loading', this, '_mapLoading');
     gMap.on ('loaded', this, '_mapLoaded');
+    
+    if (gMap.get ('loaded')) {
+      this._renderDirections ();
+    }
   },
 
   willDestroyElement () {
@@ -57,24 +61,15 @@ export default Component.extend ({
     gMap.off ('loaded', this, '_mapLoaded');
   },
 
-  _initFromMap (map) {
-    // Store our own direction service.
-    this._service = new google.maps.DirectionsService ();
-
-    // Initialize the display for the map.
-    this._display = new google.maps.DirectionsRenderer ();
-    this._display.setMap (map);
-  },
-
   _mapLoading () {
 
   },
 
   _mapLoaded () {
-    this._refresh ();
+    this._renderDirections ();
   },
 
-  _refresh () {
+  _renderDirections () {
     let service = this.get ('directionsService');
     const { origin, destination, mode: travelMode, gMap } = this.getProperties (['origin', 'destination', 'mode', 'gMap']);
 
