@@ -62,16 +62,15 @@ export default Component.extend (MapEntity, {
 
   createEntity () {
     let service = this.get ('directionsService');
-    const { origin, destination, mode: travelMode, gMap } = this.getProperties (['origin', 'destination', 'mode', 'gMap']);
+    const { origin, destination, mode: travelMode, gMap, renderOptions } = this.getProperties (['origin', 'destination', 'mode', 'gMap', 'renderOptions']);
 
     // Delete the old directions.
+
     this._removeDirections ();
+    this._renderer = gMap.createDirectionsRenderer (renderOptions);
 
     service.route ({ origin, destination, travelMode} , (response, status) => {
       if (status === 'OK') {
-        let renderOptions = this.get ('renderOptions');
-
-        this._renderer = gMap.createDirectionsRenderer (renderOptions);
         this._renderer.setDirections (response);
       } else {
         let error = (this.get ('error'));
@@ -81,6 +80,8 @@ export default Component.extend (MapEntity, {
         }
       }
     });
+
+    return this._renderer;
   },
 
   _removeDirections () {
