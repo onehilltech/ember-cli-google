@@ -14,6 +14,10 @@
 
 {{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
   {{g-circle center=(hash lat=37.774546 lng=-122.433523) radius=1000}}
+
+  {{!-- Coachella, CA --}}
+  {{g-rectangle bounds=(hash north=33.685 south=33.671 east=-116.234 west=-116.251)}}
+
   {{#g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
     {{#if showDirections}}
       {{g-directions direction="to" location='San Jose, CA' draggable=true}}
