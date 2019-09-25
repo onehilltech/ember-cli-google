@@ -3,6 +3,8 @@ import { computed } from '@ember/object';
 import { Promise } from 'rsvp';
 
 export default CaptchaComponent.extend({
+  classNames: ['g-recaptcha--invisible'],
+
   badge: 'bottomright',
 
   type: 'image',

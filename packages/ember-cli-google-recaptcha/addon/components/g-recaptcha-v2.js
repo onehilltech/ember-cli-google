@@ -1,7 +1,8 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
-import {Promise} from "rsvp";
 
 export default CaptchaComponent.extend({
+  classNames: ['g-recaptcha--v2'],
+
   theme: 'light',
 
   type: 'image',
