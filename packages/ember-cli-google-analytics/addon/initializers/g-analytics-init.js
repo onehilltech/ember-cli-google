@@ -27,13 +27,25 @@ export function initialize (app) {
   // environments and we do not run into any surprises.
 
   Ember.Route.reopen ({
+    /**
+     * Get the url for the current location. This returned url is used to set the current
+     * page for the analytics.
+     *
+     * The default behavior is to return the current href property in the location object.
+     *
+     * @param location        The Location object
+     * @returns The url string
+     */
+    urlForLocation (location) {
+      return location.href;
+    },
+
     actions: {
       didTransition () {
         this._super (...arguments);
 
         if (isProductionEnv) {
-          let {router} = this.getProperties (['routeName', 'router']);
-          let url = router.get ('url');
+          const url = this.urlForLocation (window.location);
 
           window.ga ('set', 'page', url);
           window.ga ('send', 'pageview');
