@@ -2,8 +2,6 @@
 
 EmberJS add-on for Google Analytics
 
-## Installation
-
     ember install @onehilltech/ember-cli-google-analytics
     
 ## Configuration
