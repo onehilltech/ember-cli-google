@@ -2,7 +2,6 @@ import Service from '@ember/service';
 
 import { getOwner } from '@ember/application';
 import { get } from '@ember/object';
-import { assert } from '@ember/debug';
 import { merge } from '@ember/polyfills';
 import { readOnly } from '@ember/object/computed';
 import { Promise } from 'rsvp';
