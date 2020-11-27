@@ -24,7 +24,8 @@ module.exports = function(environment) {
 
     'ember-cli-google': {
       analytics: {
-        trackerId: 'UA-109156214-2'
+        version: 'v4',
+        measurementId: 'G-PZS86M3RVR',
       }
     }
   };
