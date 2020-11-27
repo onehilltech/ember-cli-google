@@ -6,6 +6,24 @@ EmberJS add-on for Google Analytics
     
 ## Configuration
 
+### Version 4 (via Tag Manager)
+
+```javascript
+
+// config/environment.js
+
+let ENV = {
+  'ember-cli-google': {
+    analytics: {
+      version: 'v4',
+      mearsurementId: 'G-XXXXXXXXXX'
+    }
+  }
+}
+```
+
+### Universal Analytics
+
 ```javascript
 
 // config/environment.js
