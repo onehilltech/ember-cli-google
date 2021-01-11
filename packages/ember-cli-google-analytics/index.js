@@ -5,6 +5,7 @@ module.exports = {
 
   contentFor (type, config) {
     if (type === 'head') {
+      if (config.environment === 'production') {}
       if (!!config['ember-cli-google'] && !!config['ember-cli-google'].analytics) {
         let { version, measurementId } = config['ember-cli-google'].analytics;
 
