@@ -1,7 +1,6 @@
 ember-cli-google-maps
 ==============================================================================
 
-
 A simple Ember add-on from Google Maps API
 
 
@@ -15,9 +14,16 @@ Features
 * Extensible component-based design to maximize customization
 
 
-Installation
+Compatibility
 ------------------------------------------------------------------------------
 
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
+Installation
+------------------------------------------------------------------------------
 
     ember install ember-cli-google-maps
 
