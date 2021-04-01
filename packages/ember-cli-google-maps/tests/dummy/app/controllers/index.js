@@ -8,7 +8,7 @@ export default Controller.extend ({
   lng: -122.433523,
 
   lngInput: computed ('lng', {
-    get () { return this.get ('lng'); },
+    get () { return this.lng; },
 
     set (name, value) {
       this.set ('lng', parseFloat (value));
@@ -17,7 +17,7 @@ export default Controller.extend ({
   }),
 
   latInput: computed ('lat', {
-    get () { return this.get ('lat'); },
+    get () { return this.lat; },
     set (name, value) {
       this.set ('lat', parseFloat (value));
       return value;
@@ -47,7 +47,7 @@ export default Controller.extend ({
     },
 
     toggleBounce () {
-      let animation = this.get ('animation');
+      let animation = this.animation;
       this.set ('animation', animation === 'bounce' ? null : 'bounce');
     },
 

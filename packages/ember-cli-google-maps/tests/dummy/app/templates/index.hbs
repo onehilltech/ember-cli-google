@@ -1,7 +1,7 @@
 <div class="map-controls">
   <div class="map-controls--location">
-    <div>Latitude: {{input value=latInput}}</div>
-    <div>Longitude: {{input value=lngInput}}</div>
+    <div>Latitude: <Input @value={{latInput}} /></div>
+    <div>Longitude: <Input @value={{lngInput}} /></div>
   </div>
 
 
@@ -12,18 +12,18 @@
   {{/if}}
 </div>
 
-{{#g-map center=(hash lat=37.774546 lng=-122.433523) zoom=13 mapClick=(action "mapClick")}}
-  {{g-circle center=(hash lat=37.774546 lng=-122.433523) radius=1000}}
+<GMap @center={{hash lat=37.774546 lng=-122.433523}} @zoom={{13}} @mapClick={{action "mapClick"}}>
+  <GCircle @center={{hash lat=37.774546 lng=-122.433523}} @radius={{1000}} />
 
   {{!-- Coachella, CA --}}
-  {{g-rectangle bounds=(hash north=33.685 south=33.671 east=-116.234 west=-116.251)}}
+  <GRectangle @bounds={{hash north=33.685 south=33.671 east=-116.234 west=-116.251}} />
 
-  {{#g-custom-marker position=(hash lat=lat lng=lng) truck=truck}}
+  <GCustomMarker @position={{hash lat=lat lng=lng}} @truck={{truck}}>
     {{#if showDirections}}
-      {{g-directions direction="to" location='San Jose, CA' draggable=true}}
-      {{g-directions direction="to" location='Sacramento, CA' suppressMarkers=true}}
+      <GDirections @direction="to" @location="San Jose, CA" @draggable={{true}} />
+      <GDirections @direction="to" @location="Sacramento, CA" @suppressMarkers={{true}} />
     {{/if}}
-  {{/g-custom-marker}}
+  </GCustomMarker>
 
-  {{g-heatmap-layer data=heatMapData}}
-{{/g-map}}
+  <GHeatmapLayer @data={{heatMapData}} />
+</GMap>

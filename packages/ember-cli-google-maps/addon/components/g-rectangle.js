@@ -12,7 +12,7 @@ export default Component.extend (MapEntity, {
   },
 
   createEntity () {
-    let rectangleOptions = this.get ('rectangleOptions');
+    let rectangleOptions = this.rectangleOptions;
     this._rectangle = new google.maps.Rectangle (rectangleOptions);
 
     return this._rectangle;

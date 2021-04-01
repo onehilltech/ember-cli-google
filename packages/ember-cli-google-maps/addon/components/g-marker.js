@@ -27,10 +27,10 @@ export default Component.extend (MapEntity, {
   didUpdateAttrs () {
     this._super (...arguments);
 
-    let animation = this.get ('animationType');
+    let animation = this.animationType;
     this._marker.setAnimation (animation);
 
-    const { lat, lng } = this.get ('position');
+    const { lat, lng } = this.position;
 
     if (this._marker.position.lat () !== lat || this._marker.position.lng () !== lng) {
       const latLng = new google.maps.LatLng (lat,lng);
@@ -42,7 +42,7 @@ export default Component.extend (MapEntity, {
     this._super (...arguments);
 
     let options = this.getProperties (['position','title','draggable','label','icon','shape','zIndex']);
-    options.animation = this.get ('animationType');
+    options.animation = this.animationType;
 
     this._marker = new google.maps.Marker (options);
     this._marker.addListener ('click', this.didClick.bind (this));
@@ -58,7 +58,7 @@ export default Component.extend (MapEntity, {
   },
 
   animationType: computed ('animation', function () {
-    const animation = this.get ('animation');
+    const animation = this.animation;
 
     if (animation === 'drop') {
       return google.maps.Animation.DROP;

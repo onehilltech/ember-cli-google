@@ -50,7 +50,7 @@ export default Service.extend ({
 
       script.defer = true;
       script.async = true;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${this.get ('apiKey')}&callback=_gMapsInit`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&callback=_gMapsInit`;
 
       if (isPresent (libraries)) {
         script.src += `&libraries=${libraries}`;

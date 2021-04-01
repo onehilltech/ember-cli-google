@@ -9,7 +9,7 @@ export default Component.extend (MapEntity, {
   _circle: null,
 
   createEntity () {
-    let circleOptions = this.get ('circleOptions');
+    let circleOptions = this.circleOptions;
     this._circle = new google.maps.Circle (circleOptions);
 
     return this._circle;

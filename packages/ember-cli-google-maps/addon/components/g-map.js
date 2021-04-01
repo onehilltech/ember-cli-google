@@ -76,7 +76,7 @@ export default Component.extend ({
     this._super (...arguments);
 
     this.trigger ('loading');
-    this.get ('gMaps').getInstance ().then (this.didInitMap.bind (this));
+    this.gMaps.getInstance ().then (this.didInitMap.bind (this));
   },
 
   didUpdateAttrs () {
@@ -87,7 +87,7 @@ export default Component.extend ({
 
   _updateCenter () {
     let oldCenter = this.map.getCenter ();
-    let {lat, lng} = this.get ('center');
+    let {lat, lng} = this.center;
 
     if (oldCenter.lat () !== lat || oldCenter.lng () !== lng) {
        this.map.setCenter (new google.maps.LatLng (lat, lng));

@@ -16,7 +16,7 @@ export default Mixin.create ({
     this.parentView.on ('loading', this, '_mapLoading');
     this.parentView.on ('loaded', this, '_mapLoaded');
 
-    const map = this.get ('map');
+    const map = this.map;
 
     if (isPresent (map)) {
       const entity = this.createEntity ();
@@ -97,7 +97,7 @@ export default Mixin.create ({
   _showEntity (entity) {
     if (isPresent (entity)) {
       const show = this.getWithDefault ('show', true);
-      const map = this.get ('map');
+      const map = this.map;
 
       if (show) {
         entity.setMap (map);

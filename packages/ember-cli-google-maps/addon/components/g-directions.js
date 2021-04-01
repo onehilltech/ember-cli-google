@@ -61,8 +61,8 @@ export default Component.extend (MapEntity, {
   },
 
   createEntity () {
-    let service = this.get ('directionsService');
-    const { origin, destination, mode: travelMode, gMap, renderOptions } = this.getProperties (['origin', 'destination', 'mode', 'gMap', 'renderOptions']);
+    let service = this.directionsService;
+    const { origin, destination, mode: travelMode, gMap, renderOptions } = this;
 
     // Delete the old directions.
 
@@ -73,7 +73,7 @@ export default Component.extend (MapEntity, {
       if (status === 'OK') {
         this._renderer.setDirections (response);
       } else {
-        let error = (this.get ('error'));
+        let error = (this.error);
 
         if (!!error) {
           error (status, response);
@@ -111,12 +111,12 @@ export default Component.extend (MapEntity, {
   isDestination: equal ('direction', 'to'),
 
   origin: computed ('isOrigin', 'location', 'gMarker.position', function () {
-    const { isOrigin, location } = this.getProperties (['isOrigin', 'location']);
+    const { isOrigin, location } = this;
     return isOrigin ? location : this.get ('gMarker.position');
   }),
 
   destination: computed ('isDestination', 'location', 'gMarker.position', function () {
-    const { isDestination, location } = this.getProperties (['isDestination', 'location']);
+    const { isDestination, location } = this;
     return isDestination ? location : this.get ('gMarker.position');
   }),
 
@@ -125,7 +125,7 @@ export default Component.extend (MapEntity, {
   }),
 
   gMap: computed (function () {
-    return this.get ('gMarker').parentView;
+    return this.gMarker.parentView;
   }),
 
   directionsService: readOnly ('gMap.directionsService')

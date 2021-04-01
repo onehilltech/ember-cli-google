@@ -43,13 +43,13 @@ export default Component.extend (MapEntity, {
   didInsertElement () {
     this._super (...arguments);
 
-    this.get ('gMaps').include ('visualization');
+    this.gMaps.include ('visualization');
   },
 
   didUpdateAttrs () {
     this._super (...arguments);
 
-    let data = this.get ('heatMapData');
+    let data = this.heatMapData;
     this._heatMap.setData (data);
   },
 
@@ -57,7 +57,7 @@ export default Component.extend (MapEntity, {
     this._super (...arguments);
 
     let options = this.getProperties (['dissipating','gradient','maxIntensity','radius','opacity']);
-    options.data = this.get ('heatMapData');
+    options.data = this.heatMapData;
 
     this._heatMap = new google.maps.visualization.HeatmapLayer (options);
 
