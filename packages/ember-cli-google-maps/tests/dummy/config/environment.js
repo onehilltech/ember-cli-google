@@ -24,7 +24,7 @@ module.exports = function(environment) {
 
     'ember-cli-google': {
       maps: {
-        apiKey: 'AIzaSyCFCiX7xWSpiqwlwlaMLg-8HMe6XO56_wI'
+        apiKey: process.env.GOOGLE_MAPS_API_KEY
       }
     }
   };
