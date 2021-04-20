@@ -5,9 +5,9 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "github:onehilltech/ember-cli-google",
   "license": "Apache-2.0",
-  "author": "",
+  "author": "One Hill Technolgies, LLC",
   "directories": {
     "doc": "doc",
     "test": "tests"

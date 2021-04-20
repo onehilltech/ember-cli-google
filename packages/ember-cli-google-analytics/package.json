@@ -11,7 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "git@github.com:onehilltech/ember-cli-google-analytics.git",
+  "repository": "github:onehilltech/ember-cli-google",
   "scripts": {
     "build": "ember build --environment=production",
     "lint:hbs": "ember-template-lint .",

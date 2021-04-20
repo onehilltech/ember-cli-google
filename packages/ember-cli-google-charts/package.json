@@ -5,13 +5,13 @@
   "keywords": [
     "ember-addon"
   ],
-  "license": "MIT",
-  "author": "",
+  "license": "Apache 2.0",
+  "author": "One Hill Technologies, LLC",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "github:onehilltech/ember-cli-google",
   "scripts": {
     "build": "ember build",
     "start": "ember server",

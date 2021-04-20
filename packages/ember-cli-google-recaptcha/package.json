@@ -7,9 +7,9 @@
     "google",
     "recaptcha"
   ],
-  "repository": "github:onehilltech/ember-cli-google-recaptcha",
+  "repository": "github:onehilltech/ember-cli-google",
   "license": "Apache-2.0",
-  "author": "",
+  "author": "One Hill Technologies, LLC",
   "directories": {
     "doc": "doc",
     "test": "tests"
