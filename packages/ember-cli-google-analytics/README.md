@@ -6,6 +6,9 @@ EmberJS add-on for Google Analytics
     
 ## Configuration
 
+After you install this add-on, you just need to add your Google analytics settings
+to the `config/environment.js` file for basic usage.
+
 ### Version 4 (via Tag Manager)
 
 ```javascript
@@ -38,3 +41,6 @@ let ENV = {
   }
 }
 ```
+
+Happy Coding!
+
