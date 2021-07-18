@@ -1,9 +1,10 @@
+/* globals ga */
+
 import Service, { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import { get, getWithDefault } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import { tracked } from "@glimmer/tracking";
 
 /**
  * Normalize the page name as expected by Google Analytics.
@@ -109,5 +110,9 @@ export default class GoogleAnalyticsService extends Service {
     });
 
     return this._scriptPromise;
+  }
+
+  send (category, action, label, value) {
+    ga ('send', 'event', category, action, label, value);
   }
 }
