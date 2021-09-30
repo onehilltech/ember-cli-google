@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Helper | directions-url', function(hooks) {
   setupRenderingTest(hooks);
@@ -12,6 +12,6 @@ module('Integration | Helper | directions-url', function(hooks) {
 
     await render(hbs`{{directions-url inputValue}}`);
 
-    assert.dom(this.element).hasText('1234');
+    assert.equal(this.element.textContent.trim(), '1234');
   });
 });
