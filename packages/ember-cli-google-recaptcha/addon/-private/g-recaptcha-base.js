@@ -42,7 +42,7 @@ export default Component.extend({
       _callback,
       _expiredCallback,
       _extendedOptions
-    } = this.getProperties (['size', 'type', 'theme', 'tabIndex', 'siteKey', 'grecaptcha', '_callback', '_expiredCallback', '_extendedOptions']);
+    } = this;
 
     let options = merge ({
       size,
@@ -75,7 +75,7 @@ export default Component.extend({
    * @private
    */
   _callback () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+    let {grecaptcha, widgetId} = this;
 
     grecaptcha.getResponse (widgetId).then (response => {
       this.set ('_response', response);
@@ -103,7 +103,7 @@ export default Component.extend({
    * Reset the recaptcha component.
    */
   _reset () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+    let {grecaptcha, widgetId} = this;
 
     return grecaptcha.reset (widgetId).then (() => {
       this.didReset ();
@@ -112,7 +112,7 @@ export default Component.extend({
   },
 
   _execute () {
-    let {grecaptcha, widgetId} = this.getProperties (['grecaptcha', 'widgetId']);
+    let {grecaptcha, widgetId} = this;
 
     // Notify the client we started the verification process.
     this.getWithDefault ('verifying', noop) (true);

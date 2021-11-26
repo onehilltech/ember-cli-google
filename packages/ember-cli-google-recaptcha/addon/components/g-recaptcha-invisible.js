@@ -12,13 +12,13 @@ export default CaptchaComponent.extend({
   size: 'invisible',
 
   _extendedOptions: computed ('badge', function () {
-    let badge = this.get ('badge');
+    let badge = this.badge;
     return { badge };
   }),
 
   didRenderCaptcha () {
     // Handle reset the recaptcha.
-    let execute = this.get ('execute');
+    let execute = this.execute;
 
     if (execute) {
       this._execute ();
@@ -28,7 +28,7 @@ export default CaptchaComponent.extend({
   didUpdate () {
     this._super (...arguments);
 
-    const { reset, execute } = this.getProperties (['reset', 'execute']);
+    const { reset, execute } = this;
 
     let promises = [];
 

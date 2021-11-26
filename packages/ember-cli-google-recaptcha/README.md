@@ -2,8 +2,22 @@
 
 EmberJS add-on for using Google reCAPTCHA services
 
+<<<<<<< HEAD
 ![npm version](https://img.shields.io/npm/v/ember-cli-google-recaptcha.svg)
 ![node version](https://img.shields.io/node/v/ember-cli-google-recaptcha.svg)
+=======
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.16 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
+Installation
+------------------------------------------------------------------------------
+>>>>>>> 1b6fdd4 (v3.3.0...v3.24.0)
 
 [![Dependencies](https://david-dm.org/onehilltech/ember-cli-google-recaptcha.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha)
 [![devDependencies Status](https://david-dm.org/onehilltech/ember-cli-google-recaptcha/dev-status.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha?type=dev)
@@ -26,6 +40,7 @@ EmberJS add-on for using Google reCAPTCHA services
 
 ### Configuring application for reCAPTCHA
 
+<<<<<<< HEAD
 Before you can use reCAPTCHA, you must first [sign up for the service](https://www.google.com/recaptcha), 
 and register a new site. 
 
@@ -58,6 +73,10 @@ The invisible reCAPTCHA requires more coordination than [v2](#v2).
                         reset=reset
                         expired=(action "expired")}}
 ```
+=======
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+>>>>>>> 1b6fdd4 (v3.3.0...v3.24.0)
 
 Unlike [v2](#v2), you must determine when to `execute` the reCAPTCHA, `reset` the reCAPTCHA,
 and handle the `expired` action. Fortunately, this is not hard to do within EmberJS. As shown

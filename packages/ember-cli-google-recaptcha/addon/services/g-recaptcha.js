@@ -34,7 +34,7 @@ export default Service.extend ({
    * @returns {RSVP.Promise|*}
    */
   render (container, params) {
-    let siteKey = this.get ('siteKey');
+    let siteKey = this.siteKey;
     let options = merge ({sitekey: siteKey}, params);
 
     return this.getInstance ().then (grecaptcha => grecaptcha.render (container, options));

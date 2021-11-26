@@ -12,7 +12,7 @@ export default CaptchaComponent.extend({
   didUpdate () {
     this._super (...arguments);
 
-    if (this.get ('reset')) {
+    if (this.reset) {
       this._reset ();
     }
   }

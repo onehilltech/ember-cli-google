@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-google-recaptcha'
+  name: require('./package').name,
 };
