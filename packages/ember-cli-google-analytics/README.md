@@ -19,7 +19,7 @@ let ENV = {
   'ember-cli-google': {
     analytics: {
       version: 'v4',
-      mearsurementId: 'G-XXXXXXXXXX'
+      measurementId: 'G-XXXXXXXXXX'
     }
   }
 }
