@@ -29,7 +29,9 @@ export default Component.extend({
 
   reset: false,
 
-  didInsertElement () {
+  widgetId: null,
+
+  async didInsertElement () {
     this._super (...arguments);
 
     let {
@@ -57,10 +59,15 @@ export default Component.extend({
       options.sitekey = siteKey;
     }
 
-    grecaptcha.render (this.elementId, options).then (widgetId => {
+    try {
+      const widgetId = await grecaptcha.render (this.elementId, options);
+
       this.set ('widgetId', widgetId);
       this.didRenderCaptcha ();
-    });
+    }
+    catch (err) {
+      console.error (err);
+    }
   },
 
   didRenderCaptcha () {
@@ -74,10 +81,9 @@ export default Component.extend({
    *
    * @private
    */
-  _callback () {
-    let {grecaptcha, widgetId} = this;
-
-    grecaptcha.getResponse (widgetId).then (response => {
+  async _callback () {
+    try {
+      const response = await this.grecaptcha.getResponse (this.widgetId);
       this.set ('_response', response);
 
       // Let the client know we have verified the user.
@@ -86,7 +92,10 @@ export default Component.extend({
       // We also need to let the client know the component has left the verifying
       // state. This is different from the verified event.
       this.getWithDefault ('verifying', noop) (false);
-    });
+    }
+    catch (err) {
+      console.error (err);
+    }
   },
 
   /**
@@ -102,26 +111,31 @@ export default Component.extend({
   /**
    * Reset the recaptcha component.
    */
-  _reset () {
-    let {grecaptcha, widgetId} = this;
+  async _reset () {
+    try {
+      await this.grecaptcha.reset (this.widgetId);
 
-    return grecaptcha.reset (widgetId).then (() => {
       this.didReset ();
       this.setProperties ({reset: false, _response: null});
-    });
+    }
+    catch (err) {
+      console.log (err);
+    }
   },
 
-  _execute () {
-    let {grecaptcha, widgetId} = this;
-
+  async _execute () {
     // Notify the client we started the verification process.
     this.getWithDefault ('verifying', noop) (true);
 
-    return grecaptcha.execute (widgetId)
-      .then (() => {
-        this.didExecute ();
-        this.set ('execute', false);
-      });
+    try {
+      await this.grecaptcha.execute (this.widgetId);
+
+      this.didExecute ();
+      this.set ('execute', false);
+    }
+    catch (err) {
+      console.log (err);
+    }
   },
 
   didExecute () {
