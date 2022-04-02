@@ -1,19 +1,27 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
+import { action } from '@ember/object';
 
-export default CaptchaComponent.extend({
-  classNames: ['g-recaptcha--v2'],
+export default class GRecaptchaV2Component extends CaptchaComponent {
+  get tabIndex () {
+    return this.args.tabIndex || 0;
+  }
 
-  theme: 'light',
+  get theme () {
+    return this.args.theme || 'light';
+  }
 
-  type: 'image',
+  get type () {
+    return this.args.type || 'image';
+  }
 
-  size: 'normal',
+  get size () {
+    return this.args.size || 'normal';
+  }
 
-  didUpdate () {
-    this._super (...arguments);
-
-    if (this.reset) {
-      this._reset ();
+  @action
+  async run (element, [reset]) {
+    if (reset) {
+      await this.reset ();
     }
   }
-});
+}

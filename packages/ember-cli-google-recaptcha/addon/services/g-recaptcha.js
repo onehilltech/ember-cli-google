@@ -2,8 +2,6 @@ import Service from '@ember/service';
 
 import { getOwner } from '@ember/application';
 import { get } from '@ember/object';
-import { merge } from '@ember/polyfills';
-import { readOnly } from '@ember/object/computed';
 import { Promise } from 'rsvp';
 import { isNone, isPresent } from '@ember/utils';
 
@@ -14,16 +12,16 @@ import { isNone, isPresent } from '@ember/utils';
  *
  * The service is used by reCAPTCHA-v2 and reCAPTCHA-invisible.
  */
-export default Service.extend ({
-  init () {
-    this._super (...arguments);
+export default class GRecaptcha extends Service {
+  constructor () {
+    super (...arguments);
 
     const ENV = getOwner (this).resolveRegistration ('config:environment');
-    this.set ('_siteKey', get (ENV, 'ember-cli-google.recaptcha.siteKey'));
-  },
 
-  /// Site key for the application.
-  siteKey: readOnly ('_siteKey'),
+    Object.defineProperty (this, 'siteKey', {
+      value: get (ENV, 'ember-cli-google.recaptcha.siteKey')
+    });
+  }
 
   /**
    * Renders the container as a reCAPTCHA widget and returns the ID of the newly
@@ -31,46 +29,50 @@ export default Service.extend ({
    *
    * @param container
    * @param params
-   * @returns {RSVP.Promise|*}
    */
-  render (container, params) {
-    let siteKey = this.siteKey;
-    let options = merge ({sitekey: siteKey}, params);
+  async render (container, params) {
+    const options = Object.assign ({ sitekey: this.siteKey }, params);
 
-    return this.getInstance ().then (grecaptcha => grecaptcha.render (container, options));
-  },
+    const grecaptcha = await this.getInstance ();
+    return grecaptcha.render (container, options);
+  }
 
   /**
    * Manually invoke the reCAPTCHA check. Used if the invisible reCAPTCHA is on a
    * div instead of a button.
    *
    * @param widgetId
-   * @returns {RSVP.Promise|*}
    */
-  execute (widgetId) {
-    return this.getInstance ().then (grecaptcha => grecaptcha.execute (widgetId));
-  },
+  async execute (widgetId) {
+    const grecaptcha = await this.getInstance ();
+    return grecaptcha.execute (widgetId);
+  }
 
   /**
    * Resets the reCAPTCHA widget.
    *
    * @param widgetId
-   * @returns {RSVP.Promise|*}
    */
-  reset (widgetId) {
-    return this.getInstance ().then (grecaptcha => grecaptcha.reset (widgetId));
-  },
+  async reset (widgetId) {
+    const grecaptcha = await this.getInstance ();
+    return await grecaptcha.reset (widgetId);
+  }
 
   /**
    * Gets the response for the reCAPTCHA widget.
    *
    * @param widgetId
-   * @returns {RSVP.Promise|*}
    */
-  getResponse (widgetId) {
-    return this.getInstance ().then (grecaptcha => grecaptcha.getResponse (widgetId));
-  },
+  async getResponse (widgetId) {
+    const grecaptcha = await this.getInstance ();
+    return grecaptcha.getResponse (widgetId);
+  }
 
+  /**
+   * Get the singleton instance of the underling recaptcha instance.
+   *
+   * @return {*}
+   */
   getInstance () {
     if (isPresent (this._instance)) {
       return this._instance;
@@ -100,4 +102,4 @@ export default Service.extend ({
 
     return this._instance;
   }
-});
+}

@@ -30,10 +30,12 @@
   },
   "dependencies": {
     "ember-cli-babel": "^7.23.0",
+    "ember-cli-blueprint-helpers": "^0.4.7",
     "ember-cli-htmlbars": "^5.3.1"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.1.4",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",

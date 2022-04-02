@@ -1,3 +1,7 @@
-<GRecaptchaV2 @verified={{action (mut response)}} />
+<GRecaptchaV2 @verified={{this.verified}} @reset={{this.reset}} />
 
-<p>Response: {{response}}</p>
+
+{{#if this.response}}
+  <p>Response: {{this.response}}</p>
+  <p><button {{on "click" this.resetRecaptcha}}>Reset</button></p>
+{{/if}}

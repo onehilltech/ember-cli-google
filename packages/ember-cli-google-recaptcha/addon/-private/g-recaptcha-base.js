@@ -1,78 +1,129 @@
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { merge } from '@ember/polyfills';
-import { isPresent } from '@ember/utils';
+import Component from '@glimmer/component';
 
-import layout from '../templates/components/g-recaptcha';
+import { inject as service } from '@ember/service';
+import { isPresent } from '@ember/utils';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 function noop () { }
 
-export default Component.extend({
-  layout,
+export default class GRecaptchaBase extends Component {
+  @service('g-recaptcha')
+  grecaptcha;
 
-  mergedProperties: ['_extendedOptions'],
+  @tracked
+  widgetId;
 
-  /// The Google reCAPTCHA service.
-  grecaptcha: service ('g-recaptcha'),
+  @tracked
+  response;
 
-  /// Set the required class names for the reCAPTCHA element.
-  classNames: ['g-recaptcha'],
+  @action
+  async didInsert (element) {
+    const options = Object.assign ({
+      size: this.size,
+      type: this.type,
+      theme: this.theme,
+      tabindex: this.tabIndex,
+      callback: this._callback.bind (this),
+      'expired-callback': this._expiredCallback.bind (this)
+    }, this.getOptions ());
 
-  /// The attribute bindings for the component.
-  attributeBindings: ['tabIndex:data-tabindex'],
-
-  theme: 'light',
-
-  tabIndex: 0,
-
-  _response: null,
-
-  reset: false,
-
-  widgetId: null,
-
-  async didInsertElement () {
-    this._super (...arguments);
-
-    let {
-      size,
-      type,
-      theme,
-      tabIndex,
-      grecaptcha,
-      siteKey,
-      _callback,
-      _expiredCallback,
-      _extendedOptions
-    } = this;
-
-    let options = merge ({
-      size,
-      type,
-      theme,
-      tabindex: tabIndex,
-      callback: _callback.bind (this),
-      'expired-callback': _expiredCallback.bind (this)
-    }, _extendedOptions);
-
-    if (isPresent (siteKey)) {
-      options.sitekey = siteKey;
+    if (isPresent (this.args.siteKey)) {
+      options.sitekey = this.args.siteKey;
     }
 
-    try {
-      const widgetId = await grecaptcha.render (this.elementId, options);
+    this.widgetId = await this.grecaptcha.render (element, options);
 
-      this.set ('widgetId', widgetId);
-      this.didRenderCaptcha ();
+    // Let the subclasses know that we have rendered the recaptcha.
+    await this.didRender ();
+  }
+
+  get theme () {
+    return this.args.theme || 'light';
+  }
+
+  get tabIndex () {
+    return this.args.tabIndex || 0;
+  }
+
+  getOptions () {
+
+  }
+
+  async didRender () {
+
+  }
+
+  /**
+   * Callback function to be executed when the recaptcha response expires and the
+   * user needs to solve a new CAPTCHA.
+   *
+   * @private
+   */
+  _expiredCallback () {
+    (this.args.expired || noop) ();
+  }
+
+  /**
+   * Reset the recaptcha component.
+   */
+  async reset () {
+    // Reset the widget, and then reset the response. After we reset the
+    // object, let's notify the subclasses that we actually reset the object.
+
+    await this.grecaptcha.reset (this.widgetId);
+    this.response = null;
+  }
+
+  /**
+   * Execute the recaptcha response.
+   */
+  async execute () {
+    try {
+      // Notify the client we started the verification process.
+      this.verifying (true);
+
+      await this.grecaptcha.execute (this.widgetId);
     }
     catch (err) {
-      console.error (err);
+      // We are no longer verifying the user. We still need to let the caller know we had
+      // an error.
+      this.verifying (false);
+
+      throw err;
     }
-  },
+  }
 
-  didRenderCaptcha () {
+  get verifying () {
+    return this.args.verifying || noop;
+  }
 
-  },
+  get verified () {
+    return this.args.verified || noop;
+  }
+
+  /**
+   * Callback when the component finished executing.
+   */
+  didExecute () {
+
+  }
+
+  /**
+   * Callback when the component resets.
+   */
+  didReset () {
+
+  }
+
+  /**
+   * Handle errors from the callback method.
+   *
+   * @param err       The error received.
+   */
+  didError (err) {
+
+  }
 
   /**
    * The name of your callback function to be executed when the user submits
@@ -83,66 +134,18 @@ export default Component.extend({
    */
   async _callback () {
     try {
-      const response = await this.grecaptcha.getResponse (this.widgetId);
-      this.set ('_response', response);
+      this.response = await this.grecaptcha.getResponse (this.widgetId);
 
       // Let the client know we have verified the user.
-      this.getWithDefault ('verified', noop) (response);
-
-      // We also need to let the client know the component has left the verifying
-      // state. This is different from the verified event.
-      this.getWithDefault ('verifying', noop) (false);
+      this.verified (this.response);
     }
     catch (err) {
-      console.error (err);
+      this.didError (err);
     }
-  },
-
-  /**
-   * Callback function to be executed when the recaptcha response expires and the
-   * user needs to solve a new CAPTCHA.
-   *
-   * @private
-   */
-  _expiredCallback () {
-    this.getWithDefault ('expired', noop) ();
-  },
-
-  /**
-   * Reset the recaptcha component.
-   */
-  async _reset () {
-    try {
-      await this.grecaptcha.reset (this.widgetId);
-
-      this.didReset ();
-      this.setProperties ({reset: false, _response: null});
+    finally {
+      //  We also need to let the client know the component has left the verifying
+      //  state. This is different from the verified event.
+      this.verifying (false);
     }
-    catch (err) {
-      console.log (err);
-    }
-  },
-
-  async _execute () {
-    // Notify the client we started the verification process.
-    this.getWithDefault ('verifying', noop) (true);
-
-    try {
-      await this.grecaptcha.execute (this.widgetId);
-
-      this.didExecute ();
-      this.set ('execute', false);
-    }
-    catch (err) {
-      console.log (err);
-    }
-  },
-
-  didExecute () {
-
-  },
-
-  didReset () {
-
   }
-});
+}
