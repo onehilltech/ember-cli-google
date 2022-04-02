@@ -2,25 +2,11 @@
 
 EmberJS add-on for using Google reCAPTCHA services
 
-<<<<<<< HEAD
 ![npm version](https://img.shields.io/npm/v/ember-cli-google-recaptcha.svg)
 ![node version](https://img.shields.io/node/v/ember-cli-google-recaptcha.svg)
-=======
-
-Compatibility
-------------------------------------------------------------------------------
-
-* Ember.js v3.16 or above
-* Ember CLI v2.13 or above
-* Node.js v10 or above
-
-
-Installation
-------------------------------------------------------------------------------
->>>>>>> 1b6fdd4 (v3.3.0...v3.24.0)
-
 [![Dependencies](https://david-dm.org/onehilltech/ember-cli-google-recaptcha.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha)
 [![devDependencies Status](https://david-dm.org/onehilltech/ember-cli-google-recaptcha/dev-status.svg)](https://david-dm.org/onehilltech/ember-cli-google-recaptcha?type=dev)
+
 
 ## Features
 
@@ -40,7 +26,6 @@ Installation
 
 ### Configuring application for reCAPTCHA
 
-<<<<<<< HEAD
 Before you can use reCAPTCHA, you must first [sign up for the service](https://www.google.com/recaptcha), 
 and register a new site. 
 
@@ -50,13 +35,12 @@ v2 reCAPTCHA shows a widget with a checkbox. The user must check the checkbox to
 are not a robot.
 
 ```handlebars
-{{g-recaptcha-v2 siteKey=siteKey
-                 verified=(action (mut response))}}
+<GRecaptchaV2 @siteKey={{this.siteKey}} @verified={{this.verified}} />
 ```
 
-The `siteKey` and `verified` component attributes are required. The `verified` action
-has a single parameter -  the reCAPTCHA response. This response must be uploaded to your 
-server when you submit your data.
+The `@siteKey` and `@verified` attributes are required. The `@verified` action
+has a single parameter -  the reCAPTCHA response. This response must be uploaded to 
+your server when you submit your data.
 
 ### Invisible
 
@@ -67,21 +51,15 @@ loaded or when the form is submitted.
 The invisible reCAPTCHA requires more coordination than [v2](#v2).
 
 ```handlebars
-{{g-recaptcha-invisible siteKey=siteKey
-                        verified=(action (mut response))
-                        execute=reset
-                        reset=reset
-                        expired=(action "expired")}}
+<GRecaptchaInvisible @siteKey={{this.siteKey}} 
+                     @verified={{this.verified}}
+                     @reset={{this.reset}}
+                     @execute={{this.execute}}
+                     @expired={{this.expired}} />
 ```
-=======
-See the [Contributing](CONTRIBUTING.md) guide for details.
 
->>>>>>> 1b6fdd4 (v3.3.0...v3.24.0)
-
-Unlike [v2](#v2), you must determine when to `execute` the reCAPTCHA, `reset` the reCAPTCHA,
-and handle the `expired` action. Fortunately, this is not hard to do within EmberJS. As shown
-in the example above, we are going to `execute` the reCAPTCHA whenever we `reset` it. This, however,
-is not always required.
+Unlike [v2](#v2), you must determine when to `@execute` the reCAPTCHA, `@reset` the reCAPTCHA,
+and handle the `@expired` action.
 
 ### Default siteKey
 
