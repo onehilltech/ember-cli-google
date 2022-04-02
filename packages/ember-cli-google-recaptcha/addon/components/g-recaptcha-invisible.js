@@ -1,4 +1,5 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
+import { action } from '@ember/object';
 
 /**
  * @class GRecaptchaInvisibleComponent

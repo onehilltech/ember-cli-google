@@ -1,9 +1,15 @@
 <p><LinkTo @route="index">Back to index</LinkTo></p>
 
-<GRecaptchaInvisible @verified={{action (mut response)}} @expired={{action (mut expired) true}} @reset={{reset}} @execute={{reset}} />
+<GRecaptchaInvisible @verified={{this.verified}}
+                     @expired={{this.expired}}
+                     @reset={{this.reset}}
+                     @execute={{this.execute}} />
 
-<p>Response: {{response}}</p>
+{{#if this.response}}
+  <p>Response: {{this.response}}</p>
+  <p><button {{on "click" this.resetRecaptcha}}>Reset</button></p>
 
-{{#if expired}}
-  The response has expired. <a href="#" {{action "reset"}}>Reset</a>
+  {{#if this.isExpired}}
+    <p>The response has expired.</p>
+  {{/if}}
 {{/if}}

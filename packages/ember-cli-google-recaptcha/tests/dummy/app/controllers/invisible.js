@@ -1,11 +1,25 @@
 import Controller from '@ember/controller';
+import { tracked } from "@glimmer/tracking";
+import { action } from '@ember/object';
 
-export default Controller.extend({
-  reset: true,
+export default class InvisibleController extends Controller {
+  @tracked
+  reset;
 
-  actions: {
-    reset () {
-      this.setProperties ({expired: false, reset: true});
-    }
+  @tracked
+  execute;
+
+  @tracked
+  response;
+
+  @action
+  verified (response) {
+    this.response = response;
   }
-});
+
+  @action
+  resetRecaptcha () {
+    this.response = null;
+    this.reset = true;
+  }
+}
