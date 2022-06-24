@@ -17,8 +17,7 @@ export default class GRecaptchaBase extends Component {
   @tracked
   response;
 
-  @action
-  async didInsert (element) {
+  get options () {
     const options = Object.assign ({
       size: this.size,
       type: this.type,
@@ -32,7 +31,12 @@ export default class GRecaptchaBase extends Component {
       options.sitekey = this.args.siteKey;
     }
 
-    this.widgetId = await this.grecaptcha.render (element, options);
+    return options;
+  }
+
+  @action
+  async didInsert (element) {
+    this.widgetId = await this.grecaptcha.render (element, this.options);
 
     // Let the subclasses know that we have rendered the recaptcha.
     await this.didRender ();
@@ -82,14 +86,13 @@ export default class GRecaptchaBase extends Component {
     try {
       // Notify the client we started the verification process.
       this.verifying (true);
-
       await this.grecaptcha.execute (this.widgetId);
     }
     catch (err) {
-      // We are no longer verifying the user. We still need to let the caller know we had
-      // an error.
+      // We are no longer verifying anything. Reset the state, and then
+      // rethrow the error.
+      
       this.verifying (false);
-
       throw err;
     }
   }
