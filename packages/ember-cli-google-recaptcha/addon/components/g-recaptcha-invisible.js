@@ -46,18 +46,11 @@ export default class GRecaptchaInvisibleComponent extends CaptchaComponent {
     }
   }
 
-  didVerify (response) {
-    (this.args.verified || function () {}) (response);
-  }
-
   @action
   async submit (ev) {
     ev.stopPropagation ();
     ev.preventDefault ();
 
-    console.log ('submitted');
     await this.execute ();
-
-
   }
 }
