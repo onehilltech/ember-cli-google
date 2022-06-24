@@ -39,7 +39,7 @@ export default class GRecaptchaBase extends Component {
     this.widgetId = await this.grecaptcha.render (element, this.options);
 
     // Let the subclasses know that we have rendered the recaptcha.
-    await this.didRender ();
+    await this.didRender (element);
   }
 
   get theme () {
@@ -91,7 +91,7 @@ export default class GRecaptchaBase extends Component {
     catch (err) {
       // We are no longer verifying anything. Reset the state, and then
       // rethrow the error.
-      
+
       this.verifying (false);
       throw err;
     }
@@ -99,6 +99,10 @@ export default class GRecaptchaBase extends Component {
 
   get verifying () {
     return this.args.verifying || noop;
+  }
+
+  didVerify (response) {
+
   }
 
   get verified () {
@@ -140,6 +144,7 @@ export default class GRecaptchaBase extends Component {
       this.response = await this.grecaptcha.getResponse (this.widgetId);
 
       // Let the client know we have verified the user.
+      this.didVerify (this.response);
       this.verified (this.response);
     }
     catch (err) {

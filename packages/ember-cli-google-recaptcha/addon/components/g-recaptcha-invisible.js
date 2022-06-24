@@ -1,5 +1,6 @@
 import CaptchaComponent from '../-private/g-recaptcha-base';
 import { action } from '@ember/object';
+import { isPresent } from '@ember/utils';
 
 /**
  * @class GRecaptchaInvisibleComponent
@@ -36,9 +37,27 @@ export default class GRecaptchaInvisibleComponent extends CaptchaComponent {
     }
   }
 
-  async didRender () {
-    if (this.args.execute) {
-      await this.execute ();
+  @action
+  attachToSubmit (element) {
+    const submitButton = element.querySelector ('button[type="submit"]');
+
+    if (isPresent (submitButton)) {
+      submitButton.addEventListener ('click', this.submit.bind (this), true);
     }
+  }
+
+  didVerify (response) {
+    (this.args.verified || function () {}) (response);
+  }
+
+  @action
+  async submit (ev) {
+    ev.stopPropagation ();
+    ev.preventDefault ();
+
+    console.log ('submitted');
+    await this.execute ();
+
+
   }
 }

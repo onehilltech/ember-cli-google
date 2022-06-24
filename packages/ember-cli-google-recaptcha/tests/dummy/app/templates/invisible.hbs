@@ -1,9 +1,10 @@
 <p><LinkTo @route="index">Back to index</LinkTo></p>
 
-<GRecaptchaInvisible @verified={{this.verified}}
-                     @expired={{this.expired}}
-                     @reset={{this.reset}}
-                     @execute={{this.execute}} />
+<GRecaptchaInvisible @verified={{this.verified}} @reset={{this.reset}}>
+  <form>
+    <button type="submit">Submit</button>
+  </form>
+</GRecaptchaInvisible>
 
 {{#if this.response}}
   <p>Response: {{this.response}}</p>
