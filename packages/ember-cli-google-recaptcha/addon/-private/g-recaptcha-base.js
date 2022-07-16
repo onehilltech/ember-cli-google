@@ -143,8 +143,10 @@ export default class GRecaptchaBase extends Component {
     try {
       this.response = await this.grecaptcha.getResponse (this.widgetId);
 
-      // Let the client know we have verified the user.
+      // Let the subclass know we have verified the response.
       this.didVerify (this.response);
+
+      // Let the client know we have verified the user.
       this.verified (this.response);
     }
     catch (err) {
