@@ -51,6 +51,10 @@ export default class GRecaptchaInvisibleComponent extends CaptchaComponent {
     ev.stopPropagation ();
     ev.preventDefault ();
 
+    if (isPresent (this.response)) {
+      await this.reset ();
+    }
+
     await this.execute ();
   }
 }
