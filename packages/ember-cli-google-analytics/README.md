@@ -25,7 +25,7 @@ let ENV = {
 }
 ```
 
-### Universal Analytics
+### Universal Analytics (deprecated by Google)
 
 ```javascript
 
