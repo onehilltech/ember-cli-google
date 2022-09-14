@@ -42,5 +42,30 @@ let ENV = {
 }
 ```
 
+### Sending custom events to Google Analytics
+
+You can easily send custom events to Google Analytics by inject the `gtag` service, and
+calling the `event(name, params)` method. Here is an example of tracking the search term from an input
+field.
+
+```javascript
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+
+class SearchComponent extends Component {
+  @service
+  gtag;
+  
+  @action
+  searching (ev) {
+    const { target } = ev;
+    
+    this.gtag.event ('searching', { term: target.value } );
+  }
+}
+
+```
+
 Happy Coding!
 
