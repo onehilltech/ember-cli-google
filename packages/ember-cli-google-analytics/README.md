@@ -54,6 +54,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 class SearchComponent extends Component {
+  // Inject the Google Tag Manager service into our component.
   @service
   gtag;
   
@@ -61,6 +62,7 @@ class SearchComponent extends Component {
   searching (ev) {
     const { target } = ev;
     
+    // Send an event to Google Analytics.
     this.gtag.event ('searching', { term: target.value } );
   }
 }
