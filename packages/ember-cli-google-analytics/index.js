@@ -5,11 +5,10 @@ module.exports = {
 
   contentFor (type, config) {
     if (type === 'head') {
-      if (config.environment === 'production') {}
       if (!!config['ember-cli-google'] && !!config['ember-cli-google'].analytics) {
-        let { version, measurementId } = config['ember-cli-google'].analytics;
+        const { version, measurementId, forceEnable = false } = config['ember-cli-google'].analytics;
 
-        if (version === 'v4') {
+        if (version === 'v4' && (config.environment === 'production' || forceEnable)) {
           return [
             `<script async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`,
             "<script>",
