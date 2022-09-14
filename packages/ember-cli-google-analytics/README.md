@@ -64,7 +64,6 @@ class SearchComponent extends Component {
     this.gtag.event ('searching', { term: target.value } );
   }
 }
-
 ```
 
 Happy Coding!
