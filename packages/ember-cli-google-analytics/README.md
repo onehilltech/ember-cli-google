@@ -44,7 +44,7 @@ let ENV = {
 
 ### Sending custom events to Google Analytics
 
-You can easily send custom events to Google Analytics by inject the `gtag` service, and
+You can easily send custom events to Google Analytics by injecting the `gtag` service, and
 calling the `event(name, params)` method. Here is an example of tracking the search term from an input
 field.
 
