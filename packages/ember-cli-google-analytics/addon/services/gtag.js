@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
+import { getWithDefault } from '@ember/object';
 
 export default class GtagService extends Service {
   constructor () {
