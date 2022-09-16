@@ -10,13 +10,7 @@ module.exports = {
 
         if (version === 'v4' && (config.environment === 'production' || forceEnable)) {
           return [
-            `<script async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`,
-            "<script>",
-            "  window.dataLayer = window.dataLayer || [];",
-            "  function gtag(){dataLayer.push(arguments);}",
-            "  gtag('js', new Date());",
-            `  gtag('config', '${measurementId}');`,
-            "</script>"
+            `<script async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`
           ];
         }
       }
