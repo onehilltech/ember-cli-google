@@ -1,0 +1,6 @@
+<div class="g-map"
+  {{did-update this.recenter @lat @lng}}>
+  <div class="g-map__map" {{did-insert this.didInsert}}></div>
+  {{yield this.map}}
+</div>
+
