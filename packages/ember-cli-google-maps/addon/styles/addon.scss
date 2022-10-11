@@ -1,0 +1,8 @@
+.g-map {
+  display: flex;
+  flex-direction: column;
+
+  &__map {
+    flex-grow: 1;
+  }
+}

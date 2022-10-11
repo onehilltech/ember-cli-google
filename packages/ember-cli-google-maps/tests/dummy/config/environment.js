@@ -2,7 +2,7 @@
 
 const { GOOGLE_MAPS_API_KEY } = process.env;
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -25,9 +25,9 @@ module.exports = function(environment) {
     },
     'ember-cli-google': {
       maps: {
-        apiKey: GOOGLE_MAPS_API_KEY
-      }
-    }
+        apiKey: GOOGLE_MAPS_API_KEY,
+      },
+    },
   };
 
   if (environment === 'development') {

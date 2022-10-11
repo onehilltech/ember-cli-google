@@ -11,9 +11,9 @@ export default MarkerComponent.extend({
 
   icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png',
 
-  didInsertElement () {
-    this._super (...arguments);
+  didInsertElement() {
+    this._super(...arguments);
 
     // Add custom code here to initialize
-  }
+  },
 });

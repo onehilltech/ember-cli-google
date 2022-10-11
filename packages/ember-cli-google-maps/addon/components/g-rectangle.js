@@ -4,33 +4,36 @@ import MapEntity from '../mixins/map-entity';
 
 import { computed } from '@ember/object';
 
-export default Component.extend (MapEntity, {
+export default Component.extend(MapEntity, {
   _rectangle: null,
 
-  getEntity () {
+  getEntity() {
     return this._rectangle;
   },
 
-  createEntity () {
+  createEntity() {
     let rectangleOptions = this.rectangleOptions;
-    this._rectangle = new google.maps.Rectangle (rectangleOptions);
+    this._rectangle = new google.maps.Rectangle(rectangleOptions);
 
     return this._rectangle;
   },
 
-  rectangleOptions: computed ('{bounds,clickable,draggable,editable,fillColor,fillOpacity,stokeColor,strokeOpacity,strokePosition,strokeWeight,zIndex}', function () {
-    return this.getProperties ([
-      'bounds',
-      'clickable',
-      'draggable',
-      'editable',
-      'fillColor',
-      'fillOpacity',
-      'stokeColor',
-      'strokeOpacity',
-      'strokePosition',
-      'strokeWeight',
-      'zIndex'
-    ]);
-  })
+  rectangleOptions: computed(
+    '{bounds,clickable,draggable,editable,fillColor,fillOpacity,stokeColor,strokeOpacity,strokePosition,strokeWeight,zIndex}',
+    function () {
+      return this.getProperties([
+        'bounds',
+        'clickable',
+        'draggable',
+        'editable',
+        'fillColor',
+        'fillOpacity',
+        'stokeColor',
+        'strokeOpacity',
+        'strokePosition',
+        'strokeWeight',
+        'zIndex',
+      ]);
+    }
+  ),
 });

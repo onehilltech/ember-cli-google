@@ -7,10 +7,10 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
-export default Component.extend (MapEntity, {
+export default Component.extend(MapEntity, {
   classNames: ['g-heatmap-layer'],
 
-  gMaps: service (),
+  gMaps: service(),
 
   _heatMap: null,
 
@@ -40,41 +40,51 @@ export default Component.extend (MapEntity, {
   // The opacity of the heatmap, expressed as a number between 0 and 1.
   opacity: undefined,
 
-  didInsertElement () {
-    this._super (...arguments);
+  didInsertElement() {
+    this._super(...arguments);
 
-    this.gMaps.include ('visualization');
+    this.gMaps.include('visualization');
   },
 
-  didUpdateAttrs () {
-    this._super (...arguments);
+  didUpdateAttrs() {
+    this._super(...arguments);
 
     let data = this.heatMapData;
-    this._heatMap.setData (data);
+    this._heatMap.setData(data);
   },
 
-  createEntity () {
-    this._super (...arguments);
+  createEntity() {
+    this._super(...arguments);
 
-    let options = this.getProperties (['dissipating','gradient','maxIntensity','radius','opacity']);
+    let options = this.getProperties([
+      'dissipating',
+      'gradient',
+      'maxIntensity',
+      'radius',
+      'opacity',
+    ]);
     options.data = this.heatMapData;
 
-    this._heatMap = new google.maps.visualization.HeatmapLayer (options);
+    this._heatMap = new google.maps.visualization.HeatmapLayer(options);
 
     return this._heatMap;
   },
 
-  getEntity () {
+  getEntity() {
     return this._heatMap;
   },
 
-  heatMapData: computed ('data.[]', function () {
-    let data = this.getWithDefault ('data', []);
+  heatMapData: computed('data.[]', function () {
+    let data = this.data === undefined ? [] : this.data;
 
-    if (isEmpty (data)) {
+    if (isEmpty(data)) {
       return [];
     }
 
-    return data.map (({lat, lng, weight}) => weight ? {location: new google.maps.LatLng (lat, lng), weight } : new google.maps.LatLng (lat, lng));
-  })
+    return data.map(({ lat, lng, weight }) =>
+      weight
+        ? { location: new google.maps.LatLng(lat, lng), weight }
+        : new google.maps.LatLng(lat, lng)
+    );
+  }),
 });

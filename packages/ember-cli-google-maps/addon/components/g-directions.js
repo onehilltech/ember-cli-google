@@ -8,7 +8,7 @@ import { readOnly, equal } from '@ember/object/computed';
 
 import MapEntity from '../mixins/map-entity';
 
-export default Component.extend (MapEntity, {
+export default Component.extend(MapEntity, {
   classNames: ['g-directions'],
 
   mode: 'DRIVING',
@@ -37,46 +37,45 @@ export default Component.extend (MapEntity, {
 
   _renderer: null,
 
-  map: computed (function () {
-    return this.parentView.parentView.map;
-  }).volatile (),
+  map: computed.reads('parentView.parentView.map').volatile(),
 
-  didInsertElement () {
-    this._super (...arguments);
+  didInsertElement() {
+    this._super(...arguments);
 
     let gMarker = this.parentView;
-    assert ('The parent of g-directions must be a g-marker component.', gMarker.element.classList.contains ('g-marker'));
+    assert(
+      'The parent of g-directions must be a g-marker component.',
+      gMarker.element.classList.contains('g-marker')
+    );
   },
 
-  _mapLoading () {
+  _mapLoading() {},
 
+  _mapLoaded() {
+    this._renderDirections();
   },
 
-  _mapLoaded () {
-    this._renderDirections ();
-  },
-
-  getEntity () {
+  getEntity() {
     return this._renderer;
   },
 
-  createEntity () {
+  createEntity() {
     let service = this.directionsService;
     const { origin, destination, mode: travelMode, gMap, renderOptions } = this;
 
     // Delete the old directions.
 
-    this._removeDirections ();
-    this._renderer = gMap.createDirectionsRenderer (renderOptions);
+    this._removeDirections();
+    this._renderer = gMap.createDirectionsRenderer(renderOptions);
 
-    service.route ({ origin, destination, travelMode} , (response, status) => {
+    service.route({ origin, destination, travelMode }, (response, status) => {
       if (status === 'OK') {
-        this._renderer.setDirections (response);
+        this._renderer.setDirections(response);
       } else {
-        let error = (this.error);
+        let error = this.error;
 
-        if (!!error) {
-          error (status, response);
+        if (error) {
+          error(status, response);
         }
       }
     });
@@ -84,49 +83,53 @@ export default Component.extend (MapEntity, {
     return this._renderer;
   },
 
-  _removeDirections () {
-    if (!!this._renderer) {
-      this._renderer.setMap (null);
+  _removeDirections() {
+    if (this._renderer) {
+      this._renderer.setMap(null);
       this._renderer = null;
     }
   },
 
-  renderOptions: computed ('{draggable,hideRouteList,markerOptions,panel,polylineOptions,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}', function (){
-    return this.getProperties ([
-      'draggable',
-      'hideRouteList',
-      'markerOptions',
-      'panel',
-      'preserveViewport',
-      'polylineOptions',
-      'routeIndex',
-      'suppressBicyclingLayer',
-      'suppressInfoWindows',
-      'suppressMarkers',
-      'suppressPolylines'
-    ]);
-  }),
+  renderOptions: computed(
+    '{draggable,hideRouteList,markerOptions,panel,polylineOptions,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}',
+    function () {
+      return this.getProperties([
+        'draggable',
+        'hideRouteList',
+        'markerOptions',
+        'panel',
+        'preserveViewport',
+        'polylineOptions',
+        'routeIndex',
+        'suppressBicyclingLayer',
+        'suppressInfoWindows',
+        'suppressMarkers',
+        'suppressPolylines',
+      ]);
+    }
+  ),
 
-  isOrigin: equal ('direction', 'from'),
-  isDestination: equal ('direction', 'to'),
+  isOrigin: equal('direction', 'from'),
+  isDestination: equal('direction', 'to'),
 
-  origin: computed ('isOrigin', 'location', 'gMarker.position', function () {
+  origin: computed('isOrigin', 'location', 'gMarker.position', function () {
     const { isOrigin, location } = this;
-    return isOrigin ? location : this.get ('gMarker.position');
+    return isOrigin ? location : this.get('gMarker.position');
   }),
 
-  destination: computed ('isDestination', 'location', 'gMarker.position', function () {
-    const { isDestination, location } = this;
-    return isDestination ? location : this.get ('gMarker.position');
-  }),
+  destination: computed(
+    'isDestination',
+    'location',
+    'gMarker.position',
+    function () {
+      const { isDestination, location } = this;
+      return isDestination ? location : this.get('gMarker.position');
+    }
+  ),
 
-  gMarker: computed (function () {
-    return this.parentView;
-  }),
+  gMarker: computed.reads('parentView'),
 
-  gMap: computed (function () {
-    return this.gMarker.parentView;
-  }),
+  gMap: computed.reads('gMarker.parentView'),
 
-  directionsService: readOnly ('gMap.directionsService')
+  directionsService: readOnly('gMap.directionsService'),
 });
