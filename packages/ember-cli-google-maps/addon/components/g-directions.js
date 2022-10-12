@@ -1,74 +1,55 @@
 /* global google */
 
-import Component from '@ember/component';
-import { assert } from '@ember/debug';
+import MapEntity from '../lib/entity';
+import getOptions from '../lib/get-options';
+import { defaults } from 'lodash';
 
-import { computed } from '@ember/object';
-import { readOnly, equal, reads } from '@ember/object/computed';
+export default class GDirectionsEntity extends MapEntity {
+  get mode () {
+    return this.args.mode || this.args.travelMode || 'DRIVING';
+  }
 
-import MapEntity from '../mixins/map-entity';
+  get options () {
+    const options = getOptions (this.args, [
+      'draggable',
+      'hideRouteList',
+      'markerOptions',
+      'panel',
+      'preserveViewport',
+      'polylineOptions',
+      'routeIndex',
+      'suppressBicyclingLayer',
+      'suppressInfoWindows',
+      'suppressMarkers',
+      'suppressPolylines',
+    ]);
+    
+    return defaults (options, {
+      draggable: false,
+      hideRouteList: false,
+      preserveViewport: false,
+      routeIndex: 0,
+      suppressBicyclingLayer: true,
+      suppressInfoWindows: true,
+      suppressMarkers: false,
+      suppressPolylines: false,
+    })
 
-export default Component.extend(MapEntity, {
-  classNames: ['g-directions'],
+  }
 
-  mode: 'DRIVING',
-
-  // render options
-
-  draggable: false,
-
-  hideRouteList: false,
-
-  panel: null,
-
-  preserveViewport: false,
-
-  routeIndex: 0,
-
-  suppressBicyclingLayer: true,
-
-  suppressInfoWindows: true,
-
-  suppressMarkers: false,
-
-  suppressPolylines: false,
-
-  markerOptions: null,
-
-  _renderer: null,
-
-  map: reads('parentView.parentView.map').volatile(),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    let gMarker = this.parentView;
-    assert(
-      'The parent of g-directions must be a g-marker component.',
-      gMarker.element.classList.contains('g-marker')
-    );
-  },
-
-  _mapLoading() {},
-
-  _mapLoaded() {
-    this._renderDirections();
-  },
-
-  getEntity() {
-    return this._renderer;
-  },
-
-  createEntity() {
-    let service = this.directionsService;
-    const { origin, destination, mode: travelMode, gMap, renderOptions } = this;
-
+  createEntity () {
     // Delete the old directions.
 
-    this._removeDirections();
-    this._renderer = gMap.createDirectionsRenderer(renderOptions);
+    this._removeDirections ();
+    this._renderer = this.map.createDirectionsRenderer (this.options);
 
-    service.route({ origin, destination, travelMode }, (response, status) => {
+    const routeOptions = {
+      origin: this.origin,
+      destination: this.destination,
+      travelMode: this.mode
+    };
+
+    this.map.directions.route (routeOptions, (response, status) => {
       if (status === 'OK') {
         this._renderer.setDirections(response);
       } else {
@@ -81,55 +62,20 @@ export default Component.extend(MapEntity, {
     });
 
     return this._renderer;
-  },
+  }
 
   _removeDirections() {
     if (this._renderer) {
       this._renderer.setMap(null);
       this._renderer = null;
     }
-  },
+  }
 
-  renderOptions: computed(
-    '{draggable,hideRouteList,markerOptions,panel,polylineOptions,preserveViewport,routeIndex,suppressBicyclingLayer,suppressInfoWindows,suppressMarkers,suppressPolylines}',
-    function () {
-      return this.getProperties([
-        'draggable',
-        'hideRouteList',
-        'markerOptions',
-        'panel',
-        'preserveViewport',
-        'polylineOptions',
-        'routeIndex',
-        'suppressBicyclingLayer',
-        'suppressInfoWindows',
-        'suppressMarkers',
-        'suppressPolylines',
-      ]);
-    }
-  ),
+  get origin () {
+    return this.args.origin;
+  }
 
-  isOrigin: equal('direction', 'from'),
-  isDestination: equal('direction', 'to'),
-
-  origin: computed('isOrigin', 'location', 'gMarker.position', function () {
-    const { isOrigin, location } = this;
-    return isOrigin ? location : this.get('gMarker.position');
-  }),
-
-  destination: computed(
-    'isDestination',
-    'location',
-    'gMarker.position',
-    function () {
-      const { isDestination, location } = this;
-      return isDestination ? location : this.get('gMarker.position');
-    }
-  ),
-
-  gMarker: reads('parentView'),
-
-  gMap: reads('gMarker.parentView'),
-
-  directionsService: readOnly('gMap.directionsService'),
-});
+  get destination (){
+    return this.args.destination;
+  }
+}

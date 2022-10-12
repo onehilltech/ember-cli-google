@@ -142,7 +142,7 @@ export default class GMap extends Component {
     (this.mapClick || noOp)(ev);
   }
 
-  get directions() {
+  get directions () {
     if (this._directions) {
       return this._directions;
     }
@@ -151,7 +151,7 @@ export default class GMap extends Component {
     return this._directions;
   }
 
-  createDirectionsRenderer(options) {
+  createDirectionsRenderer (options) {
     const renderer = new google.maps.DirectionsRenderer(options);
     renderer.setMap (this.map);
 

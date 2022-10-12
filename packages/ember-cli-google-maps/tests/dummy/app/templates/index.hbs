@@ -18,12 +18,9 @@
   {{!-- Coachella, CA --}}
   <GRectangle @bounds={{hash north=33.685 south=33.671 east=-116.234 west=-116.251}} />
 
-  <!-- GCustomMarker @position={{hash lat=lat lng=lng}} @truck={{truck}}>
-    {{#if showDirections}}
-      <GDirections @direction="to" @location="San Jose, CA" @draggable={{true}} />
-      <GDirections @direction="to" @location="Sacramento, CA" @suppressMarkers={{true}} />
-    {{/if}}
-  </GCustomMarker -->
+  <!-- GCustomMarker @position={{hash lat=lat lng=lng}} @truck={{truck}} / -->
 
   <GHeatmapLayer @data={{this.heatMapData}} />
+
+  <GDirections @origin={{hash lat=37.774546 lng=-122.433523}} @destination="San Jose, CA" @draggable="true" />
 </GMap>
