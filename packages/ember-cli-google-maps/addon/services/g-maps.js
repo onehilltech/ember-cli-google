@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 
 import { isPresent, isNone, isEmpty } from '@ember/utils';
-import { get } from '@ember/object';
+import { getWithDefault } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { A } from '@ember/array';
 
@@ -9,13 +9,9 @@ export default class GMapService extends Service {
   constructor() {
     super(...arguments);
 
-    Object.defineProperty (this, '_includes', { value: A (), enumerable: false, writable: false, configurable: false });
-    Object.defineProperty (this, '_maps', { value: new WeakMap (), enumerable: false, writable: false, configurable: false });
-  }
-
-  get apiKey() {
     const ENV = getOwner(this).resolveRegistration('config:environment');
-    const apiKey = get(ENV, 'ember-cli-google.maps.apiKey');
+    const config = getWithDefault (ENV, 'ember-cli-google.maps', {});
+    const { apiKey, libraries = [] } = config;
 
     if (isEmpty(apiKey)) {
       throw new Error(
@@ -23,7 +19,9 @@ export default class GMapService extends Service {
       );
     }
 
-    return apiKey;
+    Object.defineProperty (this, '_includes', { value: A (libraries), enumerable: false, writable: false, configurable: false });
+    Object.defineProperty (this, '_maps', { value: new WeakMap (), enumerable: false, writable: false, configurable: false });
+    Object.defineProperty (this, 'apiKey', { value: apiKey, enumerable: false, writable: false, configurable: false });
   }
 
   /**
@@ -32,7 +30,7 @@ export default class GMapService extends Service {
    * @param library
    */
   include(library) {
-    this._includes.pushObject(library);
+    this._includes.addObject (library);
   }
 
   /**

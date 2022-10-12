@@ -47,6 +47,10 @@ export default class MapEntity extends Component {
     return this.gMaps.mapFor (this.parentElement);
   }
 
+  get clickable () {
+    return true;
+  }
+
   /**
    * Create the entity for the specified map.
    *
@@ -58,13 +62,15 @@ export default class MapEntity extends Component {
 
     entity.setMap (gMap);
 
-    entity.addListener ('click', (ev) => {
-      const event = new CustomEvent (`${this.eventType}:click`, {
-        detail: Object.assign ({}, ev, { entity })
-      });
+    if (this.clickable) {
+      entity.addListener ('click', (ev) => {
+        const event = new CustomEvent (`${this.eventType}:click`, {
+          detail: Object.assign ({}, ev, { entity })
+        });
 
-      this.parentElement.dispatchEvent (event);
-    });
+        this.parentElement.dispatchEvent (event);
+      });
+    }
   }
 
   get isCreated () {

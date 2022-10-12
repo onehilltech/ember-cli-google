@@ -3,8 +3,6 @@
 import MapEntity from '../lib/entity';
 import getOptions from '../lib/get-options';
 
-function noOp() {}
-
 export default class GMarkerEntity extends MapEntity {
   get options () {
     return getOptions (this.args, [
