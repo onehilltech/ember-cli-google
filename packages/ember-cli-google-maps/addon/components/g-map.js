@@ -120,9 +120,11 @@ export default class GMap extends Component {
   }
 
   @action
-  recenter(element, [lat, lng]) {
+  recenter(element, [center]) {
+    const { lat, lng } = center;
+
     if (isPresent(this.map)) {
-      this.map.setCenter(new google.maps.LatLng(lat, lng));
+      this.map.setCenter (new google.maps.LatLng(lat, lng));
     }
   }
 

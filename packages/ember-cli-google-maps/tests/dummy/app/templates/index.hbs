@@ -1,9 +1,8 @@
 <div class="map-controls">
   <div class="map-controls--location">
-    <div>Latitude: <Input @value={{this.lat}} /></div>
-    <div>Longitude: <Input @value={{this.lng}} /></div>
+    <div>Latitude: <Input @value={{this.latInput}} /></div>
+    <div>Longitude: <Input @value={{this.lngInput}} /></div>
   </div>
-
 
   {{#if showDirections}}
     <button type="button" {{action (mut showDirections) false}}>Hide Directions</button>
@@ -12,13 +11,12 @@
   {{/if}}
 </div>
 
-<GMap @center={{hash lat=37.774546 lng=-122.433523}} @zoom={{13}} @mapClick={{action "mapClick"}}>
+<GMap @center={{hash lat=this.lat lng=this.lng}} @zoom={{13}} @mapClick={{action "mapClick"}}>
   <GMarker @position={{hash lat=37.774546 lng=-122.433523}} />
   <GCircle @center={{hash lat=37.774546 lng=-122.433523}} @radius={{1000}} />
 
   {{!-- Coachella, CA --}}
-  <GRectangle
-      @bounds={{hash north=33.685 south=33.671 east=-116.234 west=-116.251}} />
+  <GRectangle @bounds={{hash north=33.685 south=33.671 east=-116.234 west=-116.251}} />
 
   <!-- GCustomMarker @position={{hash lat=lat lng=lng}} @truck={{truck}}>
     {{#if showDirections}}

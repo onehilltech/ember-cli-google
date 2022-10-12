@@ -27,7 +27,6 @@ export default class IndexController extends Controller {
     return this.lng;
   }
 
-
   heatMapData = Object.freeze([
     { lat: 37.782, lng: -122.447, weight: 1 },
     { lat: 37.782, lng: -122.445 },
