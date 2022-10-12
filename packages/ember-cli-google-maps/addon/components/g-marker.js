@@ -1,50 +1,13 @@
 /* global google */
 
-import Component from '@ember/component';
-import MapEntity from '../mixins/map-entity';
-
-import { computed } from '@ember/object';
+import MapEntity from '../lib/entity';
+import getOptions from '../lib/get-options';
 
 function noOp() {}
 
-export default Component.extend(MapEntity, {
-  classNames: ['g-marker'],
-
-  title: null,
-
-  _marker: null,
-
-  /// The marker is draggable.
-  draggable: false,
-
-  /// Animate the marker.
-  animation: null,
-
-  getEntity() {
-    return this._marker;
-  },
-
-  didUpdateAttrs() {
-    this._super(...arguments);
-
-    let animation = this.animationType;
-    this._marker.setAnimation(animation);
-
-    const { lat, lng } = this.position;
-
-    if (
-      this._marker.position.lat() !== lat ||
-      this._marker.position.lng() !== lng
-    ) {
-      const latLng = new google.maps.LatLng(lat, lng);
-      this._marker.setPosition(latLng);
-    }
-  },
-
-  createEntity() {
-    this._super(...arguments);
-
-    let options = this.getProperties([
+export default class GMarkerEntity extends MapEntity {
+  get options () {
+    return getOptions (this.args, [
       'position',
       'title',
       'draggable',
@@ -53,22 +16,26 @@ export default Component.extend(MapEntity, {
       'shape',
       'zIndex',
     ]);
+  }
+
+  createEntity () {
+    const options = this.options;
     options.animation = this.animationType;
 
-    this._marker = new google.maps.Marker(options);
-    this._marker.addListener('click', this.didClick.bind(this));
+    const marker = new google.maps.Marker (options);
+    marker.addListener('click', this.didClick.bind(this));
 
-    return this._marker;
-  },
+    return marker;
+  }
 
   /**
    * The marker was clicked.
    */
   didClick() {
     (this.click === undefined ? noOp : this.click)();
-  },
+  }
 
-  animationType: computed('animation', function () {
+  get animationType () {
     const animation = this.animation;
 
     if (animation === 'drop') {
@@ -78,5 +45,5 @@ export default Component.extend(MapEntity, {
     } else {
       return null;
     }
-  }),
-});
+  }
+}
