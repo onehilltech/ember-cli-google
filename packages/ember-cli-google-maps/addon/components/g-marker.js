@@ -18,21 +18,19 @@ export default class GMarkerEntity extends MapEntity {
     ]);
   }
 
+  get eventType () {
+    return 'GMarker';
+  }
+
   createEntity () {
     const options = this.options;
     options.animation = this.animationType;
 
-    const marker = new google.maps.Marker (options);
-    marker.addListener('click', this.didClick.bind(this));
-
-    return marker;
+    return new google.maps.Marker (options);
   }
 
-  /**
-   * The marker was clicked.
-   */
-  didClick() {
-    (this.click === undefined ? noOp : this.click)();
+  get animation () {
+    return this.args.animation || 'drop';
   }
 
   get animationType () {

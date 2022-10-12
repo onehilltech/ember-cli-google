@@ -12,6 +12,10 @@ export default class MapEntity extends Component {
   @tracked
   show = true;
 
+  get eventType () {
+    return 'GEntity';
+  }
+
   @action
   didInsert (element) {
     element.classList.add ('g-map__entity');
@@ -48,11 +52,19 @@ export default class MapEntity extends Component {
    *
    * @param map         The target Google Map object.
    */
-  create (map) {
+  create (gMap) {
     const entity = this.createEntity ();
     Object.defineProperty (this, 'entity', { value: entity, writable: false, configurable: false });
 
-    entity.setMap (map);
+    entity.setMap (gMap);
+
+    entity.addListener ('click', (ev) => {
+      const event = new CustomEvent (`${this.eventType}:click`, {
+        detail: Object.assign ({}, ev, { entity })
+      });
+
+      this.parentElement.dispatchEvent (event);
+    });
   }
 
   get isCreated () {

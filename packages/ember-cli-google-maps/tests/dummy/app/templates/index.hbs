@@ -11,7 +11,7 @@
   {{/if}}
 </div>
 
-<GMap @center={{hash lat=this.lat lng=this.lng}} @zoom={{13}} @mapClick={{action "mapClick"}}>
+<GMap @center={{hash lat=this.lat lng=this.lng}} @zoom={{13}} {{on "GMarker:click" this.click}}>
   <GMarker @position={{hash lat=37.774546 lng=-122.433523}} />
   <GCircle @center={{hash lat=37.774546 lng=-122.433523}} @radius={{1000}} />
 

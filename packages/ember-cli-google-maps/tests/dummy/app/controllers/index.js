@@ -45,8 +45,8 @@ export default class IndexController extends Controller {
   ]);
 
   @action
-  mapClick(ev) {
-    console.log(ev);
+  click(ev) {
+    console.log (ev);
   }
 
   @action
