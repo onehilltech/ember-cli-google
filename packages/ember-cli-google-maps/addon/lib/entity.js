@@ -66,4 +66,9 @@ export default class MapEntity extends Component {
       this.entity.setMap (null);
     }
   }
+
+  @action
+  recenter (element, [center]) {
+    this.entity.setCenter (center);
+  }
 }
