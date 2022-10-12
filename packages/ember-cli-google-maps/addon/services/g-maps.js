@@ -9,7 +9,8 @@ export default class GMapService extends Service {
   constructor() {
     super(...arguments);
 
-    this._includes = A();
+    Object.defineProperty (this, '_includes', { value: A (), enumerable: false, writable: false, configurable: false });
+    Object.defineProperty (this, '_maps', { value: new WeakMap (), enumerable: false, writable: false, configurable: false });
   }
 
   get apiKey() {
@@ -56,7 +57,7 @@ export default class GMapService extends Service {
       // easier and faster to load the script manually by injecting the script tag
       // into the head.
 
-      const libraries = this._includes.toArray().join(',');
+      const libraries = this._includes.join(',');
       const script = document.createElement('script');
       script.onerror = (err) => reject(err);
 
@@ -68,10 +69,39 @@ export default class GMapService extends Service {
         script.src += `&libraries=${libraries}`;
       }
 
-      const head = document.querySelector('head');
-      head.appendChild(script);
+      document.head.appendChild (script);
     });
 
     return this._instance;
   }
+
+  /**
+   * Register a map with the service.
+   *
+   * @param element
+   * @param map
+   */
+  register (element, map) {
+    this._maps.set (element, map);
+  }
+
+  /**
+   * Unregister a map with the service.
+   *
+   * @param element
+   */
+  unregister (element) {
+    this._maps.delete (element);
+  }
+
+  /**
+   * Get the map for the element.
+   * *
+   * @param element
+   * @return {*}
+   */
+  mapFor (element) {
+    return this._maps.get (element);
+  }
+
 }

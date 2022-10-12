@@ -1,3 +1,4 @@
+import { reads } from '@ember/object/computed';
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
@@ -76,7 +77,7 @@ export default Mixin.create({
     this._showEntity(entity);
   },
 
-  map: computed.reads('parentView.map').volatile(),
+  map: reads('parentView.map').volatile(),
 
   /**
    * Either show or hide the entity.

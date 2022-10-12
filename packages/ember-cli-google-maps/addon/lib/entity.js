@@ -3,95 +3,67 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isPresent } from '@ember/utils';
+import { inject as service } from '@ember/service';
 
 export default class MapEntity extends Component {
+  @service
+  gMaps;
+
   @tracked
   show = true;
 
   @action
-  didInsert(element) {
-    element.classList.add('g-entity');
-  }
+  didInsert (element) {
+    element.classList.add ('g-map__entity');
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
+    // Each element must have a parent map. Let's locate the parent element, and then
+    // use that element to locate the map.
+    let gMapElement = element.parentElement;
 
-    this.parentView.on('loading', this, '_mapLoading');
-    this.parentView.on('loaded', this, '_mapLoaded');
-
-    const map = this.map;
-
-    if (isPresent(map)) {
-      const entity = this.createEntity();
-      this._showEntity(entity);
+    while (!!gMapElement && !gMapElement.classList.contains ('g-map')) {
+      gMapElement = gMapElement.parentElement;
     }
-  }
 
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-
-    this.parentView.off('loading', this, '_mapLoading');
-    this.parentView.off('loaded', this, '_mapLoaded');
-
-    let entity = this.getEntity();
-
-    if (isPresent(entity)) {
-      entity.setMap(null);
+    if (!gMapElement) {
+      throw new Error ('The Google Maps entity must be a child of the GMap component.');
     }
-  }
 
-  didUpdateAttr() {
-    let entity = this.getEntity();
+    Object.defineProperty (this, 'parentElement', { value: gMapElement, writable: false, configurable: false, enumerable: false });
 
-    if (isPresent(entity)) {
-      this._showEntity(entity);
-    }
+    // Register this entity with the map.
+    this.map.registerEntity (this);
   }
 
   /**
-   * Get the implementation for the entity.
-   */
-  getEntity() {}
-
-  willLoadMap() {}
-
-  didLoadMap(/* map */) {}
-
-  createEntity() {}
-
-  _mapLoading() {
-    this.willLoadMap();
-  }
-
-  /**
-   * The map has been loaded.
+   * Get the map component that owns this entity.
    *
-   * @param map
-   * @private
+   * @return {*}
    */
-  _mapLoaded(map) {
-    // Notify the subclass the map has been loaded.
-
-    this.didLoadMap(map);
-
-    // Instruct the subclass to create its entity. We will then show the entity.
-    const entity = this.createEntity();
-    this._showEntity(entity);
+  get map () {
+    return this.gMaps.mapFor (this.parentElement);
   }
 
   /**
-   * Either show or hide the entity.
+   * Create the entity for the specified map.
    *
-   * @param entity
-   * @private
+   * @param map         The target Google Map object.
    */
-  _showEntity(entity) {
-    if (isPresent(entity)) {
-      if (this.show) {
-        entity.setMap(this.map);
-      } else {
-        entity.setMap(null);
-      }
+  create (map) {
+    const entity = this.createEntity ();
+    Object.defineProperty (this, 'entity', { value: entity, writable: false, configurable: false });
+
+    entity.setMap (map);
+  }
+
+  get isCreated () {
+    return !!this.entity;
+  }
+
+  willDestroy () {
+    super.willDestroy ();
+
+    if (isPresent (this.entity)) {
+      this.entity.setMap (null);
     }
   }
 }

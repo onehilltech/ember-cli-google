@@ -2,9 +2,10 @@
 
 import Component from '@glimmer/component';
 
-import { action, getWithDefault } from '@ember/object';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { isPresent } from '@ember/utils';
+import getOptions from '../lib/get-options';
 
 const MAP_OPTIONS = Object.freeze([
   'backgroundColor',
@@ -84,11 +85,37 @@ export default class GMap extends Component {
     return this.args.scrollwheel === undefined ? true : this.args.scrollwheel;
   }
 
+  constructor () {
+    super (...arguments);
+
+    Object.defineProperty (this, '_entities', { value: [], configurable: false, writable: false, enumerable: false });
+  }
+
   @action
-  didInsert(gMapElement) {
+  didInsert (gMapElement) {
+    // Register the element/component with the service. The element will
+    // be used to locate this component by entities.
+
+    this.gMaps.register (gMapElement.parentElement, this);
+    Object.defineProperty (this, '_element', { value: gMapElement.parentElement, configurable: false, writable: false, enumerable: false});
+
     this.gMaps
       .getInstance()
-      .then(() => this.didInitMap(gMapElement))
+      .then(() => {
+        // Create the map.
+        this.map = new google.maps.Map(gMapElement, this.options);
+        this.map.addListener('click', this.didMapClick.bind(this));
+
+        // Make sure all entities have been created. This happens when the script
+        // loaded the first time and the entity components are created before the script
+        // has been loaded.
+
+        this._entities.forEach (entity => {
+          if (!entity.isCreated) {
+            entity.create (this.map);
+          }
+        })
+      })
       .catch((err) => console.error(err));
   }
 
@@ -100,22 +127,13 @@ export default class GMap extends Component {
   }
 
   get options() {
-    const options = {};
-
-    MAP_OPTIONS.forEach((option) => {
-      const value = this.args[option];
-
-      if (isPresent(value)) {
-        options[option] = value;
-      }
-    });
-
-    return options;
+    return getOptions (this.args, MAP_OPTIONS);
   }
 
-  didInitMap(gMapElement) {
-    this.map = new google.maps.Map(gMapElement, this.options);
-    this.map.addListener('click', this.didMapClick.bind(this));
+  willDestroy () {
+    super.willDestroy ();
+
+    this.gMaps.unregister (this._element);
   }
 
   didMapClick(ev) {
@@ -133,12 +151,20 @@ export default class GMap extends Component {
 
   createDirectionsRenderer(options) {
     const renderer = new google.maps.DirectionsRenderer(options);
-    renderer.setMap(this.map);
+    renderer.setMap (this.map);
 
     return renderer;
   }
 
   get loaded() {
     return !!this.map;
+  }
+
+  registerEntity (entity) {
+    this._entities.push (entity);
+
+    if (isPresent (this.map)) {
+      entity.create (this.map);
+    }
   }
 }

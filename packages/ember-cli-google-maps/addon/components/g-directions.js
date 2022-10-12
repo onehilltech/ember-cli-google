@@ -4,7 +4,7 @@ import Component from '@ember/component';
 import { assert } from '@ember/debug';
 
 import { computed } from '@ember/object';
-import { readOnly, equal } from '@ember/object/computed';
+import { readOnly, equal, reads } from '@ember/object/computed';
 
 import MapEntity from '../mixins/map-entity';
 
@@ -37,7 +37,7 @@ export default Component.extend(MapEntity, {
 
   _renderer: null,
 
-  map: computed.reads('parentView.parentView.map').volatile(),
+  map: reads('parentView.parentView.map').volatile(),
 
   didInsertElement() {
     this._super(...arguments);
@@ -127,9 +127,9 @@ export default Component.extend(MapEntity, {
     }
   ),
 
-  gMarker: computed.reads('parentView'),
+  gMarker: reads('parentView'),
 
-  gMap: computed.reads('gMarker.parentView'),
+  gMap: reads('gMarker.parentView'),
 
   directionsService: readOnly('gMap.directionsService'),
 });
