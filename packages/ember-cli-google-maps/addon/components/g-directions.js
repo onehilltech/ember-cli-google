@@ -4,6 +4,8 @@ import MapEntity from '../lib/entity';
 import getOptions from '../lib/get-options';
 import { defaults } from 'lodash';
 
+function noOp () {}
+
 export default class GDirectionsEntity extends MapEntity {
   get mode () {
     return this.args.mode || this.args.travelMode || 'DRIVING';
@@ -53,11 +55,7 @@ export default class GDirectionsEntity extends MapEntity {
       if (status === 'OK') {
         this._renderer.setDirections(response);
       } else {
-        let error = this.error;
-
-        if (error) {
-          error(status, response);
-        }
+        (this.args.error || noOp)(status, response);
       }
     });
 
@@ -66,7 +64,7 @@ export default class GDirectionsEntity extends MapEntity {
 
   _removeDirections() {
     if (this._renderer) {
-      this._renderer.setMap(null);
+      this._renderer.setMap (null);
       this._renderer = null;
     }
   }
