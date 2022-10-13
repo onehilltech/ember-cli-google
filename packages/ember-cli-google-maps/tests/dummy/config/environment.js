@@ -2,7 +2,7 @@
 
 const { GOOGLE_MAPS_API_KEY } = process.env;
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -15,20 +15,20 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-
     'ember-cli-google': {
       maps: {
-        apiKey: GOOGLE_MAPS_API_KEY
-      }
-    }
+        apiKey: GOOGLE_MAPS_API_KEY,
+        libraries: ['visualization']
+      },
+    },
   };
 
   if (environment === 'development') {

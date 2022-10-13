@@ -1,25 +1,13 @@
-import Component from '@ember/component';
+import MapEntity from '../lib/entity';
+import getOptions from '../lib/get-options';
 
-import MapEntity from '../mixins/map-entity';
+export default class GRectangleEntity extends MapEntity {
+  createEntity() {
+    return new google.maps.Rectangle(this.options)
+  }
 
-import { computed } from '@ember/object';
-
-export default Component.extend (MapEntity, {
-  _rectangle: null,
-
-  getEntity () {
-    return this._rectangle;
-  },
-
-  createEntity () {
-    let rectangleOptions = this.rectangleOptions;
-    this._rectangle = new google.maps.Rectangle (rectangleOptions);
-
-    return this._rectangle;
-  },
-
-  rectangleOptions: computed ('{bounds,clickable,draggable,editable,fillColor,fillOpacity,stokeColor,strokeOpacity,strokePosition,strokeWeight,zIndex}', function () {
-    return this.getProperties ([
+  get options () {
+    return getOptions (this.args, [
       'bounds',
       'clickable',
       'draggable',
@@ -30,7 +18,7 @@ export default Component.extend (MapEntity, {
       'strokeOpacity',
       'strokePosition',
       'strokeWeight',
-      'zIndex'
+      'zIndex',
     ]);
-  })
-});
+  }
+};

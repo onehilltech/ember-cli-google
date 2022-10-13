@@ -1,14 +1,13 @@
 /* global google */
 
-import Component from '@ember/component';
-import layout from '../templates/components/g-map';
+import Component from '@glimmer/component';
 
-import { computed } from '@ember/object';
-import { alias, bool } from '@ember/object/computed';
-
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { isPresent } from '@ember/utils';
+import getOptions from '../lib/get-options';
 
-const MAP_OPTIONS = Object.freeze ([
+const MAP_OPTIONS = Object.freeze([
   'backgroundColor',
   'center',
   'clickableIcons',
@@ -41,91 +40,133 @@ const MAP_OPTIONS = Object.freeze ([
   'tilt',
   'zoom',
   'zoomControl',
-  'zoomControlOptions'
+  'zoomControlOptions',
 ]);
 
-function noOp () {}
+function noOp() {}
 
-export default Component.extend ({
-  layout,
+export default class GMap extends Component {
+  @service
+  gMaps;
 
-  classNames: ['g-map-component'],
+  get mapTypeId() {
+    return this.type;
+  }
 
-  type: 'roadmap',
+  get type() {
+    return this.args.type === undefined ? 'roadmap' : this.args.type;
+  }
 
-  mapTypeId: alias ('type'),
+  get clickableIcons() {
+    return this.args.clickableIcons === undefined
+      ? true
+      : this.args.clickableIcons;
+  }
 
-  gMaps: service (),
+  get disableDefaultUI() {
+    return this.args.disableDefaultUI === undefined
+      ? false
+      : this.args.disableDefaultUI;
+  }
 
-  map: undefined,
+  get gestureHandling() {
+    return this.args.gestureHandling === undefined
+      ? 'auto'
+      : this.args.gestureHandling;
+  }
 
-  clickableIcons: true,
+  get keyboardShortcuts() {
+    return this.args.keyboardShortcuts === undefined
+      ? true
+      : this.args.keyboardShortcuts;
+  }
 
-  disableDefaultUI: false,
+  get scrollwheel() {
+    return this.args.scrollwheel === undefined ? true : this.args.scrollwheel;
+  }
 
-  gestureHandling: 'auto',
+  constructor () {
+    super (...arguments);
 
-  keyboardShortcuts: true,
+    Object.defineProperty (this, '_entities', { value: [], configurable: false, writable: false, enumerable: false });
+  }
 
-  scrollwheel: true,
+  @action
+  didInsert (gMapElement) {
+    // Register the element/component with the service. The element will
+    // be used to locate this component by entities.
 
-  _directions: null,
-  _directionsDisplay: null,
+    this.gMaps.register (gMapElement.parentElement, this);
+    Object.defineProperty (this, '_element', { value: gMapElement.parentElement, configurable: false, writable: false, enumerable: false});
 
-  didInsertElement () {
-    this._super (...arguments);
+    this.gMaps
+      .getInstance()
+      .then(() => {
+        // Create the map.
+        this.map = new google.maps.Map(gMapElement, this.options);
+        this.map.addListener('click', this.didMapClick.bind(this));
 
-    this.trigger ('loading');
-    this.gMaps.getInstance ().then (this.didInitMap.bind (this));
-  },
+        // Make sure all entities have been created. This happens when the script
+        // loaded the first time and the entity components are created before the script
+        // has been loaded.
 
-  didUpdateAttrs () {
-    this._super (...arguments);
+        this._entities.forEach (entity => {
+          if (!entity.isCreated) {
+            entity.create (this.map);
+          }
+        })
+      })
+      .catch((err) => console.error(err));
+  }
 
-    this._updateCenter ();
-  },
+  @action
+  recenter(element, [center]) {
+    const { lat, lng } = center;
 
-  _updateCenter () {
-    let oldCenter = this.map.getCenter ();
-    let {lat, lng} = this.center;
-
-    if (oldCenter.lat () !== lat || oldCenter.lng () !== lng) {
-       this.map.setCenter (new google.maps.LatLng (lat, lng));
+    if (isPresent(this.map)) {
+      this.map.setCenter (new google.maps.LatLng(lat, lng));
     }
-  },
+  }
 
-  didInitMap () {
-    const options = Object.assign (this.getProperties (MAP_OPTIONS));
+  get options() {
+    return getOptions (this.args, MAP_OPTIONS);
+  }
 
-    let gMapElement = this.element.querySelector ('.g-map');
-    const map = new google.maps.Map (gMapElement, options);
+  willDestroy () {
+    super.willDestroy ();
 
-    map.addListener ('click', this.didMapClick.bind (this));
+    this.gMaps.unregister (this._element);
+  }
 
-    // Update the map attribute for the child elements.
-    this.set ('map', map);
-    this.trigger ('loaded', map);
-  },
+  didMapClick(ev) {
+    (this.mapClick || noOp)(ev);
+  }
 
-  didMapClick (ev) {
-    this.getWithDefault ('mapClick', noOp) (ev);
-  },
-
-  directionsService: computed (function () {
-    if (!!this._directions) {
+  get directions () {
+    if (this._directions) {
       return this._directions;
     }
 
-    this._directions = new google.maps.DirectionsService ();
+    this._directions = new google.maps.DirectionsService();
     return this._directions;
-  }),
+  }
 
   createDirectionsRenderer (options) {
-    let renderer = new google.maps.DirectionsRenderer (options);
+    const renderer = new google.maps.DirectionsRenderer(options);
     renderer.setMap (this.map);
 
     return renderer;
-  },
+  }
 
-  loaded: bool ('map')
-});
+  get loaded() {
+    return !!this.map;
+  }
+
+  registerEntity (entity) {
+    this._entities.push (entity);
+
+    if (isPresent (this.map)) {
+      entity.create (this.map);
+    }
+  }
+}
