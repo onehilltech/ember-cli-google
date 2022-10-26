@@ -10,7 +10,7 @@ module.exports = {
 
         if (version === 'v4' && (config.environment === 'production' || forceEnable)) {
           return [
-            `<script async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`
+            `<script defer async src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"></script>`
           ];
         }
       }
