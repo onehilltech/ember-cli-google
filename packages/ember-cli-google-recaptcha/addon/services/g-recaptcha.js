@@ -1,4 +1,4 @@
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 
 import { getOwner } from '@ember/application';
 import { get } from '@ember/object';
@@ -68,12 +68,15 @@ export default class GRecaptcha extends Service {
     return grecaptcha.getResponse (widgetId);
   }
 
+  @service
+  script;
+
   /**
    * Get the singleton instance of the underling recaptcha instance.
    *
    * @return {*}
    */
-  getInstance () {
+  async getInstance () {
     if (isPresent (this._instance)) {
       return this._instance;
     }
@@ -84,20 +87,12 @@ export default class GRecaptcha extends Service {
         return resolve ();
       }
 
-      window._grecaptcha_onload = () => resolve (window.grecaptcha);
-
       // Load the recaptcha script from Google. We do not use jQuery because it is
       // easier and faster to load the script manually by injecting the script tag
       // into the head.
-      const script = document.createElement ('script');
-      script.onerror = (err) => reject (err);
 
-      script.defer = true;
-      script.async = true;
-      script.src = 'https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit';
-
-      const head = document.querySelector ('head');
-      head.appendChild (script);
+      window._grecaptcha_onload = () => resolve (window.grecaptcha);
+      this.script.load ('https://www.google.com/recaptcha/api.js?onload=_grecaptcha_onload&render=explicit').catch (reject);
     });
 
     return this._instance;
