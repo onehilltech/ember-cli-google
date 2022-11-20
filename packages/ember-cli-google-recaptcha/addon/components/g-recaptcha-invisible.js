@@ -39,16 +39,16 @@ export default class GRecaptchaInvisibleComponent extends CaptchaComponent {
 
   @action
   attachToSubmit (element) {
-    const submitButton = element.querySelector ('button[type="submit"]');
+    const form = element.querySelector ('form');
 
-    if (isPresent (submitButton)) {
-      submitButton.addEventListener ('click', this.submit.bind (this), true);
+    if (isPresent (form)) {
+      form.addEventListener ('submit', this.submit.bind (this), true);
     }
   }
 
   @action
   async submit (ev) {
-    ev.stopPropagation ();
+    // Prevent the default behavior of the form, which is to refresh the page.
     ev.preventDefault ();
 
     if (isPresent (this.response)) {
