@@ -1,5 +1,5 @@
 <div class="g-recaptcha-invisible"
-  {{did-insert this.attachToSubmit}}
+  {{on "submit" this.submit}}
   {{did-update this.run @execute @reset}}>
   {{yield}}
   <div class="g-recaptcha g-recaptcha--invisible" {{did-insert this.didInsert}}></div>
