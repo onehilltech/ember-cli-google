@@ -18,6 +18,9 @@ export default class MapEntity extends Component {
 
   @action
   didInsert (element) {
+    // Store the element for this entity. We need this for sending events.
+    Object.defineProperty (this, 'entityElement', { value: element, writable: false, configurable: false });
+
     element.classList.add ('g-map__entity');
 
     // Each element must have a parent map. Let's locate the parent element, and then
@@ -68,7 +71,7 @@ export default class MapEntity extends Component {
           detail: Object.assign ({}, ev, { entity })
         });
 
-        this.parentElement.dispatchEvent (event);
+        this.entityElement.dispatchEvent (event);
       });
     }
   }
