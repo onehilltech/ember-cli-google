@@ -1,12 +1,12 @@
 .g-map {
   display: flex;
   flex-direction: column;
+}
 
-  &__map {
-    flex-grow: 1;
-  }
+.g-map .g-map__map {
+  flex-grow: 1;
+}
 
-  &__entity {
-    display: none;
-  }
+.g-map .g-map__entity {
+  display: none;
 }
