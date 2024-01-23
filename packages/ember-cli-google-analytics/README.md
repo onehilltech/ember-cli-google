@@ -3,7 +3,13 @@
 EmberJS add-on for Google Analytics
 
     ember install @onehilltech/ember-cli-google-analytics
-    
+
+## Compatibility
+
+* Ember.js v4.8 or above
+* Ember CLI v4.8 or above
+* Node.js v18 or above
+
 ## Configuration
 
 After you install this add-on, you only need to add your Google analytics settings
@@ -12,7 +18,6 @@ to the `config/environment.js` file for basic usage.
 ### Version 4 (via Tag Manager)
 
 ```javascript
-
 // config/environment.js
 
 let ENV = {
@@ -28,7 +33,6 @@ let ENV = {
 ### Universal Analytics (deprecated by Google)
 
 ```javascript
-
 // config/environment.js
 
 let ENV = {
@@ -69,4 +73,5 @@ class SearchComponent extends Component {
 ```
 
 Happy Coding!
+
 
