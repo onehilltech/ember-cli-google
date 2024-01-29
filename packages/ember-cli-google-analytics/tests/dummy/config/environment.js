@@ -22,7 +22,7 @@ module.exports = function (environment) {
       analytics: {
         version: 'v4',
         measurementId: 'G-PZS86M3RVR',
-        forceEnable: true
+        forceEnable: true,
       },
     },
   };

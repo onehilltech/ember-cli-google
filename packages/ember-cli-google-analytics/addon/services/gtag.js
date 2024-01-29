@@ -24,14 +24,16 @@ export default class GtagService extends Service {
       // run the risk of taking measurements of the application executing in the
       // development environment.
 
-      if (isEmpty (measurementId)) {
-        throw new Error ('You must define the measurementId property in config/environment.');
+      if (isEmpty(measurementId)) {
+        throw new Error('You must define the measurementId property in config/environment.');
       }
 
-      this.script.load (`https://www.googletagmanager.com/gtag/js?id=${measurementId}`).then (() => {
-        this.push('js', new Date());
-        this.push('config', measurementId);
-      });
+      this.script
+        .load(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`)
+        .then(() => {
+          this.push('js', new Date());
+          this.push('config', measurementId);
+        });
     }
   }
 

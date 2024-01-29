@@ -1,8 +1,8 @@
 /* globals ga */
 
-import Service, { inject as service } from '@ember/service';
+import Service, { service } from '@ember/service';
 import { getOwner } from '@ember/application';
-import { get, getWithDefault } from '@ember/object';
+import { get } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 
@@ -17,10 +17,10 @@ function normalizePageName(name) {
 }
 
 export default class GoogleAnalyticsService extends Service {
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
-    this.ga.then((ga) => this.configure(ga));
+    this.ga().then((ga) => this.configure(ga));
   }
 
   @service
@@ -49,19 +49,20 @@ export default class GoogleAnalyticsService extends Service {
 
   configure(ga) {
     // Create the one and only tracker need for the application.
-    let ENV = getOwner(this).resolveRegistration('config:environment');
-    let trackerId = get(ENV, 'ember-cli-google.analytics.trackerId');
+    const ENV = getOwner(this).resolveRegistration('config:environment');
+    const trackerId = get(ENV, 'ember-cli-google.analytics.trackerId');
 
     assert(
       'Missing ember-cli-google.analytics.trackerId in config/environment.',
-      isPresent(trackerId)
+      isPresent(trackerId),
     );
 
-    let cookieDomain =
+    const cookieDomain =
       get(ENV, 'ember-cli-google.analytics.cookieDomain') === undefined
         ? 'auto'
         : get(ENV, 'ember-cli-google.analytics.cookieDomain');
-    let trackerName = get(ENV, 'ember-cli-google.analytics.trackerName');
+
+    const trackerName = get(ENV, 'ember-cli-google.analytics.trackerName');
 
     // Create the tracker for the application.
     ga('create', trackerId, cookieDomain, trackerName);
@@ -69,7 +70,7 @@ export default class GoogleAnalyticsService extends Service {
     // We only apply Google Analytics in the production environment. Otherwise, we run
     // the risk of collecting analytics of the application while it is in development,
     // testing, or any non-production environment.
-    let { environment } = ENV;
+    const { environment } = ENV;
     this.trackPageViews = environment === 'production';
   }
 
@@ -79,22 +80,21 @@ export default class GoogleAnalyticsService extends Service {
     this.trackPageViews = false;
   }
 
-  didTransition(transition) {
+  async didTransition(transition) {
     if (this.trackPageViews) {
-      this.ga.then((ga) => {
-        const { to } = transition;
-        let page = normalizePageName(to.name);
+      const ga = await this.ga();
+      const { to } = transition;
+      const page = normalizePageName(to.name);
 
-        ga('send', 'pageview', page);
-      });
+      ga('send', 'pageview', page);
     }
   }
 
   _scriptPromise = null;
 
-  get ga() {
+  async ga() {
     if (isPresent(window.ga)) {
-      return Promise.resolve(window.ga);
+      return window.ga;
     }
 
     if (isPresent(this._scriptPromise)) {
@@ -103,10 +103,10 @@ export default class GoogleAnalyticsService extends Service {
 
     this._scriptPromise = new Promise((resolve, reject) => {
       // Dynamically load the Google Analytics script.
-      let script = document.createElement('script');
+      const script = document.createElement('script');
       script.setAttribute(
         'src',
-        'https://www.google-analytics.com/analytics.js'
+        'https://www.google-analytics.com/analytics.js',
       );
       script.async = true;
 
@@ -120,7 +120,8 @@ export default class GoogleAnalyticsService extends Service {
     return this._scriptPromise;
   }
 
-  send(category, action, label, value) {
+  async send(category, action, label, value) {
+    const ga = await this.ga();
     ga('send', 'event', category, action, label, value);
   }
 }

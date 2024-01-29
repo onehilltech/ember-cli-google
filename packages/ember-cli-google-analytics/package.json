@@ -1,17 +1,17 @@
 {
   "name": "@onehilltech/ember-cli-google-analytics",
-  "version": "1.5.0",
-  "description": "EmberJS add-on for Google Analytics.",
+  "version": "0.0.0",
+  "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
   ],
-  "license": "Apache-2.0",
-  "author": "One Hill Technologies, LLC",
+  "repository": "",
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "github:onehilltech/ember-cli-google",
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
@@ -30,7 +30,6 @@
   "dependencies": {
     "@babel/core": "^7.23.6",
     "ember-cli-babel": "^8.2.0",
-    "ember-cli-blueprint-helpers": "^0.4.8",
     "ember-cli-htmlbars": "^6.3.0"
   },
   "devDependencies": {
@@ -48,7 +47,7 @@
     "ember-cli-clean-css": "^3.0.0",
     "ember-cli-dependency-checker": "^3.3.2",
     "ember-cli-inject-live-reload": "^2.1.0",
-    "ember-cli-script": "^1.0.0",
+    "ember-cli-script": "^2.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-load-initializers": "^2.1.2",
@@ -59,6 +58,7 @@
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^5.13.0",
     "ember-try": "^3.0.0",
+    "ember-welcome-page": "^7.0.2",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^11.11.1",
@@ -85,6 +85,5 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  },
-  "gitHead": "8ca291c9aa8b42a49d344eb4472a2eb6d165920d"
+  }
 }
