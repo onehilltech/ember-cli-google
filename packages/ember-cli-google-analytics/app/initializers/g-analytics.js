@@ -1,4 +1,4 @@
 export {
   default,
   initialize,
-} from '@onehilltech/ember-cli-google-analytics/initializers/g-analytics';
+} from "@onehilltech/ember-cli-google-analytics/initializers/g-analytics";

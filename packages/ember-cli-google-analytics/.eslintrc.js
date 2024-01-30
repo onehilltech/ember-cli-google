@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser',
+  parser: "@babel/eslint-parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
     requireConfigFile: false,
     babelOptions: {
       plugins: [
-        ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
+        ["@babel/plugin-proposal-decorators", { decoratorsBeforeExport: true }],
       ],
     },
   },
-  plugins: ['ember'],
+  plugins: ["ember"],
   extends: [
-    'eslint:recommended',
-    'plugin:ember/recommended',
-    'plugin:prettier/recommended',
+    "eslint:recommended",
+    "plugin:ember/recommended",
+    "plugin:prettier/recommended",
   ],
   env: {
     browser: true,
@@ -27,30 +27,30 @@ module.exports = {
     // node files
     {
       files: [
-        './.eslintrc.js',
-        './.prettierrc.js',
-        './.stylelintrc.js',
-        './.template-lintrc.js',
-        './ember-cli-build.js',
-        './index.js',
-        './testem.js',
-        './blueprints/*/index.js',
-        './config/**/*.js',
-        './tests/dummy/config/**/*.js',
+        "./.eslintrc.js",
+        "./.prettierrc.js",
+        "./.stylelintrc.js",
+        "./.template-lintrc.js",
+        "./ember-cli-build.js",
+        "./index.js",
+        "./testem.js",
+        "./blueprints/*/index.js",
+        "./config/**/*.js",
+        "./tests/dummy/config/**/*.js",
       ],
       parserOptions: {
-        sourceType: 'script',
+        sourceType: "script",
       },
       env: {
         browser: false,
         node: true,
       },
-      extends: ['plugin:n/recommended'],
+      extends: ["plugin:n/recommended"],
     },
     {
       // test files
-      files: ['tests/**/*-test.{js,ts}'],
-      extends: ['plugin:qunit/recommended'],
+      files: ["tests/**/*-test.{js,ts}"],
+      extends: ["plugin:qunit/recommended"],
     },
   ],
 };

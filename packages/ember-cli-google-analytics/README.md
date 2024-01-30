@@ -15,8 +15,6 @@ EmberJS add-on for Google Analytics
 After you install this add-on, you only need to add your Google analytics settings
 to the `config/environment.js` file for basic usage.
 
-### Version 4 (via Tag Manager)
-
 ```javascript
 // config/environment.js
 
@@ -30,21 +28,39 @@ let ENV = {
 }
 ```
 
-### Universal Analytics (deprecated by Google)
+## Initialization
+
+### Ember 5.x and later
+
+Ember 5.x deprecated implicit injections from its initializers. This means you have
+to manually initialize Google Analytics in your application. The easiest way to initialize
+the add-on is to inject the `gtag` service in the `ApplicationRoute`, and override the
+`activate()` method to call `gtag.configure()` as shown below.
+
+> Use the following command to generate the application route: `ember g route application`
 
 ```javascript
-// config/environment.js
+import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
-let ENV = {
-  'ember-cli-google': {
-    analytics: {
-      trackerId: 'UA-XXXXX-Y',        // tracker id
-      trackerName: '',                // [optional] tracker name
-      cookieDomain: '',               // [optional] cookie domain; default = 'auto'
-    }
+export default class ApplicationRoute extends Route {
+  @service
+  gtag;
+
+  async activate () {
+    // Pass control to the base class.
+    await super.activate (...arguments);
+    
+    // Configure Google Analytics for our application.
+    await this.gtag.configure ();
   }
 }
 ```
+
+### Ember 3.x and Ember 4.x
+
+There is nothing else you need to do to setup and initialize the add-on on Ember 3.x and
+Ember 4.x.
 
 ### Sending custom events to Google Analytics
 

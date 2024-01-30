@@ -1,12 +1,12 @@
-import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
+import { module, test } from "qunit";
+import { setupTest } from "ember-qunit";
 
-module('Unit | Service | g-analytics', function (hooks) {
+module("Unit | Service | g-analytics", function (hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
-  test('it exists', function (assert) {
-    let service = this.owner.lookup('service:g-analytics');
+  test("it exists", function (assert) {
+    let service = this.owner.lookup("service:g-analytics");
     assert.ok(service);
   });
 });
