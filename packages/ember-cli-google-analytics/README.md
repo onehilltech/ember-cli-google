@@ -30,8 +30,6 @@ let ENV = {
 
 ## Initialization
 
-### Ember 5.x and later
-
 Ember 5.x deprecated implicit injections from its initializers. This means you have
 to manually initialize Google Analytics in your application. The easiest way to initialize
 the add-on is to inject the `gtag` service in the `ApplicationRoute`, and override the
@@ -56,11 +54,6 @@ export default class ApplicationRoute extends Route {
   }
 }
 ```
-
-### Ember 3.x and Ember 4.x
-
-There is nothing else you need to do to setup and initialize the add-on on Ember 3.x and
-Ember 4.x.
 
 ### Sending custom events to Google Analytics
 
