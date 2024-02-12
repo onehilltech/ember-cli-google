@@ -26,9 +26,7 @@ export default class GtagService extends Service {
         throw new Error('You must define the measurementId property in config/environment.');
       }
 
-      await this.script.load(
-        `https://www.googletagmanager.com/gtag/js?id=${measurementId}`,
-      );
+      await this.script.load(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`);
 
       this.push('js', new Date());
       this.push('config', measurementId);
