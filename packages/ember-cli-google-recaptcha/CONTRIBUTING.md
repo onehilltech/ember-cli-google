@@ -3,11 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-<<<<<<< HEAD:packages/ember-cli-google-recaptcha/CONTRIBUTING.md
-* `cd ember-cli-google-recaptcha`
-=======
-* `cd onehilltech-ember-cli-google-analytics`
->>>>>>> 2bd179c (v3.28.5...v5.5.0):packages/ember-cli-google-analytics/CONTRIBUTING.md
+* `cd packages/ember-cli-google-recaptcha`
 * `npm install`
 
 ## Linting
