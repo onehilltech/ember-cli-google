@@ -1,5 +1,4 @@
-ember-cli-google-maps
-==============================================================================
+# ember-cli-google-maps
 
 A simple Ember add-on from Google Maps API
 
@@ -14,16 +13,14 @@ Features
 * Extensible component-based design to maximize customization
 
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.24 or above
-* Ember CLI v3.24 or above
-* Node.js v12 or above
+* Ember.js v4.8 or above
+* Ember CLI v4.8 or above
+* Node.js v18 or above
 
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
     ember install ember-cli-google-maps
 
@@ -50,53 +47,52 @@ your Google Maps API key to `config/environment.js`.
 
 ### Inserting a map
 
-Use the `{{g-map}}` component to insert a map onto the page.
+Use the `<GMap />` component to insert a map onto the page.
 
 ```handlebars
-{{g-map center=(hash lat=lat lng=lng)}}
+<GMap @center={{hash lat=lat lng=lng}} />
 ```
 
-The `{{g-map}}` component must have a `center` property, or the Google Maps component
-will not work. The `{{g-map}}` component has a corresponding attribute for each 
+The `<GMap />` component must have a `@center` property, or the Google Maps component
+will not work. The `<GMap />` component has a corresponding attribute for each 
 [`google.maps.MapOptions`](https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions)
 property.
 
-> The `{{g-map}}` component has the `.g-map` class name, which can be used to 
+> The `<GMap />` component has the `.g-map` class name, which can be used to 
 > style it (_e.g._, setting its height and width).
 
 ## Map Entities
 
-Map entities are added as a child component of the corresponding `{{g-map}}` block component.
-All map entities have a `show` attribute, which can be use to show/hide the entity.
+Map entities are added as a child component of the corresponding `<GMap />` block component.
+All map entities have a `@show` attribute, which can be use to show/hide the entity.
 
 ### Adding a marker
 
-The `{{g-marker}}` component is used to add a marker to a map. Just added the `{{g-marker}}` as
-a child of the `{{g-map}}` block component. Use the `position` attribute to set the marker's
-location.
+Add the `<GMarker />` as a child of the `<GMap />` block component to add a marker to a map. 
+The `@position` attribute to set the marker's location.
 
 ```handlebars
-{{#g-map center=(hash lat=mapLat lng=mapLng)}}
-  {{g-marker position=(hash lat=markerLat lng=markerLng)}}
-{{/g-map}}
+<GMap @center={{hash lat=mapLat lng=mapLng}}>
+  <GMarker @position={{hash lat=lat lng=lng}} />
+</GMap>
 ```
 
 ## Map Layers
 
-Map layers are added as a child component of the corresponding `{{g-map}}` block component.
-All map layers have a `show` attribute, which can be use to show/hide the layer.
+Map layers are added as a child component of the corresponding `<GMap />` block component.
+All map layers have a `@show` attribute, which can be used to show/hide the layer.
 
 ### Heatmap Layer
 
-The `{{g-heatmap-layer}}` is used to add a heatmap layer to the corresponding map. The `data` 
+The `<GHeatmapLayer />` is used to add a heatmap layer to the corresponding map. The `@data` 
 attribute, which is an array of `{lat, lng [, weight]}`, adds data to the heatmap. 
 
 ```handlebars
-{{#g-map center=(hash lat=mapLat lng=mapLng)}}
-  {{g-heatmap-layer data=heatmapData}}
-{{/g-map}}
+<GMap @center={{hash lat=mapLat lng=mapLng}}>
+    <GHeatmapLayer @data=heatmapData />
+</GMap>
 ```
 
 Unlike with the Google Maps API, you can have a single array where some of the data points 
-have a weight and some of the data points do not have a weight. The `{{g-heatmap-layer}}` 
+have a weight and some of the data points do not have a weight. The `<GHeatmapLayer />` 
 component is intelligent enough to discern between the two cases, and populate the map accordingly.
