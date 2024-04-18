@@ -49,7 +49,7 @@ export default class GMap extends Component {
   @service
   gMaps;
 
-  get mapTypeId() {
+  get mapTypeId()  {
     return this.type;
   }
 
@@ -92,31 +92,34 @@ export default class GMap extends Component {
   }
 
   @action
-  didInsert (gMapElement) {
+  async didInsert (element) {
     // Register the element/component with the service. The element will
     // be used to locate this component by entities.
 
-    this.gMaps.register (gMapElement.parentElement, this);
-    Object.defineProperty (this, '_element', { value: gMapElement.parentElement, configurable: false, writable: false, enumerable: false});
+    const gMapElement = element.parentElement;
 
-    this.gMaps
-      .getInstance()
-      .then(() => {
-        // Create the map.
-        this.map = new google.maps.Map(gMapElement, this.options);
-        this.map.addListener('click', this.didMapClick.bind(this));
+    this.gMaps.register (gMapElement, this);
+    Object.defineProperty (this, '_element', {
+      value: gMapElement,
+      configurable: false,
+      writable: false,
+      enumerable: false
+    });
 
-        // Make sure all entities have been created. This happens when the script
-        // loaded the first time and the entity components are created before the script
-        // has been loaded.
+    await this.gMaps.getInstance();
 
-        this._entities.forEach (entity => {
-          if (!entity.isCreated) {
-            entity.create (this.map);
-          }
-        })
-      })
-      .catch((err) => console.error(err));
+    this.map = new google.maps.Map(element, this.options);
+    this.map.addListener('click', this.didMapClick.bind(this));
+
+    // Make sure all entities have been created. This happens when the script
+    // loaded the first time and the entity components are created before the script
+    // has been loaded.
+
+    this._entities.forEach (entity => {
+      if (!entity.isCreated) {
+        entity.create (this.map);
+      }
+    });
   }
 
   @action

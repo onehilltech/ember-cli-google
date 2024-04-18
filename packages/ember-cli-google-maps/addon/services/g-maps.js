@@ -1,16 +1,16 @@
 import Service from '@ember/service';
 
 import { isPresent, isNone, isEmpty } from '@ember/utils';
-import { getWithDefault } from '@ember/object';
+import { get } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { A } from '@ember/array';
 
 export default class GMapService extends Service {
   constructor() {
-    super(...arguments);
+    super (...arguments);
 
     const ENV = getOwner(this).resolveRegistration('config:environment');
-    const config = getWithDefault (ENV, 'ember-cli-google.maps', {});
+    const config = get (ENV, 'ember-cli-google.maps') || {};
     const { apiKey, libraries = [] } = config;
 
     if (isEmpty(apiKey)) {

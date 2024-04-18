@@ -4,15 +4,15 @@
     <div>Longitude: <Input @value={{this.lngInput}} /></div>
   </div>
 
-  {{#if showDirections}}
-    <button type="button" {{action (mut showDirections) false}}>Hide Directions</button>
+  {{#if this.showDirections}}
+    <button type="button" {{action (mut this.showDirections) false}}>Hide Directions</button>
   {{else}}
-    <button type="button" {{action (mut showDirections) true}}>Show Directions</button>
+    <button type="button" {{action (mut this.showDirections) true}}>Show Directions</button>
   {{/if}}
 </div>
 
 <GMap @center={{hash lat=this.lat lng=this.lng}} @zoom={{13}} {{on "GMarker:click" this.click}}>
-  <GMarker @position={{hash lat=37.774546 lng=-122.433523}} />
+  <GMarker @position={{hash lat=37.774546 lng=-122.433523}} @clickable={{false}} />
   <GCircle @center={{hash lat=37.774546 lng=-122.433523}} @radius={{1000}} />
 
   {{!-- Coachella, CA --}}
@@ -22,5 +22,8 @@
 
   <GHeatmapLayer @data={{this.heatMapData}} />
 
-  <GDirections @origin={{hash lat=37.774546 lng=-122.433523}} @destination="San Jose, CA" @draggable="true" />
+  <GDirections @origin={{hash lat=37.774546 lng=-122.433523}}
+               @show={{this.showDirections}}
+               @destination="San Jose, CA"
+               @draggable="true" />
 </GMap>

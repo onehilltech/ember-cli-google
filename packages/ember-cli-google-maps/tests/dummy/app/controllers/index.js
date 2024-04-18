@@ -3,6 +3,10 @@ import { tracked } from "@glimmer/tracking";
 import { action } from '@ember/object';
 
 export default class IndexController extends Controller {
+  @tracked
+  showDirections = false;
+
+  @tracked
   animation = 'bounce';
 
   @tracked
@@ -51,8 +55,7 @@ export default class IndexController extends Controller {
 
   @action
   toggleBounce() {
-    let animation = this.animation;
-    this.set('animation', animation === 'bounce' ? null : 'bounce');
+    this.animation = this.animation === 'bounce' ? null : 'bounce';
   }
 
   @action
