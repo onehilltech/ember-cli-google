@@ -35,8 +35,7 @@ export default class GDirectionsEntity extends MapEntity {
       suppressInfoWindows: true,
       suppressMarkers: false,
       suppressPolylines: false,
-    })
-
+    });
   }
 
   createEntity () {
