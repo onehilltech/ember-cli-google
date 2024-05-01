@@ -68,7 +68,7 @@ export default class MapEntity extends Component {
     const entity = this.createEntity ();
     Object.defineProperty (this, 'entity', { value: entity, writable: false, configurable: false });
 
-    if (this.args.show) {
+    if (this.show) {
       this.entity.setMap (map);
     }
 
@@ -83,7 +83,13 @@ export default class MapEntity extends Component {
     });
   }
 
-  show (element, [show]) {
+  get show () {
+    const { show = true } = this.args;
+    return show;
+  }
+
+  @action
+  showEntity (element, [show]) {
     if (show) {
       this.entity.setMap (this.map);
     }
