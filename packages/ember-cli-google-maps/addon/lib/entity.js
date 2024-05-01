@@ -90,12 +90,7 @@ export default class MapEntity extends Component {
 
   @action
   showEntity (element, [show]) {
-    if (show) {
-      this.entity.setMap (this.map);
-    }
-    else {
-      this.entity.setMap (null);
-    }
+    this.entity.setVisible (show);
   }
 
   get isCreated () {
