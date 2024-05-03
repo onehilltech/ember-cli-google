@@ -56,7 +56,8 @@ export default class MapEntity extends Component {
   }
 
   get clickable () {
-    return this.args.clickable || false;
+    const { clickable = false } = this.args;
+    return clickable;
   }
 
   /**
