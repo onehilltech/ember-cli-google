@@ -55,6 +55,21 @@ export default class ApplicationRoute extends Route {
 }
 ```
 
+The `gtag.configure()` method optionally accepts an `options` object with the following properties:
+
+| Property | Type | Desciption |
+| --- | --- | --- |
+| `measurementId` | `string` | When set, overrides the `measurementId` defined in your app's `config/environment` file. |
+| `forceEnable` | `boolean` | If `true`, allows `gtag.configure()` to run in the `development` and `test` environments. (By default, `gtag.configure()` doesn't work unless the environment is `production`.) |
+
+Example using both properties:
+```javascript
+await this.gtag.configure({
+  measurementId: 'G-XXXXXXXXXX',
+  forceEnable: true,
+});
+```
+
 ### Sending custom events to Google Analytics
 
 You can easily send custom events to Google Analytics by injecting the `gtag` service, and
