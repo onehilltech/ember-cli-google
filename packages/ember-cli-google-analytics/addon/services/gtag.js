@@ -15,6 +15,7 @@ export default class GtagService extends Service {
     const {
       measurementId = options.measurementId,
       forceEnable = options.forceEnable,
+      debugMode = options.debugMode,
     } = get (ENV, 'ember-cli-google.analytics') || {};
 
     if (ENV.environment === 'production' || forceEnable) {
@@ -29,7 +30,7 @@ export default class GtagService extends Service {
       await this.script.load(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`);
 
       this.push('js', new Date());
-      this.push('config', measurementId);
+      this.push('config', measurementId, { debug_mode: !!debugMode });
     }
   }
 
