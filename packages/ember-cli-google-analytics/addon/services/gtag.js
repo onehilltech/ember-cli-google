@@ -41,6 +41,6 @@ export default class GtagService extends Service {
   }
 
   event(name, params) {
-    this.push({ event: name, ...params });
+    this.push('event', name, { ...params });
   }
 }
